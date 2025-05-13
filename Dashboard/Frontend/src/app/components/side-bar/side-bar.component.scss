@@ -1,0 +1,10 @@
+ui5-side-navigation {
+    height: calc(100vh - 90px);
+}
+
+.tool-layout {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: auto 1fr;
+}
+
