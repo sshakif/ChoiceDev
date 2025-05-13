@@ -1,0 +1,25 @@
+@import "styles.sass";
+
+.analytical-table {
+  height: $grid-table-height;
+  width: $w-100;
+}
+
+ui5-tollbar {
+  height: $grid-table-toolbar-height;
+}
+
+ui5-card {
+  height: $w-100;
+}
+
+ui5-checkbox {
+  width: $w-100;
+  margin: $m-auto;
+}
+
+#dialog{
+  height: 70vh;
+  width: 25%;
+
+}

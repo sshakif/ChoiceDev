@@ -1,0 +1,55 @@
+<span #AnalyticaltableContainer></span>
+
+<ui5-dialog [open]="isSettingOpen" id="dialog">
+  <ui5-bar slot="header" design="Header">
+    <ui5-title level="H5" slot="startContent">Settings</ui5-title>
+    <div class="d-flex justify-end">
+      <ui5-button (click)="selectAll()" design="Default">Select All</ui5-button>
+      <ui5-button (click)="deselectAll()" design="Default" class="ms-2"
+        >Deselect All</ui5-button
+      >
+      <ui5-button (click)="resetDefault()" design="Default" class="ms-2"
+        >Reset Default</ui5-button
+      >
+    </div>
+  </ui5-bar>
+  <div>
+    <ui5-input
+      #searchInput
+      id="settingsSearchInput"
+      placeholder="Type to search.."
+      class="w-full"
+      show-clear-icon
+      (value-changed)="filterColumns($event)"
+    >
+      <ui5-icon id="searchIcon" slot="icon" name="search"></ui5-icon>
+    </ui5-input>
+  </div>
+  <div class="mt-2" *ngIf="isSettingOpen">
+    <ui5-label
+      *ngIf="filteredColumns.length === 0"
+      class="block text-center text-gray-600 font-medium py-2"
+    >
+      No columns found
+    </ui5-label>
+    <ui5-checkbox
+      *ngFor="let column of filteredColumns"
+      [checked]="tempSelection.includes(column.accessor)"
+      (change)="toggleColumn($event, column.accessor)"
+      [text]="column.Header"
+      class="mb-1"
+    ></ui5-checkbox>
+  </div>
+  <ui5-toolbar slot="footer">
+    <ui5-toolbar-button
+      design="Emphasized"
+      text="Submit"
+      (click)="applySettings()"
+    ></ui5-toolbar-button>
+    <ui5-toolbar-button
+      design="Transparent"
+      text="Cancel"
+      (click)="onDialogFilter()"
+    ></ui5-toolbar-button>
+  </ui5-toolbar>
+</ui5-dialog>
