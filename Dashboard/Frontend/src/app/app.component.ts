@@ -10,10 +10,11 @@ import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { SideBarComponent } from '@app/components/side-bar/side-bar.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LayoutComponent, CommonModule,SideBarComponent],
+  imports: [RouterOutlet, LayoutComponent, CommonModule, SideBarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
