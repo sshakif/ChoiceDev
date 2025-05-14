@@ -53,9 +53,7 @@ const containerElementRef = "AnalyticaltableContainer";
   styleUrls: ["./analytical-table.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
-export class AnalyticalTableComponent
-  implements OnDestroy, AfterViewInit, OnInit, OnChanges
-{
+export class AnalyticalTableComponent implements OnDestroy, AfterViewInit, OnInit, OnChanges{
   @ViewChild(containerElementRef, { static: true }) containerRef!: ElementRef;
   @ViewChild("searchInput", { static: false }) searchInput!: ElementRef;
   private root: ReturnType<typeof createRoot> | null = null;
