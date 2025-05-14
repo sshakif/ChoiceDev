@@ -4,6 +4,7 @@ import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
   EventEmitter,
+  OnInit,
   Output,
 } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -13,9 +14,9 @@ import { CommonService } from "@app/services/common-service/common.service";
 import { Faq } from "@app/shared/Model/faq";
 import { Button, Icon, TextAlign } from "@ui5/webcomponents-react";
 import React from "react";
-import { FaqAddComponent } from "../faq-add/faq-add.component";
-import { FaqDetailsComponent } from "../faq-details/faq-details.component";
-import { FaqEditComponent } from "../faq-edit/faq-edit.component";
+import { FaqAddComponent } from "@app/faq/faq-add/faq-add.component";
+import { FaqDetailsComponent } from "@app/faq/faq-details/faq-details.component";
+import { FaqEditComponent } from "@app/faq/faq-edit/faq-edit.component";
 
 @Component({
   selector: "app-faq-list",
@@ -33,10 +34,7 @@ import { FaqEditComponent } from "../faq-edit/faq-edit.component";
   templateUrl: "./faq-list.component.html",
   styleUrl: "./faq-list.component.scss",
 })
-export class FaqListComponent {
-handleEditData($event: any) {
-throw new Error('Method not implemented.');
-}
+export class FaqListComponent implements OnInit {
   @Output() refreshTable: EventEmitter<void> = new EventEmitter<void>();
   @Output() IsOpenToastAlert = new EventEmitter<void>();
   ToastType: string = "";
@@ -58,7 +56,7 @@ throw new Error('Method not implemented.');
   type: string | null = null;
   selectedFaqId: number | null = null;
   selectedFaqData: any = null;
-  Faqs = Faq;
+  Faqs = Faq
   faqs = new Faq().deserialize({});
   constructor(
     private commonService: CommonService,
@@ -108,7 +106,7 @@ throw new Error('Method not implemented.');
       },
       {
         Header: "Answer",
-        accessor: "answer",
+        accessor: "Answer",
         autoResizable: true,
         className: "custom-class-name",
       },
@@ -138,14 +136,14 @@ throw new Error('Method not implemented.');
               icon="edit"
               design="Transparent"
               onClick={() => {
-                this.editFaq(row.original);
+                // this.editFaq(row.original);
               }}
             />
             <Button
               icon="information"
               design="Transparent"
               onClick={() => {
-                this.FaqsDetails(row.original);
+                // this.FaqsDetails(row.original);
               }}
             ></Button>
 
@@ -153,7 +151,7 @@ throw new Error('Method not implemented.');
               icon="delete"
               design="Transparent"
               onClick={() => {
-                this.deleteFaqs(row.original);
+                // this.deleteFaqs(row.original);
               }}
             ></Button>
           </div>
@@ -161,66 +159,5 @@ throw new Error('Method not implemented.');
       },
     ];
     return columns;
-  }
-  FaqsDetails(original: any) {
-    this.selectedFaqId = original.id;
-    this.selectedFaqData = { ...original };
-    this.isDetails = true;
-    this.cdr.detectChanges();
-  }
-
-  closeFaqDetailsModal() {
-    this.isDetails = false;
-    this.selectedFaqId = null;
-    this.selectedFaqData = null;
-  }
-
-  handleInsertData(isInsert: boolean): void {
-    console.log("Received isInsertData:", isInsert);
-    if (isInsert) {
-      this.isInsert = isInsert;
-    }
-  }
-  closeAddFaqModal() {
-    this.isInsert = false;
-    this.refreshTable.emit();
-  }
-
-  deleteFaqs(original: any) {
-    this.isDeleteOpen = true;
-    this.selectedFaqId = original.id;
-  }
-
-  deleteItemConfirm() {
-    this.isDeleteLoading = true;
-    const id = this.selectedFaqId;
-    this.commonService.delete(`Faqs/${id}`, this.odata).subscribe({
-      next: (response: any) => {
-        this.isDeleteOpen = false;
-        this.isDeleteLoading = false;
-        this.ToastType = "delete";
-        setTimeout(() => {
-          this.IsOpenToastAlert.emit();
-        }, 1000);
-        this.refreshTable.emit();
-      },
-      error: (error: any) => {
-        console.log(error);
-        this.isDeleteError = true;
-        this.isDeleteOpen = false;
-        this.isDeleteLoading = false;
-        this.refreshTable.emit();
-      },
-    });
-  }
-
-  editFaq(original: any) {
-    this.isEdit = true;
-    this.selectedFaqId = original.id;
-    this.selectedFaqData = { ...original };
-  }
-
-  closeEditFaqModal() {
-    this.isEdit = false;
   }
 }

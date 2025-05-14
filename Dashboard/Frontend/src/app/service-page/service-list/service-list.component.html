@@ -1,19 +1,17 @@
 <div style="height: 100vh">
   <react-analytical-table
-    [tableId]="'userTable'"
-    [tableName]="'User Table'"
-    [headerTitle]="'User List'"
-    [insertTitle]="'New Add'"
+    [headerTitle]="'ServicePage List'"
+    [insertTitle]="'New'"
     [button1Text]="'ALL'"
-    [button2Text]="'Active'"
-    [button3Text]="'InActive'"
-    [apiUrl]="'Faqs?'"
+    [button2Text]="'Inactive'"
+    [button3Text]="'Active'"
+    [apiUrl]="'ServicePages?'"
     [alternateRowColors]="true"
     [isInsertData]="true"
     [isSearchFilter]="true"
     [isFilterable]="true"
     [isOdata]="true"
-    [model]="faqs"
+    [model]="ServicePages"
     [isGroupable]="false"
     [isSortable]="true"
     [isTableTree]="false"
@@ -28,5 +26,6 @@
     [selectionMode]="'Single'"
     [rowSelectionBehavior]="'RowOnly'"
     [refreshTrigger]="refreshTable"
+     (isInsertDataChange)="handleInsertData($event)"
   ></react-analytical-table>
 </div>
