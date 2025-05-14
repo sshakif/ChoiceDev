@@ -59,7 +59,7 @@ export class ServiceListComponent implements OnInit {
   selectedFaqId: number | null = null;
   selectedFaqData: any = null;
   ServicePages = ServicePage;
-  // servicePages = new ServicePage().deserialize({});
+  servicePages = new ServicePage().deserialize({});
   constructor(
     private commonService: CommonService,
     private datePipe: DatePipe,
@@ -112,18 +112,18 @@ export class ServiceListComponent implements OnInit {
       autoResizable: true,
       className: "custom-class-name",
     },
-    // {
-    //   Header: "Status",
-    //   accessor: "status",
-    //   autoResizable: true,
-    //   disableGroupBy: true,
-    //   disableFilters: true,
-    //   className: "custom-class-name",
-    //   width: 100,
-    //   hAlign: "Center" as TextAlign,
-    //   Cell: ({ value }: any) =>
-    //     value ? <Icon name="accept" /> : <Icon name="decline" />,
-    // },
+    {
+        Header: "Active",
+        accessor: "is_active",
+        autoResizable: true,
+        disableGroupBy: true,
+        disableFilters: true,
+        className: "custom-class-name",
+        width: 100,
+        hAlign: "Center" as TextAlign,
+        Cell: ({ value }: any) =>
+          value ? <Icon name="accept" /> : <Icon name="decline" />,
+      },
     {
       Header: "Created At",
       accessor: "created_at",
@@ -195,12 +195,12 @@ export class ServiceListComponent implements OnInit {
   //   this.selectedFaqData = null;
   // }
 
-  // handleInsertData(isInsert: boolean): void {
-  //   console.log("Received isInsertData:", isInsert);
-  //   if (isInsert) {
-  //     this.isInsert = isInsert;
-  //   }
-  // }
+  handleInsertData(isInsert: boolean): void {
+    console.log("Received isInsertData:", isInsert);
+    if (isInsert) {
+      this.isInsert = isInsert;
+    }
+  }
   // closeAddFaqModal() {
   //   this.isInsert = false;
   //   this.refreshTable.emit();
@@ -243,4 +243,5 @@ export class ServiceListComponent implements OnInit {
   // closeEditFaqModal() {
   //   this.isEdit = false;
   // }
+
 }

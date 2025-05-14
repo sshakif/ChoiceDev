@@ -26,5 +26,6 @@
     [selectionMode]="'Single'"
     [rowSelectionBehavior]="'RowOnly'"
     [refreshTrigger]="refreshTable"
+     (isInsertDataChange)="handleInsertData($event)"
   ></react-analytical-table>
 </div>
