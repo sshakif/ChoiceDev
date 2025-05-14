@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\ServicePage;
+use Flat3\Lodata\Facades\Lodata;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Lodata::discover(ServicePage::class);
     }
 }
