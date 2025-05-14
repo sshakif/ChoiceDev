@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        // Lodata::discover(Faq::class);
+        Lodata::discover(Faq::class);
         Lodata::discover(ServicePage::class);
     }
 }

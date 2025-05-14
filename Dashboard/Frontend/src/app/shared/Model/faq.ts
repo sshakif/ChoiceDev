@@ -1,6 +1,6 @@
 import { Deserializable } from '../interfaces/deserializable';
 
-export class faq implements Deserializable {
+export class Faq implements Deserializable {
   id?: number;
   question: string = '';
   answer: string = '';
