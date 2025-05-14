@@ -140,108 +140,22 @@ export class ServiceListComponent implements OnInit {
       hAlign: "Center" as TextAlign,
       Cell: ({ value }: any) => value ? new Date(value).toLocaleDateString() : "",
     },
-      // {
-      //   Header: "   Actions",
-      //   accessor: ".",
-      //   cellLabel: () => "",
-      //   disableFilters: true,
-      //   disableGroupBy: true,
-      //   disableSortBy: true,
-      //   autoResizable: true,
-      //   id: "actions",
-      //   className: "custom-class-name",
-      //   width: 150,
-      //   hAlign: "Center" as TextAlign,
-      //   Cell: ({ row }: any) => (
-      //     <div>
-      //       <Button
-      //         icon="edit"
-      //         design="Transparent"
-      //         onClick={() => {
-      //           this.editFaq(row.original);
-      //         }}
-      //       />
-      //       <Button
-      //         icon="information"
-      //         design="Transparent"
-      //         onClick={() => {
-      //           this.FaqsDetails(row.original);
-      //         }}
-      //       ></Button>
-
-      //       <Button
-      //         icon="delete"
-      //         design="Transparent"
-      //         onClick={() => {
-      //           this.deleteFaqs(row.original);
-      //         }}
-      //       ></Button>
-      //     </div>
-      //   ),
-      // },
+      
     ];
     return columns;
   }
-  // FaqsDetails(original: any) {
-  //   this.selectedFaqId = original.id;
-  //   this.selectedFaqData = { ...original };
-  //   this.isDetails = true;
-  //   this.cdr.detectChanges();
-  // }
-
-  // closeFaqDetailsModal() {
-  //   this.isDetails = false;
-  //   this.selectedFaqId = null;
-  //   this.selectedFaqData = null;
-  // }
+ 
 
   handleInsertData(isInsert: boolean): void {
     console.log("Received isInsertData:", isInsert);
     if (isInsert) {
       this.isInsert = isInsert;
+       this.cdr.detectChanges();
     }
   }
-  // closeAddFaqModal() {
-  //   this.isInsert = false;
-  //   this.refreshTable.emit();
-  // }
-
-  // deleteFaqs(original: any) {
-  //   this.isDeleteOpen = true;
-  //   this.selectedFaqId = original.id;
-  // }
-
-  // deleteItemConfirm() {
-  //   this.isDeleteLoading = true;
-  //   const id = this.selectedFaqId;
-  //   this.commonService.delete(`Faqs/${id}`, this.odata).subscribe({
-  //     next: (response: any) => {
-  //       this.isDeleteOpen = false;
-  //       this.isDeleteLoading = false;
-  //       this.ToastType = "delete";
-  //       setTimeout(() => {
-  //         this.IsOpenToastAlert.emit();
-  //       }, 1000);
-  //       this.refreshTable.emit();
-  //     },
-  //     error: (error: any) => {
-  //       console.log(error);
-  //       this.isDeleteError = true;
-  //       this.isDeleteOpen = false;
-  //       this.isDeleteLoading = false;
-  //       this.refreshTable.emit();
-  //     },
-  //   });
-  // }
-
-  // editFaq(original: any) {
-  //   this.isEdit = true;
-  //   this.selectedFaqId = original.id;
-  //   this.selectedFaqData = { ...original };
-  // }
-
-  // closeEditFaqModal() {
-  //   this.isEdit = false;
-  // }
+  closeAddModal() {
+    this.isInsert = false;
+    this.refreshTable.emit();
+  }
 
 }

@@ -1,1 +1,86 @@
-<p>add-service works!</p>
+<ui5-dialog header-text="Add" [open]="isOpen" id="dialog">
+  <ui5-bar slot="header" design="Header">
+    <ui5-title level="H5" slot="startContent">Add</ui5-title>
+    <ui5-button
+      class="dialogCloser"
+      design="Transparent"
+      id="closeDialogButton"
+      slot="endContent"
+      (click)="closeDialog()"
+      icon="decline"
+    ></ui5-button>
+  </ui5-bar>
+
+  <ui5-message-strip class="w-100 mt-3" design="Critical" *ngIf="errorMessage">
+    <ui5-icon name="alert" slot="icon"></ui5-icon> {{ errorMessage }}
+  </ui5-message-strip>
+  <section>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="d-flex align-items-center">
+          <span>Active :</span>
+          <ui5-switch checked (click)="toggleActive($event)"></ui5-switch>
+        </div>
+      </div>
+       <div class="col-md-6 mb-3">
+        <ui5-label show-colon required>Title</ui5-label>
+        <ui5-input
+          [(ngModel)]="title"
+          placeholder="Enter title"
+          required
+        ></ui5-input>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <ui5-label show-colon required>Slug</ui5-label>
+        <ui5-input
+          [(ngModel)]="slug"
+          placeholder="Enter slug"
+          required
+        ></ui5-input>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <ui5-label show-colon>Short Description</ui5-label>
+        <ui5-textarea
+          [(ngModel)]="short_description"
+          placeholder="Enter short description"
+        ></ui5-textarea>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <ui5-label show-colon>Long Description</ui5-label>
+        <ui5-textarea
+          [(ngModel)]="long_description"
+          placeholder="Enter long description"
+        ></ui5-textarea>
+      </div>
+    </div>
+  </section>
+  <ui5-toolbar slot="footer">
+    <ui5-toolbar-button
+      design="Emphasized"
+      [disabled]="loading"
+      (click)="insertData()"
+      text="Submit"
+    >
+    </ui5-toolbar-button>
+    <!-- <ui5-toolbar-button
+  design="Emphasized"
+  [disabled]="loading || !question || !answer"
+  (click)="insertData()"
+  text="Submit">
+	</ui5-toolbar-button> -->
+
+    <ui5-toolbar-button
+      design="Transparent"
+      text="Cancel"
+      (click)="closeDialog()"
+    ></ui5-toolbar-button>
+  </ui5-toolbar>
+</ui5-dialog>
+
+<app-toast-message
+  [IsOpenToastAlert]="IsOpenToastAlert"
+  [ToastType]="ToastType"
+></app-toast-message>
