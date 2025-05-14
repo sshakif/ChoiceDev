@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './faq-edit.component.html',
-  styleUrl: './faq-edit.component.scss'
+  styleUrl: './faq-edit.component.sass',
 })
-export class FaqEditComponent {
-
-}
+export class FaqEditComponent {}

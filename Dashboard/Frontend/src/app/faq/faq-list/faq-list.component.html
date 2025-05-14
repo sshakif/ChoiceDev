@@ -1,1 +1,29 @@
-<p>faq-list works!</p>
+<div style="height: 100vh">
+  <react-analytical-table
+    [tableId]="'userTable'"
+    [tableName]="'User Table'"
+    [headerTitle]="'User List'"
+    [insertTitle]="'New Add'"
+    [button1Text]="'ALL'"
+    [button2Text]="'Active'"
+    [button3Text]="'InActive'"
+    [apiUrl]="'Users?'"
+    [alternateRowColors]="true"
+    [isInsertData]="true"
+    [isSearchFilter]="true"
+    [isFilterable]="true"
+    [isOdata]="true"
+    [isGroupable]="false"
+    [isSortable]="true"
+    [isTableTree]="false"
+    [isInfiniteScroll]="true"
+    [infiniteScrollNumber]="10"
+    [minRowsNumber]="15"
+    [headerHeight]="30"
+    [rowHeight]="30"
+    [selectionMode]="'None'"
+    [emptyDataText]="'No Data Found'"
+    [selectionMode]="'Single'"
+    [rowSelectionBehavior]="'RowOnly'"
+  ></react-analytical-table>
+</div>
