@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('service_pages', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug')->unique();
             $table->text('short_description')->nullable();
             $table->longText('long_description')->nullable();
             $table->string('image')->nullable();

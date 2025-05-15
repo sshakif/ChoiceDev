@@ -8,11 +8,12 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LabelComponent } from '@ui5/webcomponents-ngx';
+import { InputComponent, LabelComponent } from '@ui5/webcomponents-ngx';
 import { TextAreaComponent } from '@ui5/webcomponents-ngx/main/text-area';
 // import { FormPreloaderComponent } from '@app/components/form-preloader/form-preloader.component';
 import { ToastMessageComponent } from '@app/components/toast-message/toast-message.component';
 import { CommonService } from '@app/services/common-service/common.service';
+import { ServicePage } from '@app/shared/Model/servicePage';
 
 @Component({
   selector: 'app-add-service',
@@ -24,6 +25,7 @@ import { CommonService } from '@app/services/common-service/common.service';
     // FormPreloaderComponent,
     TextAreaComponent,
     ToastMessageComponent,
+    InputComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './add-service.component.html',
@@ -40,31 +42,21 @@ export class AddServiceComponent implements OnInit {
   ToastType: string = '';
   errorMessage: string = '';
 
-  title: string = '';
-  slug: string = '';
-  short_description: string = '';
-  long_description: string = '';
+  Service: ServicePage = new ServicePage().deserialize({});
 
   constructor(private commonService: CommonService) {}
 
   ngOnInit(): void {}
 
   insertData() {
-    if (!this.title ) {
+    if (!this.Service.title) {
       this.errorMessage = 'Title required.';
       return;
     }
-
-    const data = {
-      title: this.title,
-      slug: this.slug,
-      short_description: this.short_description,
-      long_description: this.long_description,
-      is_active: this.isActive,
-    };
     this.loading = true;
-    this.commonService.post('ServicePages', data).subscribe(
+    this.commonService.post('ServicePages', this.Service.toOdata()).subscribe(
       (response) => {
+        console.log(response);
         this.loading = false;
         this.ToastType = 'add';
         setTimeout(() => {
@@ -81,16 +73,20 @@ export class AddServiceComponent implements OnInit {
     );
   }
 
-  toggleActive(event: any) {
-    this.isActive = event.target.checked;
+  toggleActive($event: any) {
+    if($event.target.checked){
+      this.isActive= true;
+    }
+    else{
+      this.isActive=false;
+    }
   }
 
   resetForm() {
     this.errorMessage = '';
-    this.title = '';
-    this.slug = '';
-    this.short_description = '';
-    this.long_description = '';
+    this.Service.title = '';
+    this.Service.short_description = '';
+    this.Service.long_description = '';
   }
 
   closeDialog() {

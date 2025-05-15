@@ -24,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         // Lodata::discover(Faq::class);
-        Lodata::discover(ServicePage::class);
+        Lodata::discover(  ServicePage::class);
     }
 }

@@ -2,7 +2,7 @@ import { Deserializable } from '@app/shared/interfaces/deserializable';
 
 export class ServicePage implements Deserializable {
   id?: number;
-  title?: string;
+  title?: string = '';
   short_description?: string;
   long_description?: string;
   image?: string;
