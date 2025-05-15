@@ -1,13 +1,113 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import { CommonModule, DatePipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import {
+  ChangeDetectorRef,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+// import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ToastMessageComponent } from '@app/components/toast-message/toast-message.component';
+import { CommonService } from '@app/services/common-service/common.service';
+import { Faq } from '@app/shared/Model/faq';
+import { LabelComponent, TextAreaComponent } from '@ui5/webcomponents-ngx';
 @Component({
   selector: 'app-faq-add',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    LabelComponent,
+    TextAreaComponent,
+    ToastMessageComponent,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './faq-add.component.html',
-  styleUrl: './faq-add.component.scss'
+  styleUrl: './faq-add.component.scss',
 })
-export class FaqAddComponent {
+export class FaqAddComponent implements OnInit {
+  @Input() isOpen: boolean | null = null;
+  @Output() close = new EventEmitter<void>();
+  @Output() IsOpenToastAlert = new EventEmitter<void>();
+  ToastType: string = '';
+  loading: boolean = false;
+  isSuccess: boolean = false;
+  isAddError: boolean = false;
 
+  errorMassage: string = '';
+
+  htmlContent: string = '';
+  placeholder: string = '';
+  isActive: boolean = true;
+
+  faq = new Faq().deserialize({});
+
+  constructor(
+    private commandService: CommonService,
+    private datepipe: DatePipe,
+    private cdr: ChangeDetectorRef
+  ) {}
+  ngOnInit(): void {
+    this.isOpen = true; //model open
+  }
+
+  insertData() {
+    if (!this.faq.question || !this.faq.answer) {
+      this.errorMassage = 'Please fill all the fields.';
+      return;
+    }
+
+    this.loading = true;
+    this.commandService.post('Faqs', this.faq).subscribe(
+      (response: any) => {
+        console.log('response', response);
+        this.loading = false;
+        this.isSuccess = true;
+        this.ToastType = 'add';
+        setTimeout(() => {
+          this.IsOpenToastAlert.emit();
+        }, 1000);
+        this.resetForm();
+        this.closeDialog();
+      },
+      (error: any) => {
+        this.loading = false;
+        this.errorMassage = 'An error occurred while submitting the data.';
+        console.error(error);
+      }
+    );
+  }
+  toggleAction($event: any) {
+    if ($event.target.checked) {
+      this.isActive = true;
+    } else {
+      this.isActive = false;
+    }
+  }
+
+  closeDialog() {
+    this.isOpen = false;
+    this.close.emit();
+  }
+
+  resetForm() {
+    this.faq.question = '';
+    this.faq.answer = '';
+    this.htmlContent = '';
+    this.isActive = true;
+  }
+  limitWords(field: 'question' | 'answer', maxWords: number): void {
+    let value = this.faq[field] || '';
+    const words = value.trim().split(/\s+/);
+    if (words.length > maxWords) {
+      this.faq[field] = words.slice(0, maxWords).join(' ');
+    }
+  }
 }
+
+

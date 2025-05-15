@@ -10,13 +10,13 @@ import {
 import { FormsModule } from "@angular/forms";
 import { AnalyticalTableComponent } from "@app/components/analytical-table/analytical-table.component";
 import { ToastMessageComponent } from "@app/components/toast-message/toast-message.component";
+import { FaqAddComponent } from "@app/faq/faq-add/faq-add.component";
+import { FaqDetailsComponent } from "@app/faq/faq-details/faq-details.component";
+import { FaqEditComponent } from "@app/faq/faq-edit/faq-edit.component";
 import { CommonService } from "@app/services/common-service/common.service";
 import { Faq } from "@app/shared/Model/faq";
 import { Button, Icon, TextAlign } from "@ui5/webcomponents-react";
 import React from "react";
-import { FaqAddComponent } from "@app/faq/faq-add/faq-add.component";
-import { FaqDetailsComponent } from "@app/faq/faq-details/faq-details.component";
-import { FaqEditComponent } from "@app/faq/faq-edit/faq-edit.component";
 
 @Component({
   selector: "app-faq-list",
@@ -56,7 +56,7 @@ export class FaqListComponent implements OnInit {
   type: string | null = null;
   selectedFaqId: number | null = null;
   selectedFaqData: any = null;
-  Faqs = Faq
+  Faq = Faq;
   faqs = new Faq().deserialize({});
   constructor(
     private commonService: CommonService,
@@ -87,6 +87,18 @@ export class FaqListComponent implements OnInit {
         width: 70,
       },
       {
+        Header: "Question",
+        accessor: "question",
+        autoResizable: true,
+        className: "custom-class-name",
+      },
+      {
+        Header: "Answer",
+        accessor: "answer",
+        autoResizable: true,
+        className: "custom-class-name",
+      },
+      {
         Header: "Active",
         accessor: "is_active",
         autoResizable: true,
@@ -99,24 +111,13 @@ export class FaqListComponent implements OnInit {
           value ? <Icon name="accept" /> : <Icon name="decline" />,
       },
       {
-        Header: " Quastion",
-        accessor: "question",
-        autoResizable: true,
-        className: "custom-class-name",
-      },
-      {
-        Header: "Answer",
-        accessor: "Answer",
-        autoResizable: true,
-        className: "custom-class-name",
-      },
-      {
         Header: "Created At",
         accessor: "created_at",
         autoResizable: true,
         className: "custom-class-name",
         hAlign: "Center" as TextAlign,
-        Cell: ({ value }: any) => new Date(value).toLocaleDateString(),
+        Cell: ({ value }: any) =>
+          value ? new Date(value).toLocaleDateString() : "",
       },
       {
         Header: "   Actions",
@@ -136,14 +137,14 @@ export class FaqListComponent implements OnInit {
               icon="edit"
               design="Transparent"
               onClick={() => {
-                // this.editFaq(row.original);
+                //  this.editFaq(row.original);
               }}
             />
             <Button
               icon="information"
               design="Transparent"
               onClick={() => {
-                // this.FaqsDetails(row.original);
+                this.FaqsDetails(row.original);
               }}
             ></Button>
 
@@ -151,7 +152,7 @@ export class FaqListComponent implements OnInit {
               icon="delete"
               design="Transparent"
               onClick={() => {
-                // this.deleteFaqs(row.original);
+                this.deleteFaqs(row.original);
               }}
             ></Button>
           </div>
@@ -159,5 +160,66 @@ export class FaqListComponent implements OnInit {
       },
     ];
     return columns;
+  }
+  FaqsDetails(original: any) {
+    this.selectedFaqId = original.id;
+    this.selectedFaqData = { ...original };
+    this.isDetails = true;
+    this.cdr.detectChanges();
+  }
+
+  closeFaqDetailsModal() {
+    this.isDetails = false;
+    this.selectedFaqId = null;
+    this.selectedFaqData = null;
+  }
+
+  handleInsertData(isInsert: boolean): void {
+    console.log("Received isInsertData:", isInsert);
+    if (isInsert) {
+      this.isInsert = isInsert;
+    }
+  }
+  closeAddFaqModal() {
+    this.isInsert = false;
+    this.refreshTable.emit();
+  }
+
+  deleteFaqs(original: any) {
+    this.isDeleteOpen = true;
+    this.selectedFaqId = original.id;
+  }
+
+  deleteItemConfirm() {
+    this.isDeleteLoading = true;
+    const id = this.selectedFaqId;
+    this.commonService.delete(`Faqs/${id}`, this.odata).subscribe({
+      next: (response: any) => {
+        this.isDeleteOpen = false;
+        this.isDeleteLoading = false;
+        this.ToastType = "delete";
+        setTimeout(() => {
+          this.IsOpenToastAlert.emit();
+        }, 1000);
+        this.refreshTable.emit();
+      },
+      error: (error: any) => {
+        console.log(error);
+        this.isDeleteError = true;
+        this.isDeleteOpen = false;
+        this.isDeleteLoading = false;
+        this.refreshTable.emit();
+      },
+    });
+  }
+
+  editFaq(original: any) {
+    this.isEdit = true;
+    this.selectedFaqId = original.id;
+    this.selectedFaqData = { ...original };
+  }
+
+  closeEditFaqModal() {
+    this.isEdit = false;
   }
 }
