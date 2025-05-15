@@ -137,7 +137,7 @@ export class FaqListComponent implements OnInit {
               icon="edit"
               design="Transparent"
               onClick={() => {
-                //  this.editFaq(row.original);
+                this.editFaq(row.original);
               }}
             />
             <Button
@@ -161,6 +161,24 @@ export class FaqListComponent implements OnInit {
     ];
     return columns;
   }
+  handleInsertData(isInsert: boolean): void {
+    console.log("Received isInsertData:", isInsert);
+    if (isInsert) {
+      this.isInsert = isInsert;
+    }
+  }
+
+  closeAddFaqModal() {
+    this.isInsert = false;
+    this.refreshTable.emit();
+  }
+
+  editFaq(original: any) {
+    this.isEdit = true;
+    this.selectedFaqId = original.id;
+    this.selectedFaqData = { ...original };
+  }
+
   FaqsDetails(original: any) {
     this.selectedFaqId = original.id;
     this.selectedFaqData = { ...original };
@@ -172,17 +190,6 @@ export class FaqListComponent implements OnInit {
     this.isDetails = false;
     this.selectedFaqId = null;
     this.selectedFaqData = null;
-  }
-
-  handleInsertData(isInsert: boolean): void {
-    console.log("Received isInsertData:", isInsert);
-    if (isInsert) {
-      this.isInsert = isInsert;
-    }
-  }
-  closeAddFaqModal() {
-    this.isInsert = false;
-    this.refreshTable.emit();
   }
 
   deleteFaqs(original: any) {
@@ -212,14 +219,9 @@ export class FaqListComponent implements OnInit {
       },
     });
   }
-
-  editFaq(original: any) {
-    this.isEdit = true;
-    this.selectedFaqId = original.id;
-    this.selectedFaqData = { ...original };
-  }
-
   closeEditFaqModal() {
     this.isEdit = false;
+    this.selectedFaqId = null;
+    this.selectedFaqData = null;
   }
 }

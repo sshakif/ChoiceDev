@@ -6,8 +6,10 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -30,7 +32,7 @@ import { LabelComponent, TextAreaComponent } from '@ui5/webcomponents-ngx';
   templateUrl: './faq-add.component.html',
   styleUrl: './faq-add.component.scss',
 })
-export class FaqAddComponent implements OnInit {
+export class FaqAddComponent implements OnInit, OnChanges {
   @Input() isOpen: boolean | null = null;
   @Output() close = new EventEmitter<void>();
   @Output() IsOpenToastAlert = new EventEmitter<void>();
@@ -39,7 +41,7 @@ export class FaqAddComponent implements OnInit {
   isSuccess: boolean = false;
   isAddError: boolean = false;
 
-  errorMassage: string = '';
+  errorMessage: string = '';
 
   htmlContent: string = '';
   placeholder: string = '';
@@ -53,11 +55,11 @@ export class FaqAddComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
   ngOnInit(): void {
-    this.isOpen = true; //model open
+    // this.isOpen = true; //model open
   }
   insertData() {
     if (!this.faq.question || !this.faq.answer) {
-      this.errorMassage = 'Please fill all the fields.';
+      this.errorMessage = 'Please fill all the fields.';
       return;
     }
 
@@ -76,7 +78,7 @@ export class FaqAddComponent implements OnInit {
       },
       (error: any) => {
         this.loading = false;
-        this.errorMassage = 'An error occurred while submitting the data.';
+        this.errorMessage = 'An error occurred while submitting the data.';
         console.error(error);
       }
     );
@@ -88,6 +90,11 @@ export class FaqAddComponent implements OnInit {
     this.close.emit();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isOpen'] && changes['isOpen'].currentValue) {
+      this.resetForm(); // Every time modal opens
+    }
+  }
   resetForm() {
     this.faq.question = '';
     this.faq.answer = '';
@@ -105,10 +112,14 @@ export class FaqAddComponent implements OnInit {
     question: false,
     answer: false,
   };
-
   toggleAction(event: any): void {
-    console.log('Switch toggled:', event.target.checked);
+    this.isActive = event.target.checked;
+    console.log('Switch toggled:', this.isActive);
   }
+
+  // toggleAction(event: any): void {
+  //   console.log('Switch toggled:', event.target.checked);
+  // }
 
   validateWords(field: 'question' | 'answer', maxWords: number): void {
     const text = this.faq[field] || '';

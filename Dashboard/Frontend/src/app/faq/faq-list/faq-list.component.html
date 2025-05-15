@@ -30,6 +30,13 @@
   ></react-analytical-table>
 </div>
 <app-faq-add [isOpen]="isInsert" (close)="closeAddFaqModal()"></app-faq-add>
+<!-- <app-faq-edit
+  [isOpen]="isEdit"
+  [faqId]="selectedFaqId"
+  [faqData]="selectedFaqData"
+  (close)="closeEditFaqModal()"
+  (refreshTable)="refreshTable.emit()"
+></app-faq-edit> -->
 <app-faq-edit
   [isOpen]="isEdit"
   [faqId]="selectedFaqId"
@@ -38,9 +45,16 @@
   (refreshTable)="refreshTable.emit()"
 ></app-faq-edit>
 
-<app-faq-details
+<!-- <app-faq-details
   [faqId]="selectedFaqId"
   [FaqData]="selectedFaqData"
+  [isOpen]="isDetails"
+  (close)="closeFaqDetailsModal()"
+></app-faq-details> -->
+
+<app-faq-details
+  [faqId]="selectedFaqId"
+  [faqData]="selectedFaqData"
   [isOpen]="isDetails"
   (close)="closeFaqDetailsModal()"
 ></app-faq-details>

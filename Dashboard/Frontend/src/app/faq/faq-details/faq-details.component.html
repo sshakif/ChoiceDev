@@ -20,7 +20,12 @@
     </ng-container>
     <ng-container>
       <ui5-label show-colon>Answer</ui5-label>
-      <ui5-textarea class="w-100" placeholder="Answer" readonly></ui5-textarea>
+      <ui5-textarea
+        class="w-100"
+        value="{{ faqData.answer }}"
+        placeholder="Answer"
+        readonly
+      ></ui5-textarea>
     </ng-container>
   </div>
 
