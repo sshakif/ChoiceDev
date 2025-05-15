@@ -55,7 +55,6 @@ export class FaqAddComponent implements OnInit {
   ngOnInit(): void {
     this.isOpen = true; //model open
   }
-
   insertData() {
     if (!this.faq.question || !this.faq.answer) {
       this.errorMassage = 'Please fill all the fields.';
@@ -82,13 +81,7 @@ export class FaqAddComponent implements OnInit {
       }
     );
   }
-  toggleAction($event: any) {
-    if ($event.target.checked) {
-      this.isActive = true;
-    } else {
-      this.isActive = false;
-    }
-  }
+  // toggleAction method removed to resolve duplicate implementation error
 
   closeDialog() {
     this.isOpen = false;
@@ -101,13 +94,39 @@ export class FaqAddComponent implements OnInit {
     this.htmlContent = '';
     this.isActive = true;
   }
-  limitWords(field: 'question' | 'answer', maxWords: number): void {
-    let value = this.faq[field] || '';
-    const words = value.trim().split(/\s+/);
+
+  // count add or  view page apply
+  wordCounts = {
+    question: 0,
+    answer: 0,
+  };
+
+  wordErrors = {
+    question: false,
+    answer: false,
+  };
+
+  toggleAction(event: any): void {
+    console.log('Switch toggled:', event.target.checked);
+  }
+
+  validateWords(field: 'question' | 'answer', maxWords: number): void {
+    const text = this.faq[field] || '';
+    const words = text
+      .trim()
+      .split(/\s+/)
+      .filter((word) => word);
+    this.wordCounts[field] = words.length;
+    this.wordErrors[field] = words.length > maxWords;
+
     if (words.length > maxWords) {
-      this.faq[field] = words.slice(0, maxWords).join(' ');
+      // Trim to limit
+      const trimmed = words.slice(0, maxWords).join(' ');
+      this.faq[field] = trimmed;
+      this.wordCounts[field] = maxWords;
+      this.wordErrors[field] = true;
+    } else {
+      this.wordErrors[field] = false;
     }
   }
 }
-
-

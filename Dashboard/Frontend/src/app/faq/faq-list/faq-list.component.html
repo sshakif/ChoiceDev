@@ -30,21 +30,20 @@
   ></react-analytical-table>
 </div>
 <app-faq-add [isOpen]="isInsert" (close)="closeAddFaqModal()"></app-faq-add>
-<app-user-update
+<app-faq-edit
   [isOpen]="isEdit"
-  [userId]="selectedFaqId"
-  [userData]="selectedFaqData"
+  [faqId]="selectedFaqId"
+  [faqData]="selectedFaqData"
   (close)="closeEditFaqModal()"
   (refreshTable)="refreshTable.emit()"
-></app-user-update>
+></app-faq-edit>
 
-
-<app-user-details
-  [userId]="selectedFaqId"
-  [UserData]="selectedFaqData"
+<app-faq-details
+  [faqId]="selectedFaqId"
+  [FaqData]="selectedFaqData"
   [isOpen]="isDetails"
   (close)="closeFaqDetailsModal()"
-></app-user-details>
+></app-faq-details>
 
 <ui5-dialog [open]="isDeleteOpen" header-text="Warning" state="Critical">
   <p *ngIf="!isDeleteLoading">Are you sure you want to delete this data?</p>

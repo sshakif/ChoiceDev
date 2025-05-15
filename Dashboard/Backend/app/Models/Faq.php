@@ -9,12 +9,13 @@ class Faq extends Model
 {    
     use HasFactory;
     
-    protected $guarded=[
-        'question',
-        'answer',
-        'is_active',
-    ];
-     protected $casts = [
-        'is_active' => 'boolean',
-    ];
+     protected $guarded = [];
+    // protected $guarded=[
+    //     'question',
+    //     'answer',
+    //     'is_active',
+    // ];
+    //  protected $casts = [
+    //     'is_active' => 'boolean',
+    // ];
 }

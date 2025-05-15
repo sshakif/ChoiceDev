@@ -1,36 +1,27 @@
-<ui5-dialog header-text="new" [open]="isOpen" id="dialog" class="w-50">
-  <ui5-bar slot="header" design="Header">
-    <ui5-title level="H5" slot="startContent">New</ui5-title>
-    <ui5-button
-      class="dialogCloser"
-      design="Transparent"
-      id="closeDialogButton"
-      slot="endContent"
-      (click)="closeDialog()"
-      icon="decline"
-    ></ui5-button>
-  </ui5-bar>
-  <app-faq-add *ngIf="loading"></app-faq-add>
+<ui5-dialog header-text="new" [open]="isOpen" id="dialog">
+<ui5-bar slot="header" design="Header">
+<ui5-title level="H5" slot="startContent">New</ui5-title>
+<ui5-button
+class="dialogCloser"
+design="Transparent"
+id="closeDialogButton"
+slot="endContent"
+(click)="closeDialog()"
+icon="decline" ></ui5-button>
+</ui5-bar>
+<app-faq-add \*ngIf="loading"></app-faq-add>
 
-  <ui5-message-strip class="w-100 mt-3" design="Critical" *ngIf="errorMassage">
-    <ui5-icon name="alert" slot="icon"></ui5-icon> {{ errorMassage }}
-  </ui5-message-strip>
+<ui5-message-strip class="w-100 mt-3" design="Critical" \*ngIf="errorMassage">
+<ui5-icon name="alert" slot="icon"></ui5-icon> {{ errorMassage }}
+</ui5-message-strip>
+
   <section class="bg-pink-100 p-6 rounded-lg max-w-md mx-auto mt-6">
     <div class="flex flex-col space-y-6">
       <div class="flex space-x-4">
         <!-- Active Toggle -->
-        <!-- <div class="flex-1">
+        <div class="flex-1">
           <span> Active: </span>
           <ui5-switch checked (click)="toggleAction($event)"></ui5-switch>
-        </div> -->
-        <div class="d-flex align-items-center">
-          <ui5-label show-colon>Active</ui5-label>
-          <ui5-switch
-            accessible-name="graphical"
-            design="Graphical"
-            [checked]="isActive"
-            (change)="toggleAction($event)"
-          ></ui5-switch>
         </div>
 
         <!-- Question Field -->
@@ -76,7 +67,7 @@
           >
             Answer
           </ui5-label>
-          <div>
+           <div>
             <div
               class="text-xs mt-1"
               [ngClass]="{
@@ -97,9 +88,11 @@
             required
             (input)="validateWords('answer', 200)"
           ></ui5-textarea>
+
         </div>
       </div>
     </div>
+
   </section>
 
   <ui5-toolbar slot="footer">
@@ -116,6 +109,7 @@
       text="Close"
       (click)="closeDialog()"
     ></ui5-toolbar-button>
+
   </ui5-toolbar>
 </ui5-dialog>
 <app-toast-message
