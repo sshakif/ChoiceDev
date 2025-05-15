@@ -1,0 +1,46 @@
+<div class="tool-layout" data-ui5-compact-size>
+  <ui5-bar design="Header">
+    <ui5-button
+      data-ui5-compact-size
+      design="Transparent"
+      icon="menu"
+      (click)="toggleSidenav()"
+      slot="startContent"
+      class="ms-3 nav_button"
+    ></ui5-button>
+    <!-- <img slot="startContent" (click)="redirect()" class="logo" src="/assets/img/logo.png" /> -->
+
+    <ui5-label id="basic-label"></ui5-label>
+    <!-- <ui5-avatar
+      size="S"
+      slot="endContent"
+      interactive
+      id="btn"
+      (click)="popover.open = true"
+    >
+      <img alt="U" [src]="user?.image_url"
+    /></ui5-avatar> -->
+  </ui5-bar>
+
+  <!-- <ui5-popover #popover="ui5Popover" opener="btn" placement="Bottom">
+    <ui5-label for="emailInput" class="m-auto ms-1 d-block">
+      <b>{{ user?.name }}</b>
+    </ui5-label>
+    <ui5-label for="emailInput" class="m-auto text-center ms-1 d-block">
+      {{ user?.position || "Guest" }}</ui5-label
+    >
+    <ui5-button
+      icon="sap-icon://log"
+      class="w-100"
+      design="Transparent"
+      (click)="onLogout()"
+      >Logout</ui5-button
+    >
+  </ui5-popover> -->
+
+  <app-sidebar [collapsed]="isCollapsed"></app-sidebar>
+
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+</div>
