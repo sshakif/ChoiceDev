@@ -24,6 +24,25 @@
 
                 @canAny(['admin'])
                     <li>
+                        <a href="{{ route('about.list') }}">
+                            <i data-feather="briefcase"></i>
+                            <span data-key="t-apps">About</span>
+                        </a>
+                    </li>
+                @endcan
+
+                @canAny(['admin'])
+                    <li>
+                        <a href="{{ route('service.list') }}">
+                            <i data-feather="briefcase"></i>
+                            <span data-key="t-apps">Services</span>
+                        </a>
+                    </li>
+                @endcan
+
+
+                @canAny(['admin'])
+                    <li>
                         <a href="javascript: void(0);" class="has-arrow">
                             <i data-feather="crosshair"></i>
                             <span data-key="t-email">User Management</span>

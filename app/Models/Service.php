@@ -4,19 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Service extends Model
 {
-    use HasFactory;
-    protected $table = 'category';
+    use HasFactory, SoftDeletes;
+
     protected $fillable = [
-        'name',
-        'note',
+        'title',
+        'short_desc',
+        'long_desc',
         'file_path',
-        'mim_type',
+        'status',
         'created_by',
-        'updated_by'
-
+        'updated_by',
     ];
-
 }

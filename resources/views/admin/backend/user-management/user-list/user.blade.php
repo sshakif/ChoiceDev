@@ -224,8 +224,10 @@
 
 
                 </div> <!-- end col -->
-            </div> <!-- end row -->
-        </div> <!-- container-fluid -->
+            </div> 
+            <!-- end row -->
+        </div> 
+        <!-- container-fluid -->
     </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\ServiceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -17,16 +19,12 @@ Route::get('/terms-conditions' , [UserController::class, 'Terms'])->name('terms'
 Route::get('/privacy-policy' , [UserController::class, 'Privacy'])->name('privacy');
 Route::get('/event/details/{id}' , [UserController::class, 'Details'])->name('details');
 
-// ticket request
-Route::post('/event/ticket-request' , [UserController::class, 'Request_ticket'])->name('ticket.request');
 
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
 
 
 
@@ -49,6 +47,20 @@ Route::middleware('admin')->group(function(){
     Route::get('/category/edit/{id}' , [CategoryController::class, 'Edit'])->name('category.edit');
     Route::put('/category/update/{id}' , [CategoryController::class, 'Update'])->name('category.update');
     // end cateogry
+
+    //For Service
+    Route::get('/service', [ServiceController::class, 'index'])->name('service.list');
+    Route::post('/add_service', [ServiceController::class, 'store'])->name('service.add');
+    Route::delete('/delete_service/{id}', [ServiceController::class, 'destroy'])->name('service.delete');
+    Route::get('/service/edit/{id}', [ServiceController::class, 'edit'])->name('service.edit');
+    Route::put('/service/update/{id}', [ServiceController::class, 'update'])->name('service.update');
+
+    //For about_us
+    Route::get('/about', [AboutUsController::class, 'index'])->name('about.list');
+    Route::post('/add_about', [AboutUsController::class, 'store'])->name('about.add');
+    Route::delete('/delete_about/{id}', [AboutUsController::class, 'destroy'])->name('about.delete');
+    Route::get('/about/edit/{id}', [AboutUsController::class, 'edit'])->name('about.edit');
+    Route::put('/about/update/{id}', [AboutUsController::class, 'update'])->name('about.update');
 
 
     // role and permission
