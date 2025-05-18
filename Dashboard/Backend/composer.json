@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "flat3/lodata": "^5.0",
+        "illuminate/support": "*",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9"
     },

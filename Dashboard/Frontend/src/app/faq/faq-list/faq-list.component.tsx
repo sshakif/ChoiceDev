@@ -120,6 +120,15 @@ export class FaqListComponent implements OnInit {
           value ? new Date(value).toLocaleDateString() : "",
       },
       {
+        Header: "Updated At",
+        accessor: "updated_at",
+        autoResizable: true,
+        className: "custom-class-name",
+        hAlign: "Center" as TextAlign,
+        Cell: ({ value }: any) =>
+          value ? new Date(value).toLocaleDateString() : "",
+      },
+      {
         Header: "   Actions",
         accessor: ".",
         cellLabel: () => "",
@@ -161,24 +170,6 @@ export class FaqListComponent implements OnInit {
     ];
     return columns;
   }
-  handleInsertData(isInsert: boolean): void {
-    console.log("Received isInsertData:", isInsert);
-    if (isInsert) {
-      this.isInsert = isInsert;
-    }
-  }
-
-  closeAddFaqModal() {
-    this.isInsert = false;
-    this.refreshTable.emit();
-  }
-
-  editFaq(original: any) {
-    this.isEdit = true;
-    this.selectedFaqId = original.id;
-    this.selectedFaqData = { ...original };
-  }
-
   FaqsDetails(original: any) {
     this.selectedFaqId = original.id;
     this.selectedFaqData = { ...original };
@@ -190,6 +181,17 @@ export class FaqListComponent implements OnInit {
     this.isDetails = false;
     this.selectedFaqId = null;
     this.selectedFaqData = null;
+  }
+
+  handleInsertData(isInsert: boolean): void {
+    console.log("Received isInsertData:", isInsert);
+    if (isInsert) {
+      this.isInsert = isInsert;
+    }
+  }
+  closeAddFaqModal() {
+    this.isInsert = false;
+    this.refreshTable.emit();
   }
 
   deleteFaqs(original: any) {
@@ -219,9 +221,14 @@ export class FaqListComponent implements OnInit {
       },
     });
   }
+
+  editFaq(original: any) {
+    this.isEdit = true;
+    this.selectedFaqId = original.id;
+    this.selectedFaqData = { ...original };
+  }
+
   closeEditFaqModal() {
     this.isEdit = false;
-    this.selectedFaqId = null;
-    this.selectedFaqData = null;
   }
 }
