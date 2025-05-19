@@ -1,101 +1,108 @@
 <ui5-dialog
-  header-text="new"
   [open]="isOpen"
-  class="h -40 w-50"
+  class="h-40 w-50"
   state="Information"
 >
-  <ui5-bar slot="header" design="Header">
-    <ui5-title level="H5" slot="startContent">New</ui5-title>
+  <ui5-tabcontainer [collapsed]="isTabCollapsed">
+    <ui5-tab text="Info" selected>
+      <ui5-bar slot="header" design="Header">
+        <ui5-title level="H5" slot="startContent">New</ui5-title>
+        <ui5-button
+          class="dialogCloser"
+          design="Transparent"
+          id="closeDialogButton"
+          slot="endContent"
+          (click)="closeDialog()"
+          icon="decline"
+        ></ui5-button>
+      </ui5-bar>
+      <app-faq-add *ngIf="loading"></app-faq-add>
 
-    <ui5-button
-      class="dialogCloser"
-      design="Transparent"
-      id="closeDialogButton"
-      slot="endContent"
-      (click)="closeDialog()"
-      icon="decline"
-    ></ui5-button>
-  </ui5-bar>
-  <app-faq-add *ngIf="loading"></app-faq-add>
-
-  <ui5-message-strip class="w-100 mt-3" design="Critical" *ngIf="errorMessage">
-    <ui5-icon name="alert" slot="icon"></ui5-icon> {{ errorMessage }}
-  </ui5-message-strip>
-  <section>
-    <div>
-      <div>
-        <div class="d-flex align-items-center">
-          <ui5-label show-colon>Active</ui5-label>
-          <ui5-switch
-            accessible-name="graphical"
-            design="Graphical"
-            [checked]="isActive"
-            (change)="toggleAction($event)"
-          ></ui5-switch>
-        </div>
-
-        <!-- title Field -->
+      <ui5-message-strip
+        class="w-100 mt-3"
+        design="Critical"
+        *ngIf="errorMessage"
+      >
+        <ui5-icon name="alert" slot="icon"></ui5-icon> {{ errorMessage }}
+      </ui5-message-strip>
+      <section>
         <div>
-          <ui5-label
-            style="margin-right: 10px"
-            show-colon
-            required
-            class="block text-sm font-medium text-gray-700"
-          >
-            Title
-          </ui5-label>
+          <div>
+            <div class="d-flex align-items-center">
+              <ui5-label show-colon>Active</ui5-label>
+              <ui5-switch
+                accessible-name="graphical"
+                design="Graphical"
+                [checked]="isActive"
+                (change)="toggleAction($event)"
+              ></ui5-switch>
+            </div>
 
-          <ui5-input
-            [(ngModel)]="Service.title"
-            placeholder="Enter your Title"
-            required
-          ></ui5-input>
-        </div>
+            <!-- Title Field -->
+            <div>
+              <ui5-label
+                style="margin-right: 10px"
+                show-colon
+                required
+                class="block text-sm font-medium text-gray-700"
+              >
+                Title
+              </ui5-label>
+              <ui5-input
+                [(ngModel)]="Service.title"
+                placeholder="Enter your Title"
+                required
+              ></ui5-input>
+            </div>
 
-        <!-- short_description Field -->
-        <div>
-          <ui5-label
-            show-colon
-            required
-            class="block text-sm font-medium text-gray-700"
-          >
-            Short Description
-          </ui5-label>
-          <ui5-textarea
-            [(ngModel)]="Service.short_description"
-            placeholder="Enter your Short Description"
-            required
-          ></ui5-textarea>
-        </div>
-        <!-- short_description Field -->
-        <div>
-          <ui5-label
-            show-colon
-            required
-            class="block text-sm font-medium text-gray-700"
-          >
-            Long Description
-          </ui5-label>
-          <ui5-textarea
-            style="height: 200px"
-            [(ngModel)]="Service.long_description"
-            placeholder="Enter your Long Description"
-            required
-          ></ui5-textarea>
-        </div>
-      </div>
-    </div>
-  </section>
+            <!-- Short Description Field -->
+            <div>
+              <ui5-label
+                show-colon
+                required
+                class="block text-sm font-medium text-gray-700"
+              >
+                Short Description
+              </ui5-label>
+              <ui5-textarea
+                [(ngModel)]="Service.short_description"
+                placeholder="Enter your Short Description"
+                required
+              ></ui5-textarea>
+            </div>
 
+            <!-- Long Description Field -->
+            <div>
+              <ui5-label
+                show-colon
+                required
+                class="block text-sm font-medium text-gray-700"
+              >
+                Long Description
+              </ui5-label>
+              <ui5-textarea
+                style="height: 200px"
+                [(ngModel)]="Service.long_description"
+                placeholder="Enter your Long Description"
+                required
+              ></ui5-textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+    </ui5-tab>
+    <ui5-tab text="Attachments">
+      <!-- Add content for the Attachments tab if needed -->
+      <p>Attachments tab content goes here.</p>
+    </ui5-tab>
+  </ui5-tabcontainer>
   <ui5-toolbar slot="footer">
     <ui5-toolbar-button
       design="Emphasized"
       [disabled]="loading"
       (click)="insertData()"
       text="Submit"
-    >
-    </ui5-toolbar-button>
-
+    ></ui5-toolbar-button>
     <ui5-toolbar-button
       design="Transparent"
       text="Close"
@@ -103,6 +110,7 @@
     ></ui5-toolbar-button>
   </ui5-toolbar>
 </ui5-dialog>
+
 <app-toast-message
   [IsOpenToastAlert]="IsOpenToastAlert"
   [ToastType]="ToastType"

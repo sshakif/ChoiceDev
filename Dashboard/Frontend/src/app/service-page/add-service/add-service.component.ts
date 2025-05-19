@@ -13,7 +13,11 @@ import { FormsModule } from '@angular/forms';
 import { ToastMessageComponent } from '@app/components/toast-message/toast-message.component';
 import { CommonService } from '@app/services/common-service/common.service';
 import { ServicePage } from '@app/shared/Model/servicePage';
-import { LabelComponent, TextAreaComponent } from '@ui5/webcomponents-ngx';
+import {
+  LabelComponent,
+  TextAreaComponent,
+  Ui5MainModule,
+} from '@ui5/webcomponents-ngx';
 //import { InputComponent } from '@ui5/webcomponents-ngx'; // Uncomment and use the correct component if needed
 import { InputComponent } from '@ui5/webcomponents-ngx/main/input';
 import '@ui5/webcomponents/dist/Input.js';
@@ -28,6 +32,7 @@ import '@ui5/webcomponents/dist/Input.js';
     TextAreaComponent,
     ToastMessageComponent,
     InputComponent,
+    Ui5MainModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './add-service.component.html',
@@ -42,7 +47,7 @@ export class AddServiceComponent {
   loading: boolean = false;
   isSuccess: boolean = false;
   isAddError: boolean = false;
-
+  isTabCollapsed = false;
   errorMessage: string = '';
 
   htmlContent: string = '';
@@ -57,7 +62,7 @@ export class AddServiceComponent {
   ) {}
 
   ngOnInit(): void {
-    // this.isOpen = true; //model open
+    this.isOpen = true; //model open
   }
 
   insertData() {
