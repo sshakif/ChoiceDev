@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\ProjectCategoryController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\ProjectImageController;
 use App\Http\Controllers\Admin\ServiceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -48,13 +51,6 @@ Route::middleware('admin')->group(function(){
     Route::put('/category/update/{id}' , [CategoryController::class, 'Update'])->name('category.update');
     // end cateogry
 
-    //For Service
-    Route::get('/service', [ServiceController::class, 'index'])->name('service.list');
-    Route::post('/add_service', [ServiceController::class, 'store'])->name('service.add');
-    Route::delete('/delete_service/{id}', [ServiceController::class, 'destroy'])->name('service.delete');
-    Route::get('/service/edit/{id}', [ServiceController::class, 'edit'])->name('service.edit');
-    Route::put('/service/update/{id}', [ServiceController::class, 'update'])->name('service.update');
-
     //For about_us
     Route::get('/about', [AboutUsController::class, 'index'])->name('about.list');
     Route::post('/add_about', [AboutUsController::class, 'store'])->name('about.add');
@@ -62,6 +58,32 @@ Route::middleware('admin')->group(function(){
     Route::get('/about/edit/{id}', [AboutUsController::class, 'edit'])->name('about.edit');
     Route::put('/about/update/{id}', [AboutUsController::class, 'update'])->name('about.update');
 
+    //For Service
+    Route::get('/service', [ServiceController::class, 'index'])->name('service.list');
+    Route::post('/add_service', [ServiceController::class, 'store'])->name('service.add');
+    Route::delete('/delete_service/{id}', [ServiceController::class, 'destroy'])->name('service.delete');
+    Route::get('/service/edit/{id}', [ServiceController::class, 'edit'])->name('service.edit');
+    Route::put('/service/update/{id}', [ServiceController::class, 'update'])->name('service.update');
+
+    
+    // Project Category Routes
+    Route::get('/project/category', [ProjectCategoryController::class, 'index'])->name('project.category.list');
+    Route::post('/add_project_category', [ProjectCategoryController::class, 'store'])->name('project.category.add');
+    Route::delete('/delete_project_category/{id}', [ProjectCategoryController::class, 'destroy'])->name('project.category.delete');
+    Route::get('/project/category/edit/{id}', [ProjectCategoryController::class, 'edit'])->name('project.category.edit');
+    Route::put('/project/category/update/{id}', [ProjectCategoryController::class, 'update'])->name('project.category.update');
+
+    // Project Routes
+    Route::get('/project', [ProjectController::class, 'index'])->name('project.list');
+    Route::get('/project/create', [ProjectController::class, 'create'])->name('project.create');
+    Route::post('/add_project', [ProjectController::class, 'store'])->name('project.add');
+    Route::delete('/delete_project/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
+    Route::get('/project/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
+    Route::put('/project/update/{id}', [ProjectController::class, 'update'])->name('project.update');
+
+    // Project Image Routes
+    Route::post('/add_project_image', [ProjectImageController::class, 'store'])->name('project.image.add');
+    Route::delete('/delete_project_image/{id}', [ProjectImageController::class, 'destroy'])->name('project.image.delete');
 
     // role and permission
     Route::post('/store/user', [UserManagementController::class, 'userStore'])->name('store.user');

@@ -49,14 +49,14 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td style="max-width: 250px;">
-                                {{ \Illuminate\Support\Str::limit($service->title, 50, '...') }}
-                                @if(strlen($service->title) > 50)
+                                {{ \Illuminate\Support\Str::limit($service->title, 30, '...') }}
+                                @if(strlen($service->title) > 30)
                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ViewLongDesc{{ $key }}" class="text-primary" style="cursor:pointer;">Read more</a>
                                 @endif
                             </td>
                             <td style="max-width: 300px;">
-                                {{ \Illuminate\Support\Str::limit($service->short_desc, 50, '...') }}
-                                @if(strlen($service->short_desc) > 50)
+                                {{ \Illuminate\Support\Str::limit($service->short_desc, 30, '...') }}
+                                @if(strlen($service->short_desc) > 30)
                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ViewShortDesc{{ $key }}" class="text-primary" style="cursor:pointer;">Read more</a>
                                 @endif
                             </td>

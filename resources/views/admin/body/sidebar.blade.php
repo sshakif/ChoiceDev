@@ -40,6 +40,18 @@
                     </li>
                 @endcan
 
+                @canAny(['admin'])
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i data-feather="crosshair"></i>
+                            <span data-key="t-email">Project Management</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ route('project.category.list') }}">Project Category</a></li>
+                            <li><a href="{{ route('project.list') }}">Project List</a></li>
+                        </ul>
+                    </li>
+                @endcan
 
                 @canAny(['admin'])
                     <li>

@@ -16,8 +16,8 @@ class CreateServicesTable extends Migration
         Schema::create('abouts', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->string('subtitle')->nullable();
-            $table->text('desc')->nullable(); // You can change to longText if needed
+            $table->string('short_desc')->nullable();
+            $table->text('long_desc')->nullable(); 
             $table->string('file_path')->nullable();
             $table->boolean('status')->default(1);
 
