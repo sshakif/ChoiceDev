@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToastMessageComponent } from '@app/components/toast-message/toast-message.component';
+import { Faq } from '@app/shared/Model/faq';
 import { LabelComponent, TextAreaComponent } from '@ui5/webcomponents-ngx';
 import { CommonService } from 'app/services/common-service/common.service';
 
@@ -43,9 +44,9 @@ export class FaqEditComponent {
   sucessMessage = '';
   ToastType = '';
 
-  question = '';
-  answer = '';
-
+  // question = '';
+  // answer = '';
+  faq = new Faq().deserialize({});
   constructor(
     private commonService: CommonService,
     private datePipe: DatePipe
@@ -64,9 +65,10 @@ export class FaqEditComponent {
   }
 
   populateData(): void {
-    this.question = this.faqData.question || '';
-    this.answer = this.faqData.answer || '';
-    this.isActive = this.faqData.is_active === true;
+    this.faq.question = this.faqData.question || '';
+    this.faq.answer = this.faqData.answer || '';
+    this.faq.is_active = this.faqData.is_active === true;
+     this.isActive = this.faq.is_active; // ⬅️ Synchronize toggle with model
   }
 
   getCandidateInfo(): void {
@@ -86,21 +88,14 @@ export class FaqEditComponent {
   }
 
   updateData(): void {
-    if (!this.question || !this.answer) {
+    if (!this.faq.question || !this.faq.answer) {
       this.errorMessage = 'Both Question and Answer fields are required.';
       return;
     }
-
-    const formData = {
-      question: this.question,
-      answer: this.answer,
-      is_active: this.isActive,
-    };
-
     this.formloading = true;
     this.ToastType = 'edit';
 
-    this.commonService.put(`Faqs(${this.faqId})`, formData, true).subscribe({
+    this.commonService.put(`Faqs(${this.faqId})`, this.faq, true).subscribe({
       next: () => {
         this.formloading = false;
         this.isOpen = false;
@@ -114,10 +109,10 @@ export class FaqEditComponent {
       },
     });
   }
-
   toggleActive(event: any): void {
-    this.isActive = event.target.checked;
-  }
+  this.isActive = event.target.checked;
+  this.faq.is_active = this.isActive;
+}
 
   closeDialog(): void {
     this.isOpen = false;

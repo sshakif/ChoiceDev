@@ -1,25 +1,22 @@
 import { CommonModule, DatePipe } from "@angular/common";
 import {
+  ChangeDetectorRef,
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
   EventEmitter,
-  Input,
   OnInit,
   Output,
-  ChangeDetectorRef,
 } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { Router, RouterLink } from "@angular/router";
-import { CommonService } from "../../services/common-service/common.service";
 import { AnalyticalTableComponent } from "@app/components/analytical-table/analytical-table.component";
-import { Icon, TextAlign } from "@ui5/webcomponents-react";
-import React from "react";
-import { Button } from "@ui5/webcomponents-react";
+import { ToastMessageComponent } from "@app/components/toast-message/toast-message.component";
 import { AddServiceComponent } from "@app/service-page/add-service/add-service.component";
 import { EditServiceComponent } from "@app/service-page/edit-service/edit-service.component";
 import { ServiceDetailsComponent } from "@app/service-page/service-details/service-details.component";
-import { ToastMessageComponent } from "@app/components/toast-message/toast-message.component";
 import { ServicePage } from "@app/shared/Model/servicePage";
+import { Button, Icon, TextAlign } from "@ui5/webcomponents-react";
+import React from "react";
+import { CommonService } from "../../services/common-service/common.service";
 @Component({
   selector: "app-service-list",
   standalone: true,
@@ -56,8 +53,8 @@ export class ServiceListComponent implements OnInit {
   filter: string = "";
   Title: string;
   type: string | null = null;
-  selectedFaqId: number | null = null;
-  selectedFaqData: any = null;
+  selectedServiceId: number | null = null;
+  selectedServiceData: any = null;
   ServicePages = ServicePage;
   servicePages = new ServicePage().deserialize({});
   constructor(
@@ -74,45 +71,45 @@ export class ServiceListComponent implements OnInit {
 
   tableColum() {
     const columns = [
-    {
-      Header: "Sl No.",
-      accessor: ".",
-      autoResizable: true,
-      disableFilters: true,
-      disableGroupBy: true,
-      disableSortBy: true,
-      className: "custom-class-name",
-      Cell: ({ row }: { row: any }) => {
-        return React.createElement("span", null, row.index + 1);
+      {
+        Header: "Sl No.",
+        accessor: ".",
+        autoResizable: true,
+        disableFilters: true,
+        disableGroupBy: true,
+        disableSortBy: true,
+        className: "custom-class-name",
+        Cell: ({ row }: { row: any }) => {
+          return React.createElement("span", null, row.index + 1);
+        },
+        hAlign: "Center" as TextAlign,
+        width: 70,
       },
-      hAlign: "Center" as TextAlign,
-      width: 70,
-    },
-    {
-      Header: "Title",
-      accessor: "title",
-      autoResizable: true,
-      className: "custom-class-name",
-    },
-    {
-      Header: "Slug",
-      accessor: "slug",
-      autoResizable: true,
-      className: "custom-class-name",
-    },
-    {
-      Header: "Short Description",
-      accessor: "short_description",
-      autoResizable: true,
-      className: "custom-class-name",
-    },
-    {
-      Header: "Long Description",
-      accessor: "long_description",
-      autoResizable: true,
-      className: "custom-class-name",
-    },
-    {
+      // {
+      //   Header: "Profile",
+      //   accessor: "image",
+      //   autoResizable: true,
+      //   className: "custom-class-name",
+      // },
+      {
+        Header: "Title",
+        accessor: "title",
+        autoResizable: true,
+        className: "custom-class-name",
+      },
+      {
+        Header: "Short Description",
+        accessor: "short_description",
+        autoResizable: true,
+        className: "custom-class-name",
+      },
+      {
+        Header: "Long Description",
+        accessor: "long_description",
+        autoResizable: true,
+        className: "custom-class-name",
+      },
+      {
         Header: "Active",
         accessor: "is_active",
         autoResizable: true,
@@ -124,76 +121,72 @@ export class ServiceListComponent implements OnInit {
         Cell: ({ value }: any) =>
           value ? <Icon name="accept" /> : <Icon name="decline" />,
       },
-    {
-      Header: "Created At",
-      accessor: "created_at",
-      autoResizable: true,
-      className: "custom-class-name",
-      hAlign: "Center" as TextAlign,
-      Cell: ({ value }: any) => value ? new Date(value).toLocaleDateString() : "",
-    },
-    {
-      Header: "Updated At",
-      accessor: "updated_at",
-      autoResizable: true,
-      className: "custom-class-name",
-      hAlign: "Center" as TextAlign,
-      Cell: ({ value }: any) => value ? new Date(value).toLocaleDateString() : "",
-    },
-      // {
-      //   Header: "   Actions",
-      //   accessor: ".",
-      //   cellLabel: () => "",
-      //   disableFilters: true,
-      //   disableGroupBy: true,
-      //   disableSortBy: true,
-      //   autoResizable: true,
-      //   id: "actions",
-      //   className: "custom-class-name",
-      //   width: 150,
-      //   hAlign: "Center" as TextAlign,
-      //   Cell: ({ row }: any) => (
-      //     <div>
-      //       <Button
-      //         icon="edit"
-      //         design="Transparent"
-      //         onClick={() => {
-      //           this.editFaq(row.original);
-      //         }}
-      //       />
-      //       <Button
-      //         icon="information"
-      //         design="Transparent"
-      //         onClick={() => {
-      //           this.FaqsDetails(row.original);
-      //         }}
-      //       ></Button>
+      {
+        Header: "Created At",
+        accessor: "created_at",
+        autoResizable: true,
+        className: "custom-class-name",
+        hAlign: "Center" as TextAlign,
+        Cell: ({ value }: any) =>
+          value ? new Date(value).toLocaleDateString() : "",
+      },
+      {
+        Header: "Updated At",
+        accessor: "updated_at",
+        autoResizable: true,
+        className: "custom-class-name",
+        hAlign: "Center" as TextAlign,
+        Cell: ({ value }: any) =>
+          value ? new Date(value).toLocaleDateString() : "",
+      },
+      {
+        Header: "   Actions",
+        accessor: ".",
+        cellLabel: () => "",
+        disableFilters: true,
+        disableGroupBy: true,
+        disableSortBy: true,
+        autoResizable: true,
+        id: "actions",
+        className: "custom-class-name",
+        width: 150,
+        hAlign: "Center" as TextAlign,
+        Cell: ({ row }: any) => (
+          <div>
+            <Button
+              icon="edit"
+              design="Transparent"
+              onClick={() => {
+                this.editService(row.original);
+              }}
+            />
+            <Button
+              icon="information"
+              design="Transparent"
+              onClick={() => {
+                this.DetailsService(row.original);
+              }}
+            ></Button>
 
-      //       <Button
-      //         icon="delete"
-      //         design="Transparent"
-      //         onClick={() => {
-      //           this.deleteFaqs(row.original);
-      //         }}
-      //       ></Button>
-      //     </div>
-      //   ),
-      // },
+            <Button
+              icon="delete"
+              design="Transparent"
+              onClick={() => {
+                this.deleteService(row.original);
+              }}
+            ></Button>
+          </div>
+        ),
+      },
     ];
     return columns;
   }
-  // FaqsDetails(original: any) {
-  //   this.selectedFaqId = original.id;
-  //   this.selectedFaqData = { ...original };
-  //   this.isDetails = true;
-  //   this.cdr.detectChanges();
-  // }
-
-  // closeFaqDetailsModal() {
-  //   this.isDetails = false;
-  //   this.selectedFaqId = null;
-  //   this.selectedFaqData = null;
-  // }
+  DetailsService(original: any) {
+    this.selectedServiceId = original.id;
+    this.selectedServiceData = { ...original };
+    this.isDetails = true;
+    this.cdr.detectChanges();
+  }
 
   handleInsertData(isInsert: boolean): void {
     console.log("Received isInsertData:", isInsert);
@@ -201,47 +194,51 @@ export class ServiceListComponent implements OnInit {
       this.isInsert = isInsert;
     }
   }
-  // closeAddFaqModal() {
-  //   this.isInsert = false;
-  //   this.refreshTable.emit();
-  // }
+  closeAddServiceModal() {
+    this.isInsert = false;
+    this.refreshTable.emit();
+  }
 
-  // deleteFaqs(original: any) {
-  //   this.isDeleteOpen = true;
-  //   this.selectedFaqId = original.id;
-  // }
+  deleteService(original: any) {
+    this.isDeleteOpen = true;
+    this.selectedServiceId = original.id;
+  }
 
-  // deleteItemConfirm() {
-  //   this.isDeleteLoading = true;
-  //   const id = this.selectedFaqId;
-  //   this.commonService.delete(`Faqs/${id}`, this.odata).subscribe({
-  //     next: (response: any) => {
-  //       this.isDeleteOpen = false;
-  //       this.isDeleteLoading = false;
-  //       this.ToastType = "delete";
-  //       setTimeout(() => {
-  //         this.IsOpenToastAlert.emit();
-  //       }, 1000);
-  //       this.refreshTable.emit();
-  //     },
-  //     error: (error: any) => {
-  //       console.log(error);
-  //       this.isDeleteError = true;
-  //       this.isDeleteOpen = false;
-  //       this.isDeleteLoading = false;
-  //       this.refreshTable.emit();
-  //     },
-  //   });
-  // }
+  deleteItemConfirm() {
+    this.isDeleteLoading = true;
+    const id = this.selectedServiceId;
+    this.commonService.delete(`Faqs/${id}`, this.odata).subscribe({
+      next: (response: any) => {
+        this.isDeleteOpen = false;
+        this.isDeleteLoading = false;
+        this.ToastType = "delete";
+        setTimeout(() => {
+          this.IsOpenToastAlert.emit();
+        }, 1000);
+        this.refreshTable.emit();
+      },
+      error: (error: any) => {
+        console.log(error);
+        this.isDeleteError = true;
+        this.isDeleteOpen = false;
+        this.isDeleteLoading = false;
+        this.refreshTable.emit();
+      },
+    });
+  }
 
-  // editFaq(original: any) {
-  //   this.isEdit = true;
-  //   this.selectedFaqId = original.id;
-  //   this.selectedFaqData = { ...original };
-  // }
+  editService(original: any) {
+    this.isEdit = true;
+    this.selectedServiceId = original.id;
+    this.selectedServiceData = { ...original };
+  }
 
-  // closeEditFaqModal() {
-  //   this.isEdit = false;
-  // }
-
+  closeEditServiceModal() {
+    this.isEdit = false;
+  }
+  closeServiceDetailsModal() {
+    this.isDetails = false;
+    this.selectedServiceId = null;
+    this.selectedServiceData = null;
+  }
 }

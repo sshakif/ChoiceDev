@@ -1,1 +1,44 @@
-<p>service-details works!</p>
+<ui5-dialog [open]="isOpen" header-text="Details" state="Information">
+  <div *ngIf="Service">
+    <div class="d-flex align-items-center">
+      <ui5-label show-colon>Avtive</ui5-label>
+      <ui5-switch
+        accessible-name="graphical"
+        design="Graphical"
+        disabled
+        [checked]="Service.is_active"
+      ></ui5-switch>
+    </div>
+    <ng-container>
+      <ui5-label show-colon>Title</ui5-label>
+      <ui5-textarea
+        class="w-100"
+        value="{{ Service.title }}"
+        placeholder="Title"
+        readonly
+      ></ui5-textarea>
+    </ng-container>
+    <ng-container>
+      <ui5-label show-colon>Short Description</ui5-label>
+      <ui5-textarea
+        class="w-100"
+        value="{{ Service.short_description }}"
+        placeholder="short_description"
+        readonly
+      ></ui5-textarea>
+    </ng-container>
+    <ng-container>
+      <ui5-label show-colon>Long Description</ui5-label>
+      <ui5-textarea
+        class="w-100"
+        value="{{ Service.long_description }}"
+        placeholder="long_description"
+        readonly
+      ></ui5-textarea>
+    </ng-container>
+  </div>
+
+  <div slot="footer" class="d-flex justify-content-end w-100 gap-2 p-2">
+    <ui5-button (click)="closeDialog()">Close</ui5-button>
+  </div>
+</ui5-dialog>

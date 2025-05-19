@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         {
           id: 'services',
           method: 'GET',
-          url: '/odata/ServicePageDetails?$count=true',
+          url: '/odata/ServicePages?$count=true',
         },
         
         

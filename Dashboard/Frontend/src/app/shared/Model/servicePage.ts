@@ -6,7 +6,7 @@ export class ServicePage implements Deserializable {
   short_description?: string;
   long_description?: string;
   image?: string;
-  is_active: boolean = false;
+  is_active: boolean = true;
   created_at?: string;
   updated_at?: string;
 
