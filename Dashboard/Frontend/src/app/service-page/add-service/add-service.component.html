@@ -1,6 +1,6 @@
-<ui5-dialog [open]="isOpen" class="w-50" state="Information">
+<ui5-dialog [open]="isOpen" header-text="New" class="w-50" state="Information">
   <ui5-tabcontainer [collapsed]="isTabCollapsed">
-    <ui5-tab text="Info" selected>
+    <ui5-tab text="Info">
       <ui5-bar slot="header" design="Header">
         <ui5-title level="H5" slot="startContent">New</ui5-title>
         <ui5-button
@@ -45,7 +45,7 @@
                 Title
               </ui5-label>
               <ui5-input
-                class="w-100"
+                class="h-[40px] w-100"
                 [(ngModel)]="Service.title"
                 placeholder="Enter your Title"
                 required
@@ -78,7 +78,7 @@
                 Long Description
               </ui5-label>
               <ui5-textarea
-                class="h-full w-full"
+                class="h-[150px] w-full"
                 [(ngModel)]="Service.long_description"
                 placeholder="Enter your Long Description"
                 required
@@ -88,9 +88,78 @@
         </div>
       </section>
     </ui5-tab>
-    <ui5-tab text="Attachments">
-      <!-- Add content for the Attachments tab if needed -->
-      <p>Attachments tab content goes here.</p>
+    <ui5-tab text="Attachments" selected>
+      <ui5-tabcontainer [collapsed]="isTabCollapsed">
+        <!-- Info Tab (Left side) -->
+        <ui5-tab text="Attachments()">
+          <div class="w-full flex flex-wrap justify-start gap-4 p-4">
+            <div
+              *ngIf="uploadedFiles.length === 0"
+              class="text-center text-gray-500 w-full"
+            >
+              <img
+                src="../../../assets/img/Uploder.png"
+                alt="No files"
+                class="mx-auto w-32 mb-4"
+              />
+              <div class="text-lg font-medium">No files found</div>
+              <div class="text-sm">
+                Drop files to upload, or use the Upload button.
+              </div>
+            </div>
+
+            <div *ngFor="let file of uploadedFiles" class="w-40">
+              <img
+                *ngIf="file.type.startsWith('image')"
+                [src]="file.preview"
+                class="w-full h-auto rounded shadow"
+              />
+              <div class="truncate text-sm text-center mt-2">
+                {{ file.name }}
+              </div>
+            </div>
+          </div>
+        </ui5-tab>
+        <!-- Right Side: Uploader Tab -->
+
+            <ui5-tab text="Uploader">
+              <div class="p-4 w-1/2">
+                <input
+                  type="file"
+                  (change)="onFileSelected($event)"
+                  multiple
+                  hidden
+                  #fileInput
+                />
+                <ui5-button icon="upload" (click)="fileInput.click()"
+                  >Upload Files</ui5-button
+                >
+              </div>
+            </ui5-tab>
+        <!-- Download Tab -->
+        <ui5-tab text="Download">
+          <div class="p-4">
+            <ui5-list>
+              <ui5-li *ngFor="let file of uploadedFiles">
+                <ui5-checkbox [(ngModel)]="file.selected"></ui5-checkbox>
+                {{ file.name }}
+                <ui5-button
+                  icon="download"
+                  design="Transparent"
+                  (click)="downloadFile(file)"
+                  >Download</ui5-button
+                >
+              </ui5-li>
+            </ui5-list>
+            <ui5-button
+              icon="download"
+              design="Emphasized"
+              (click)="downloadSelectedFiles()"
+              >Download Selected</ui5-button
+            >
+          </div>
+        </ui5-tab>
+      </ui5-tabcontainer>
     </ui5-tab>
   </ui5-tabcontainer>
   <ui5-toolbar slot="footer">

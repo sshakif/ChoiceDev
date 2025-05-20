@@ -47,7 +47,9 @@ export class AddServiceComponent {
   loading: boolean = false;
   isSuccess: boolean = false;
   isAddError: boolean = false;
+  //tab user
   isTabCollapsed = false;
+
   errorMessage: string = '';
 
   htmlContent: string = '';
@@ -114,4 +116,105 @@ export class AddServiceComponent {
     this.isActive = event.target.checked;
     console.log('Switch toggled:', this.isActive);
   }
+
+  //   onFileSelected(event: any) {
+  //   const file = event.target.files[0];
+  //   if (file && file.type.startsWith("image/")) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e: any) => {
+  //       const preview = document.getElementById("imagePreview") as HTMLImageElement;
+  //       preview.src = e.target.result;
+  //       preview.classList.remove("hidden");
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
+
+  selectedFile: File | null = null;
+  previewUrl: string | null = null;
+  isImage: boolean = false;
+
+  // onFileSelected(event: any): void {
+  //   const file: File = event.target?.files?.[0];
+  //   if (!file) return;
+
+  //   this.selectedFile = file;
+  //   const fileType = file.type;
+
+  //   if (fileType.startsWith('image/')) {
+  //     this.isImage = true;
+  //     const reader = new FileReader();
+  //     reader.onload = (e: any) => {
+  //       this.previewUrl = e.target?.result || null;
+  //     };
+  //     reader.readAsDataURL(file);
+  //   } else {
+  //     this.isImage = false;
+  //     this.previewUrl = null;
+  //   }
+  // }
+
+  // removeFile(): void {
+  //   this.selectedFile = null;
+  //   this.previewUrl = null;
+  //   this.isImage = false;
+
+  //   this.resetUploader('avatarUploader');
+  //   this.resetUploader('tagUploader');
+  // }
+
+  // resetUploader(id: string): void {
+  //   const uploader = document.getElementById(id) as any;
+  //   const input = uploader?.shadowRoot?.querySelector('input[type="file"]');
+  //   if (input) input.value = '';
+  // }
+
+  // triggerUploaderClick(uploaderId: string) {
+  //   const uploader = document.getElementById(uploaderId) as any;
+  //   if (uploader) {
+  //     // Wait for shadow DOM to be ready
+  //     const input = uploader.shadowRoot?.querySelector('input[type="file"]');
+  //     if (input) input.click();
+  //   }
+  // }
+  uploadedFiles: any[] = [];
+
+onFileSelected(event: any): void {
+  const files = Array.from(event.target.files) as File[];
+
+  for (const file of files) {
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      this.uploadedFiles.push({
+        name: file.name,
+        type: file.type,
+        preview: file.type.startsWith('image') ? e.target.result : null,
+        data: file,
+        selected: false
+      });
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  // Clear the input
+  event.target.value = '';
+}
+
+downloadFile(file: any): void {
+  const url = URL.createObjectURL(file.data);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = file.name;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+downloadSelectedFiles(): void {
+  this.uploadedFiles
+    .filter(f => f.selected)
+    .forEach(f => this.downloadFile(f));
+}
+
 }

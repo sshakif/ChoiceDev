@@ -45,6 +45,9 @@ export class EditServiceComponent implements OnInit {
   sucessMessage = '';
   ToastType = '';
 
+    //tab user
+  isTabCollapsed = false;
+  
   Service = new ServicePage().deserialize({});
 
   constructor(
@@ -53,6 +56,7 @@ export class EditServiceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // this.isOpen = true;
     if (this.ServiceData) {
       this.populateData();
     }
