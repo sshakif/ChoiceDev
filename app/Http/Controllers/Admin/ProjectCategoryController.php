@@ -9,14 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectCategoryController extends Controller
 {
-    // Display all categories
     public function index()
     {
         $categories = ProjectCategory::orderBy('created_at', 'desc')->get();
         return view('admin.backend.project.categoryList', compact('categories'));
     }
 
-    // Store a new category
     public function store(Request $request)
     {
         $request->validate([
@@ -49,14 +47,12 @@ class ProjectCategoryController extends Controller
         return redirect()->route('project.category.list')->with('success', 'Category created successfully.');
     }
 
-    // Show edit form
     public function edit($id)
     {
         $category = ProjectCategory::findOrFail($id);
         return view('admin.backend.project.editCategory', compact('category'));
     }
 
-    // Update the category
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -95,7 +91,6 @@ class ProjectCategoryController extends Controller
         return redirect()->route('project.category.list')->with('success', 'Category updated successfully.');
     }
 
-    // Delete category
     public function destroy($id)
     {
         $category = ProjectCategory::findOrFail($id);

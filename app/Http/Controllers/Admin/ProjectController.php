@@ -77,6 +77,12 @@ class ProjectController extends Controller
         return redirect()->route('project.list')->with('success', 'Project created successfully.');
     }
 
+    public function show($id)
+    {
+        $project = Project::with(['categories', 'images'])->findOrFail($id);
+        return view('admin.backend.project.projectDetails', compact('project'));
+    }
+
     public function edit($id)
     {
         $project = Project::with('categories')->findOrFail($id);

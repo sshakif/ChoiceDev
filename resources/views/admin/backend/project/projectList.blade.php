@@ -89,6 +89,9 @@
                             </td>
                             <td>{{ $project->created_at->format('d M, Y') }}</td>
                             <td class="d-flex gap-2">
+                                <a href="{{ route('project.show', $project->id) }}" class="btn btn-info btn-sm">
+                                    <i class="fa fa-eye"></i>
+                                </a>
                                 <a href="{{ route('project.edit', $project->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                                 <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#DeleteModal{{ $key }}">
                                     <i class="fa fa-trash"></i>
@@ -185,82 +188,75 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
+                        <!-- Title Field -->
+                        <div class="mb-3 col-md-6">
+                            <label for="title" class="form-label">Project Title <span class="text-danger">*</span> (<span id="titleCounter">0</span>/100)</label>
+                            <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" maxlength="100" required>
+                            @error('title') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
 
-                    <!-- Title Field -->
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Project Title <span class="text-danger">*</span> (<span id="titleCounter">0</span>/100)</label>
-                        <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" maxlength="100" required>
-                        @error('title')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <!-- Category Selection -->
-                    <div class="mb-3">
-                        <label for="categories" class="form-label">Categories</label>
-                        <select name="categories[]" id="categories" class="form-select" multiple>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->title }}</option>
-                            @endforeach
-                        </select>
-                        @error('categories')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <!-- Short Description -->
-                    <div class="mb-3">
-                        <label for="short_desc" class="form-label">Short Description <span class="text-danger">*</span> (<span id="shortDescCounter">0</span>/150)</label>
-                        <textarea name="short_desc" id="short_desc" class="form-control" rows="3" maxlength="150" required>{{ old('short_desc') }}</textarea>
-                        @error('short_desc')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <!-- Long Description -->
-                    <div class="mb-3">
-                        <label for="long_desc" class="form-label">Long Description (<span id="longDescCounter">0</span>/500)</label>
-                        <textarea name="long_desc" id="long_desc" class="form-control" rows="5" maxlength="500">{{ old('long_desc') }}</textarea>
-                        @error('long_desc')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <!-- Image Upload with Preview -->
-                    <div class="mb-3">
-                        <label for="banner_image" class="form-label">Project Image</label>
-                        <input type="file" name="banner_image" id="banner_image" class="form-control" accept="image/*" onchange="previewImage(this)">
-                        @error('banner_image')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                        <div id="imagePreview" class="mt-2" style="display:none;">
-                            <img id="preview" src="#" alt="Image Preview" style="max-width: 100px; max-height: 100px; border: 1px solid #ddd; border-radius: 4px; padding: 5px;"/>
+                        <!-- Category Selection -->
+                        <div class="mb-3 col-md-6">
+                            <label for="categories" class="form-label">Categories</label>
+                            <select name="categories[]" id="categories" class="form-select" multiple>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                @endforeach
+                            </select>
+                            @error('categories') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
                     </div>
 
-                    <!-- Replace the existing "Image Thumbline (Multiple)" section with this: -->
-                    <div class="mb-3">
-                        <label for="project_images" class="form-label">Project Gallery Images (Multiple)</label>
-                        <input type="file" name="project_images[]" id="project_images" class="form-control" accept="image/*" multiple>
-                        @error('project_images')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                        <div id="galleryPreview" class="d-flex flex-wrap gap-2 mt-2"></div>
+                    <div class="row">
+                        <!-- Short Description -->
+                        <div class="mb-3 col-md-6">
+                            <label for="short_desc" class="form-label">Short Description <span class="text-danger">*</span> (<span id="shortDescCounter">0</span>/150)</label>
+                            <textarea name="short_desc" id="short_desc" class="form-control" rows="3" maxlength="150" required>{{ old('short_desc') }}</textarea>
+                            @error('short_desc') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+
+                        <!-- Long Description -->
+                        <div class="mb-3 col-md-6">
+                            <label for="long_desc" class="form-label">Long Description (<span id="longDescCounter">0</span>/500)</label>
+                            <textarea name="long_desc" id="long_desc" class="form-control" rows="3" maxlength="500">{{ old('long_desc') }}</textarea>
+                            @error('long_desc') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
                     </div>
 
-                    <!-- Status Selection -->
-                    <div class="mb-3">
-                        <label class="form-label">Status <span class="text-danger">*</span></label>
-                        <select name="status" class="form-select">
-                            <option value="1" selected>Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                        @error('status')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
+                    <div class="row">
+                        <!-- Banner Image Upload -->
+                        <div class="mb-3 col-md-6">
+                            <label for="banner_image" class="form-label">Project Banner Image</label>
+                            <input type="file" name="banner_image" id="banner_image" class="form-control" accept="image/*">
+                            @error('banner_image') <small class="text-danger">{{ $message }}</small> @enderror
+                            <div id="bannerPreview" class="mt-2" style="display:none;">
+                                <img id="bannerPreviewImg" src="#" alt="Banner Preview" style="max-width: 200px; max-height: 150px; border: 1px solid #ddd; border-radius: 4px; padding: 5px;" />
+                            </div>
+                        </div>
+
+                        <!-- Gallery Images Upload -->
+                        <div class="mb-3 col-md-6">
+                            <label for="project_images" class="form-label">Project Gallery Images (Multiple)</label>
+                            <input type="file" name="project_images[]" id="project_images" class="form-control" accept="image/*" multiple>
+                            @error('project_images') <small class="text-danger">{{ $message }}</small> @enderror
+                            <div id="galleryPreview" class="d-flex flex-wrap gap-2 mt-2"></div>
+                        </div>
                     </div>
 
+                    <div class="row">
+                        <!-- Status -->
+                        <div class="mb-3 col-md-12">
+                            <label class="form-label">Status <span class="text-danger">*</span></label>
+                            <select name="status" class="form-select">
+                                <option value="1" selected>Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                            @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                    </div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">
@@ -272,107 +268,100 @@
     </div>
 </div>
 
-<!-- Include Select2 CSS and JS -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-        // Initialize Select2
-        $('#categories').select2({
-            placeholder: "Select categories",
-            allowClear: true,
-            width: '100%'
-        });
-
-        // Image preview function for single image
-        function previewImage(input) {
-            const preview = document.getElementById('preview');
-            const imagePreview = document.getElementById('imagePreview');
-            
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    imagePreview.style.display = 'block';
-                }
-                
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                imagePreview.style.display = 'none';
-                preview.src = '#';
-            }
-        }
-
-        // Attach previewImage function to your single image input
-        $('#single_image_input').on('change', function() {
-            previewImage(this);
-        });
-
-        // Character counters
+    // Character counter for form fields
+    document.addEventListener('DOMContentLoaded', function() {
         const titleInput = document.getElementById('title');
         const titleCounter = document.getElementById('titleCounter');
+        
         const shortDescInput = document.getElementById('short_desc');
         const shortDescCounter = document.getElementById('shortDescCounter');
+        
         const longDescInput = document.getElementById('long_desc');
         const longDescCounter = document.getElementById('longDescCounter');
         
-        // Initialize counters
         if(titleInput && titleCounter) {
-            titleCounter.textContent = titleInput.value.length;
             titleInput.addEventListener('input', function() {
                 titleCounter.textContent = this.value.length;
             });
+            titleCounter.textContent = titleInput.value.length;
         }
         
         if(shortDescInput && shortDescCounter) {
-            shortDescCounter.textContent = shortDescInput.value.length;
             shortDescInput.addEventListener('input', function() {
                 shortDescCounter.textContent = this.value.length;
             });
+            shortDescCounter.textContent = shortDescInput.value.length;
         }
         
         if(longDescInput && longDescCounter) {
-            longDescCounter.textContent = longDescInput.value.length;
             longDescInput.addEventListener('input', function() {
                 longDescCounter.textContent = this.value.length;
             });
+            longDescCounter.textContent = longDescInput.value.length;
         }
 
-        // Multiple images preview for input with id 'project_images'
-        $('#project_images').on('change', function() {
-            const galleryPreview = document.getElementById('galleryPreview');
-            galleryPreview.innerHTML = '';
-            
-            if (this.files && this.files.length > 0) {
-                Array.from(this.files).forEach(file => {
+        // Banner image preview
+        const bannerImageInput = document.getElementById('banner_image');
+        if (bannerImageInput) {
+            bannerImageInput.addEventListener('change', function() {
+                const preview = document.getElementById('bannerPreviewImg');
+                const previewContainer = document.getElementById('bannerPreview');
+                
+                if (this.files && this.files[0]) {
                     const reader = new FileReader();
+                    
                     reader.onload = function(e) {
-                        const imgContainer = document.createElement('div');
-                        imgContainer.style.width = '100px';
-                        imgContainer.style.height = '100px';
-                        imgContainer.style.overflow = 'hidden';
-                        imgContainer.style.borderRadius = '8px';
-                        imgContainer.style.marginBottom = '10px';
-                        imgContainer.style.marginRight = '10px';
-                        imgContainer.style.display = 'inline-block';
+                        preview.src = e.target.result;
+                        previewContainer.style.display = 'block';
+                    }
+                    
+                    reader.readAsDataURL(this.files[0]);
+                } else {
+                    previewContainer.style.display = 'none';
+                    preview.src = '#';
+                }
+            });
+        }
 
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.style.width = '100%';
-                        img.style.height = '100%';
-                        img.style.objectFit = 'cover';
+        // Gallery images preview
+        const galleryImagesInput = document.getElementById('project_images');
+        if (galleryImagesInput) {
+            galleryImagesInput.addEventListener('change', function() {
+                const galleryPreview = document.getElementById('galleryPreview');
+                galleryPreview.innerHTML = '';
+                
+                if (this.files && this.files.length > 0) {
+                    Array.from(this.files).forEach(file => {
+                        const reader = new FileReader();
                         
-                        imgContainer.appendChild(img);
-                        galleryPreview.appendChild(imgContainer);
-                    };
-                    reader.readAsDataURL(file);
-                });
-            }
-        });
+                        reader.onload = function(e) {
+                            const imgContainer = document.createElement('div');
+                            imgContainer.style.width = '100px';
+                            imgContainer.style.height = '100px';
+                            imgContainer.style.overflow = 'hidden';
+                            imgContainer.style.borderRadius = '8px';
+                            imgContainer.style.marginBottom = '10px';
+                            imgContainer.style.marginRight = '10px';
+                            imgContainer.style.display = 'inline-block';
+
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.style.width = '100%';
+                            img.style.height = '100%';
+                            img.style.objectFit = 'cover';
+                            
+                            imgContainer.appendChild(img);
+                            galleryPreview.appendChild(imgContainer);
+                        };
+                        
+                        reader.readAsDataURL(file);
+                    });
+                }
+            });
+        }
     });
 </script>
-
 
 @endsection

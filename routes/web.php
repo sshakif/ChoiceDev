@@ -80,6 +80,7 @@ Route::middleware('admin')->group(function(){
     Route::delete('/delete_project/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
     Route::get('/project/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
     Route::put('/project/update/{id}', [ProjectController::class, 'update'])->name('project.update');
+    Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project.show');
 
     // Project Image Routes
     Route::post('/add_project_image', [ProjectImageController::class, 'store'])->name('project.image.add');

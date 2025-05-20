@@ -61,12 +61,8 @@
                         <!-- Long Description -->
                         <div class="col-md-12">
                             <label class="form-label fw-semibold">Long Description</label>
-                            <div class="border rounded p-2 bg-light">
-                                <div id="quill-editor" style="min-height: 200px;"></div>
-                                <textarea name="long_desc" id="quill-editor-area" class="d-none">
-                                    {{ trim(old('long_desc', $service->long_desc)) }}
-                                </textarea>
-                            </div>
+                            <textarea class="form-control" name="long_desc" rows="3"
+                                      placeholder="Detailed description about the service">{{ old('long_desc', $service->long_desc) }}</textarea>
                             @error('long_desc')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
@@ -137,74 +133,5 @@
     }
 </script>
 
-<!-- Quill Editor Script -->
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initialize Quill editor
-        if (document.getElementById('quill-editor-area')) {
-            const quill = new Quill('#quill-editor', {
-                theme: 'snow',
-                modules: {
-                    toolbar: [
-                        ['bold', 'italic', 'underline'],
-                        [{'list': 'ordered'}, {'list': 'bullet'}],
-                        ['clean']
-                    ]
-                }
-            });
-
-            // Set initial content and remove extra whitespace
-            const initialContent = `{!! trim(preg_replace('/\s+/', ' ', old('long_desc', $service->long_desc))) !!}`;
-            quill.root.innerHTML = initialContent;
-            document.getElementById('quill-editor-area').value = initialContent;
-
-            // Update hidden textarea on content change
-            quill.on('text-change', function() {
-                const content = quill.root.innerHTML;
-                document.getElementById('quill-editor-area').value = content;
-            });
-        }
-    });
-</script>
-
-<style>
-    .card {
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-    
-    .form-control, .form-select {
-        border-radius: 6px;
-        padding: 8px 12px;
-    }
-    
-    #quill-editor {
-        border: none;
-        background: white;
-    }
-    
-    .ql-toolbar {
-        border-radius: 6px 6px 0 0;
-        border-color: #dee2e6 !important;
-    }
-    
-    .ql-container {
-        border-radius: 0 0 6px 6px;
-        border-color: #dee2e6 !important;
-    }
-    
-    .img-thumbnail {
-        border-radius: 6px;
-        border: 1px solid #dee2e6;
-    }
-    
-    .btn {
-        border-radius: 6px;
-        padding: 8px 16px;
-    }
-</style>
 
 @endsection

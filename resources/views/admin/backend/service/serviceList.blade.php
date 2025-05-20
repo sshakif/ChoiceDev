@@ -263,24 +263,19 @@
 
     // Character counter for form fields
     document.addEventListener('DOMContentLoaded', function() {
-        // Title counter
         const titleInput = document.getElementById('title');
         const titleCounter = document.getElementById('titleCounter');
         
-        // Short description counter
         const shortDescInput = document.getElementById('short_desc');
         const shortDescCounter = document.getElementById('shortDescCounter');
         
-        // Long description counter
         const longDescInput = document.getElementById('long_desc');
         const longDescCounter = document.getElementById('longDescCounter');
         
-        // Update counters on input
         if(titleInput && titleCounter) {
             titleInput.addEventListener('input', function() {
                 titleCounter.textContent = this.value.length;
             });
-            // Initialize counter
             titleCounter.textContent = titleInput.value.length;
         }
         
@@ -288,7 +283,6 @@
             shortDescInput.addEventListener('input', function() {
                 shortDescCounter.textContent = this.value.length;
             });
-            // Initialize counter
             shortDescCounter.textContent = shortDescInput.value.length;
         }
         
@@ -296,11 +290,9 @@
             longDescInput.addEventListener('input', function() {
                 longDescCounter.textContent = this.value.length;
             });
-            // Initialize counter
             longDescCounter.textContent = longDescInput.value.length;
         }
 
-        // Status change handler
         document.querySelectorAll('.status-select').forEach(select => {
             select.addEventListener('change', function() {
                 const serviceId = this.dataset.serviceId;
