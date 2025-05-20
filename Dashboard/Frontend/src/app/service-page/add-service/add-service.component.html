@@ -1,8 +1,4 @@
-<ui5-dialog
-  [open]="isOpen"
-  class="h-40 w-50"
-  state="Information"
->
+<ui5-dialog [open]="isOpen" class="w-50" state="Information">
   <ui5-tabcontainer [collapsed]="isTabCollapsed">
     <ui5-tab text="Info" selected>
       <ui5-bar slot="header" design="Header">
@@ -49,6 +45,7 @@
                 Title
               </ui5-label>
               <ui5-input
+                class="w-100"
                 [(ngModel)]="Service.title"
                 placeholder="Enter your Title"
                 required
@@ -81,7 +78,7 @@
                 Long Description
               </ui5-label>
               <ui5-textarea
-                style="height: 200px"
+                class="h-full w-full"
                 [(ngModel)]="Service.long_description"
                 placeholder="Enter your Long Description"
                 required
