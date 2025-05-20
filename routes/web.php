@@ -14,20 +14,17 @@ use App\Http\Controllers\Admin\UserManagementController;
 use Spatie\Permission\Middlewares\PermissionMiddleware;
 
 //Frontend Route List
-Route::get('/', [UserController::class, 'Index'])->name('index');
-Route::get('/about', [UserController::class, 'About'])->name('about');
-Route::get('/view-events', [UserController::class, 'Events'])->name('events');
-Route::get('/event/details/{id}' , [UserController::class, 'Details'])->name('details');
-Route::get('/terms-conditions' , [UserController::class, 'Terms'])->name('terms');
-Route::get('/privacy-policy' , [UserController::class, 'Privacy'])->name('privacy');
-Route::get('/event/details/{id}' , [UserController::class, 'Details'])->name('details');
+Route::get('/', [UserController::class, 'home'])->name('home');
+Route::get( '/services', [UserController::class, 'services'])->name('services');
+Route::get( '/resources', [UserController::class, 'resources'])->name('resources');
+Route::get('/contact', [UserController::class, 'contact'])->name('contact');
 
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-// require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';
 
 
 

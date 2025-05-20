@@ -33,7 +33,7 @@
         <!-- Edit Project Form -->
         <div class="card border-0 shadow-sm">
             <div class="card-body p-4">
-                <form action="{{ route('project.update', $project->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('project.update', $project->id) }}" method="POST" enctype="multipart/form-data" id="projectForm">
                     @csrf
                     @method('PUT')
 
@@ -110,33 +110,37 @@
                             </div>
                         </div>
 
-                        <!-- Gallery Images -->
+                        <!-- Gallery Images Section -->
                         <div class="col-md-6">
                             <label class="form-label fw-semibold">Gallery Images</label>
-                            <input type="file" class="form-control" name="project_images[]" 
-                                   id="galleryImages" multiple accept="image/*">
-                            @error('project_images')
-                                <div class="text-danger small mt-1">{{ $message }}</div>
-                            @enderror
-
-                            <div class="mt-2">
-                                <h6 class="mb-2">Existing Images:</h6>
-                                <div class="d-flex flex-wrap gap-2" id="existingGallery">
+                            
+                            <!-- Existing Images -->
+                            <div class="mb-3">
+                                <label class="form-label">Current Images:</label>
+                                <div class="d-flex flex-wrap gap-2" id="existing-images">
                                     @foreach($project->images as $image)
                                         <div class="position-relative" style="width: 120px;">
-                                            <img src="{{ asset($image->file_path) }}" 
-                                                 class="img-thumbnail" 
-                                                 style="width: 100%; height: 100px; object-fit: cover;">
-                                            <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0"
-                                                    onclick="removeGalleryImage(this, {{ $image->id }})">
+                                            <img src="{{ asset($image->file_path) }}" class="img-thumbnail" style="width: 100%; height: 100px; object-fit: cover;">
+                                            <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1" 
+                                                    onclick="removeExistingImage(this, {{ $image->id }})">
                                                 <i class="fas fa-times"></i>
                                             </button>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
-
-                            <div class="mt-3 d-flex flex-wrap gap-2" id="galleryPreview"></div>
+                            
+                            <!-- New Images Upload -->
+                            <div class="mb-3">
+                                <label class="form-label">Add More Images:</label>
+                                <input type="file" class="form-control" name="project_images[]" multiple accept="image/*" id="galleryImages">
+                            </div>
+                            
+                            <!-- Preview for new images -->
+                            <div class="d-flex flex-wrap gap-2 mt-2" id="galleryPreview"></div>
+                            
+                            <!-- Hidden field for removed images -->
+                            <input type="hidden" name="removed_images" id="removed-images" value="">
                         </div>
 
                         <!-- Submit -->
@@ -145,12 +149,12 @@
                                 <a href="{{ route('project.list') }}" class="btn btn-secondary px-4">
                                     <i class="fas fa-times me-1"></i> Cancel
                                 </a>
-                                <button type="submit" class="btn btn-primary px-4" onclick="prepareForm()">
+                                <button type="submit" class="btn btn-primary px-4">
                                     <i class="fas fa-save me-1"></i> Update
                                 </button>
                             </div>
                         </div>
-                    </div> <!-- row -->
+                    </div>
                 </form>
             </div>
         </div>
@@ -158,8 +162,8 @@
     </div>
 </div>
 
-{{-- Scripts --}}
 <script>
+    // Preview banner image
     function previewBannerImage(input) {
         const previewContainer = document.getElementById('bannerPreviewContainer');
         const preview = document.getElementById('bannerPreview');
@@ -176,6 +180,21 @@
         }
     }
 
+    // Remove existing image
+    function removeExistingImage(button, imageId) {
+        if (confirm('Are you sure you want to remove this image?')) {
+            // Add to removed images list
+            const removedInput = document.getElementById('removed-images');
+            const currentRemoved = removedInput.value ? removedInput.value.split(',') : [];
+            currentRemoved.push(imageId);
+            removedInput.value = currentRemoved.join(',');
+            
+            // Remove the image visually
+            button.closest('.position-relative').remove();
+        }
+    }
+
+    // Preview new gallery images
     document.getElementById('galleryImages').addEventListener('change', function() {
         const galleryPreview = document.getElementById('galleryPreview');
         galleryPreview.innerHTML = '';
@@ -183,41 +202,33 @@
         if (this.files && this.files.length > 0) {
             Array.from(this.files).forEach(file => {
                 const reader = new FileReader();
-
                 reader.onload = function(e) {
                     const imgContainer = document.createElement('div');
+                    imgContainer.className = 'position-relative';
                     imgContainer.style.width = '120px';
-                    imgContainer.style.height = '100px';
-                    imgContainer.style.position = 'relative';
-
+                    
                     const img = document.createElement('img');
                     img.src = e.target.result;
                     img.className = 'img-thumbnail';
                     img.style.width = '100%';
-                    img.style.height = '100%';
+                    img.style.height = '100px';
                     img.style.objectFit = 'cover';
-
+                    
                     imgContainer.appendChild(img);
                     galleryPreview.appendChild(imgContainer);
                 };
-
                 reader.readAsDataURL(file);
             });
         }
     });
 
-    function removeGalleryImage(button, imageId) {
-        if (confirm('Are you sure you want to remove this image?')) {
-            const form = button.closest('form');
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'removed_images[]';
-            input.value = imageId;
-            form.appendChild(input);
-
-            button.closest('div.position-relative').remove();
-        }
-    }
+    // Initialize Select2 for categories
+    $(document).ready(function() {
+        $('.select2-multiple').select2({
+            placeholder: "Select categories",
+            allowClear: true
+        });
+    });
 </script>
 
 @endsection

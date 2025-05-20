@@ -36,14 +36,14 @@ class ProjectController extends Controller
 
         if ($request->hasFile('banner_image')) {
             $image = $request->file('banner_image');
-            $imageName = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
 
             if (!file_exists(public_path('upload/project'))) {
                 mkdir(public_path('upload/project'), 0777, true);
             }
 
             $image->move(public_path('upload/project'), $imageName);
-            $imagePath = 'upload/project/'.$imageName;
+            $imagePath = 'upload/project/' . $imageName;
         }
 
         $project = Project::create([
@@ -60,19 +60,19 @@ class ProjectController extends Controller
             $project->categories()->sync($request->categories);
         }
 
-         if ($request->hasFile('project_images')) {
-        foreach ($request->file('project_images') as $image) {
-            $imageName = time().'_'.$image->getClientOriginalName();
-            $image->move(public_path('uploads/projects/gallery'), $imageName);
-            $imagePath = 'uploads/projects/gallery/'.$imageName;
-            
-            ProjectImage::create([
-                'project_id' => $project->id,
-                'file_path' => $imagePath,
-                'created_by' => Auth::id()
-            ]);
+        if ($request->hasFile('project_images')) {
+            foreach ($request->file('project_images') as $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('uploads/projects/gallery'), $imageName);
+                $imagePath = 'uploads/projects/gallery/' . $imageName;
+
+                ProjectImage::create([
+                    'project_id' => $project->id,
+                    'file_path' => $imagePath,
+                    'created_by' => Auth::id()
+                ]);
+            }
         }
-    }
 
         return redirect()->route('project.list')->with('success', 'Project created successfully.');
     }
@@ -99,12 +99,14 @@ class ProjectController extends Controller
             'banner_image' => 'nullable|image|mimes:jpg,png,jpeg,svg|max:10240',
             'status' => 'required|boolean',
             'categories' => 'nullable|array',
-            'categories.*' => 'exists:project_categories,id'
+            'categories.*' => 'exists:project_categories,id',
+            'project_images.*' => 'nullable|image|mimes:jpg,png,jpeg|max:5120',
         ]);
 
         $project = Project::findOrFail($id);
         $imagePath = $project->banner_image;
 
+        // Handle banner image update
         if ($request->hasFile('banner_image')) {
             // Delete old image
             if ($project->banner_image && file_exists(public_path($project->banner_image))) {
@@ -112,16 +114,17 @@ class ProjectController extends Controller
             }
 
             $image = $request->file('banner_image');
-            $imageName = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
 
             if (!file_exists(public_path('upload/project'))) {
                 mkdir(public_path('upload/project'), 0777, true);
             }
 
             $image->move(public_path('upload/project'), $imageName);
-            $imagePath = 'upload/project/'.$imageName;
+            $imagePath = 'upload/project/' . $imageName;
         }
 
+        // Update project details
         $project->update([
             'title' => $request->title,
             'short_desc' => $request->short_desc,
@@ -133,6 +136,31 @@ class ProjectController extends Controller
 
         // Sync categories
         $project->categories()->sync($request->categories ?? []);
+
+        // Handle removed images
+        if ($request->removed_images) {
+            $removedIds = explode(',', $request->removed_images);
+            foreach ($removedIds as $id) {
+                $image = ProjectImage::find($id);
+                if ($image && file_exists(public_path($image->file_path))) {
+                    unlink(public_path($image->file_path));
+                }
+                $image->delete();
+            }
+        }
+
+        // Handle new images upload
+        if ($request->hasFile('project_images')) {
+            foreach ($request->file('project_images') as $file) {
+                $imageName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('upload/project/gallery'), $imageName);
+
+                ProjectImage::create([
+                    'project_id' => $project->id,
+                    'file_path' => 'upload/project/gallery/' . $imageName,
+                ]);
+            }
+        }
 
         return redirect()->route('project.list')->with('success', 'Project updated successfully.');
     }
@@ -147,7 +175,7 @@ class ProjectController extends Controller
 
         // Detach all categories first
         $project->categories()->detach();
-        
+
         $project->delete();
 
         return redirect()->route('project.list')->with('success', 'Project deleted successfully.');

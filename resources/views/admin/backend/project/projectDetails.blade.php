@@ -7,19 +7,22 @@
         <!-- Breadcrumb -->
         <div class="row">
             <div class="col-12">
-                <div class="page-title-box d-flex align-items-center justify-content-between">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <div>
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('project.list') }}">Projects</a></li>
                             <li class="breadcrumb-item active">Project Details</li>
                         </ol>
-                        <h4 class="mb-sm-0 mt-2">Project Details</h4>
+                        <h4 class="mb-sm-0 font-size-18 mt-2">Project Details</h4>
+                    </div>
+                    <div class="page-title-right">
+                        <a href="{{ route('project.edit', $project->id) }}" class="btn btn-primary">Edit Project</a>
                     </div>
                 </div>
             </div>
         </div>
-
+        
         <!-- Project Content -->
         <div class="row mt-3">
             <!-- Left Column -->
