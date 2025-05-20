@@ -1,6 +1,6 @@
 <ui5-dialog [open]="isOpen" header-text="New" class="w-50" state="Information">
   <ui5-tabcontainer [collapsed]="isTabCollapsed">
-    <ui5-tab text="Info">
+    <ui5-tab text="Info" selected>
       <ui5-bar slot="header" design="Header">
         <ui5-title level="H5" slot="startContent">New</ui5-title>
         <ui5-button
@@ -33,7 +33,6 @@
                 (change)="toggleAction($event)"
               ></ui5-switch>
             </div>
-
             <!-- Title Field -->
             <div>
               <ui5-label
@@ -51,7 +50,6 @@
                 required
               ></ui5-input>
             </div>
-
             <!-- Short Description Field -->
             <div>
               <ui5-label
@@ -67,7 +65,6 @@
                 required
               ></ui5-textarea>
             </div>
-
             <!-- Long Description Field -->
             <div>
               <ui5-label
@@ -88,78 +85,91 @@
         </div>
       </section>
     </ui5-tab>
-    <ui5-tab text="Attachments" selected>
-      <ui5-tabcontainer [collapsed]="isTabCollapsed">
-        <!-- Info Tab (Left side) -->
-        <ui5-tab text="Attachments()">
-          <div class="w-full flex flex-wrap justify-start gap-4 p-4">
-            <div
-              *ngIf="uploadedFiles.length === 0"
-              class="text-center text-gray-500 w-full"
-            >
+    <!-- Attachments File Uploder Start  -->
+    <ui5-tab text="Attachments">
+      <!-- Header Area -->
+      <div class="flex justify-between items-center bg-white p-4 shadow-sm">
+        <label class="text-base font-semibold"
+          >Attachments ({{ attachments.length }})</label
+        >
+        <div class="flex gap-2 items-center">
+          <ui5-button
+            class="text-gray-500"
+            tooltip="Upload files"
+            (click)="fileInput.click()"
+            >Upload</ui5-button
+          >
+          <ui5-button
+            class="text-gray-500"
+            design="Transparent"
+            tooltip="Download selected files"
+            (click)="downloadSelected()"
+            >Download</ui5-button
+          >
+        </div>
+      </div>
+      <!-- Hidden File Input -->
+      <input
+        type="file"
+        multiple
+        hidden
+        #fileInput
+        (change)="onFilesSelected($event)"
+      />
+      <ui5-list mode="MultiSelect" id="fileList">
+        <ui5-li-custom
+          *ngFor="let file of attachments; let i = index"
+          [selected]="file.selected"
+          (click)="toggleSelection(i)"
+        >
+          <div class="flex items-center justify-between w-full">
+            <div class="flex items-center gap-2">
+              <!-- Image preview if image -->
               <img
-                src="../../../assets/img/Uploder.png"
-                alt="No files"
-                class="mx-auto w-32 mb-4"
+                *ngIf="isImage(file.file)"
+                [src]="file.previewUrl"
+                alt="preview"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  object-fit: cover;
+                  border-radius: 4px;
+                "
               />
-              <div class="text-lg font-medium">No files found</div>
-              <div class="text-sm">
-                Drop files to upload, or use the Upload button.
-              </div>
+              <!-- Icon if not image -->
+              <ui5-icon *ngIf="!isImage(file.file)" name="paperclip"></ui5-icon>
+
+              <!-- File name -->
+              <span>{{ file.file.name }}</span>
             </div>
 
-            <div *ngFor="let file of uploadedFiles" class="w-40">
-              <img
-                *ngIf="file.type.startsWith('image')"
-                [src]="file.preview"
-                class="w-full h-auto rounded shadow"
-              />
-              <div class="truncate text-sm text-center mt-2">
-                {{ file.name }}
-              </div>
-            </div>
-          </div>
-        </ui5-tab>
-        <!-- Right Side: Uploader Tab -->
-
-            <ui5-tab text="Uploader">
-              <div class="p-4 w-1/2">
-                <input
-                  type="file"
-                  (change)="onFileSelected($event)"
-                  multiple
-                  hidden
-                  #fileInput
-                />
-                <ui5-button icon="upload" (click)="fileInput.click()"
-                  >Upload Files</ui5-button
-                >
-              </div>
-            </ui5-tab>
-        <!-- Download Tab -->
-        <ui5-tab text="Download">
-          <div class="p-4">
-            <ui5-list>
-              <ui5-li *ngFor="let file of uploadedFiles">
-                <ui5-checkbox [(ngModel)]="file.selected"></ui5-checkbox>
-                {{ file.name }}
-                <ui5-button
-                  icon="download"
-                  design="Transparent"
-                  (click)="downloadFile(file)"
-                  >Download</ui5-button
-                >
-              </ui5-li>
-            </ui5-list>
+            <!-- Delete button -->
             <ui5-button
-              icon="download"
-              design="Emphasized"
-              (click)="downloadSelectedFiles()"
-              >Download Selected</ui5-button
-            >
+              icon="delete"
+              design="Transparent"
+              tooltip="Delete file"
+              (click)="removeFile(i); $event.stopPropagation()"
+            ></ui5-button>
           </div>
-        </ui5-tab>
-      </ui5-tabcontainer>
+        </ui5-li-custom>
+      </ui5-list>
+      <!-- Attachments Image  Start -->
+      <div *ngIf="attachments.length === 0" class="p-4 text-center">
+        <div class="w-full flex flex-wrap justify-start gap-4 p-4">
+          <div class="text-center text-gray-500 w-full">
+            <img
+              src="../../../assets/img/Uploder.png"
+              alt="No files"
+              class="mx-auto w-32 mb-4"
+            />
+            <div class="text-lg font-medium">No files found</div>
+            <div class="text-sm">
+              Drop files to upload, or use the Upload button.
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Attachments Image  End -->
     </ui5-tab>
   </ui5-tabcontainer>
   <ui5-toolbar slot="footer">
