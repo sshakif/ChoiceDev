@@ -196,14 +196,27 @@
                             @error('title') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
-                        <!-- Category Selection -->
+                        <!-- Category Selection with Checkboxes -->
                         <div class="mb-3 col-md-6">
                             <label for="categories" class="form-label">Categories</label>
-                            <select name="categories[]" id="categories" class="form-select" multiple>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
-                                @endforeach
-                            </select>
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle w-100 text-start" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select Categories
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="categoryDropdown">
+                                    @foreach($categories as $category)
+                                        <li>
+                                            <div class="form-check ms-2">
+                                                <input class="form-check-input category-checkbox" type="checkbox" name="categories[]" value="{{ $category->id }}" id="category{{ $category->id }}">
+                                                <label class="form-check-label" for="category{{ $category->id }}">
+                                                    {{ $category->title }}
+                                                </label>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div id="selectedCategories" class="mt-2 d-flex flex-wrap gap-2"></div>
                             @error('categories') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
                     </div>
@@ -268,16 +281,18 @@
     </div>
 </div>
 
+<!-- Include Bootstrap Multiselect CSS/JS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/css/bootstrap-multiselect.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/js/bootstrap-multiselect.min.js"></script>
 
 <script>
     // Character counter for form fields
     document.addEventListener('DOMContentLoaded', function() {
+        // Text counters
         const titleInput = document.getElementById('title');
         const titleCounter = document.getElementById('titleCounter');
-        
         const shortDescInput = document.getElementById('short_desc');
         const shortDescCounter = document.getElementById('shortDescCounter');
-        
         const longDescInput = document.getElementById('long_desc');
         const longDescCounter = document.getElementById('longDescCounter');
         
@@ -302,7 +317,7 @@
             longDescCounter.textContent = longDescInput.value.length;
         }
 
-        // Banner image preview
+        // Image preview handlers
         const bannerImageInput = document.getElementById('banner_image');
         if (bannerImageInput) {
             bannerImageInput.addEventListener('change', function() {
@@ -359,6 +374,46 @@
                         reader.readAsDataURL(file);
                     });
                 }
+            });
+        }
+
+        // Category selection with checkboxes
+        const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
+        const categoryDropdown = document.getElementById('categoryDropdown');
+        const selectedCategoriesContainer = document.getElementById('selectedCategories');
+        
+        categoryCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                updateSelectedCategories();
+            });
+        });
+        
+        function updateSelectedCategories() {
+            const selectedCategories = [];
+            const checkedBoxes = document.querySelectorAll('.category-checkbox:checked');
+            
+            checkedBoxes.forEach(checkbox => {
+                const label = document.querySelector(`label[for="${checkbox.id}"]`).textContent;
+                selectedCategories.push({
+                    id: checkbox.value,
+                    name: label
+                });
+            });
+            
+            // Update dropdown button text
+            if (selectedCategories.length > 0) {
+                categoryDropdown.textContent = `${selectedCategories.length} categories selected`;
+            } else {
+                categoryDropdown.textContent = 'Select Categories';
+            }
+            
+            // Update selected categories display
+            selectedCategoriesContainer.innerHTML = '';
+            selectedCategories.forEach(category => {
+                const badge = document.createElement('span');
+                badge.className = 'badge bg-primary';
+                badge.textContent = category.name;
+                selectedCategoriesContainer.appendChild(badge);
             });
         }
     });
