@@ -57,17 +57,41 @@
                             </select>
                         </div>
 
-                        <!-- Categories -->
+                        <!-- Categories - Updated to match projectList.blade -->
                         <div class="col-md-12">
                             <label class="form-label fw-semibold">Categories</label>
-                            <select name="categories[]" class="form-select select2-multiple" multiple="multiple">
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" 
-                                        {{ in_array($category->id, old('categories', $project->categories->pluck('id')->toArray())) ? 'selected' : '' }}>
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle w-100 text-start" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @if(count($project->categories) > 0)
+                                        {{ count($project->categories) }} categories selected
+                                    @else
+                                        Select Categories
+                                    @endif
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="categoryDropdown">
+                                    @foreach($categories as $category)
+                                        <li>
+                                            <div class="form-check ms-2">
+                                                <input class="form-check-input category-checkbox" type="checkbox" 
+                                                       name="categories[]" value="{{ $category->id }}" 
+                                                       id="category{{ $category->id }}"
+                                                       {{ in_array($category->id, old('categories', $project->categories->pluck('id')->toArray())) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="category{{ $category->id }}">
+                                                    {{ $category->title }}
+                                                </label>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div id="selectedCategories" class="mt-2 d-flex flex-wrap gap-2">
+                                @foreach($project->categories as $category)
+                                    <span class="badge bg-primary" data-category-id="{{ $category->id }}">
                                         {{ $category->title }}
-                                    </option>
+                                        <input type="hidden" name="categories[]" value="{{ $category->id }}">
+                                    </span>
                                 @endforeach
-                            </select>
+                            </div>
                             @error('categories')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
@@ -222,12 +246,60 @@
         }
     });
 
-    // Initialize Select2 for categories
-    $(document).ready(function() {
-        $('.select2-multiple').select2({
-            placeholder: "Select categories",
-            allowClear: true
+    // Category selection functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
+        const categoryDropdown = document.getElementById('categoryDropdown');
+        const selectedCategoriesContainer = document.getElementById('selectedCategories');
+        
+        // Initialize with existing categories
+        updateSelectedCategories();
+        
+        // Add event listeners
+        categoryCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                updateSelectedCategories();
+            });
         });
+        
+        function updateSelectedCategories() {
+            const selectedCategories = [];
+            const checkedBoxes = document.querySelectorAll('.category-checkbox:checked');
+            
+            // Get selected categories
+            checkedBoxes.forEach(checkbox => {
+                const label = document.querySelector(`label[for="${checkbox.id}"]`).textContent;
+                selectedCategories.push({
+                    id: checkbox.value,
+                    name: label
+                });
+            });
+            
+            // Update dropdown button text
+            if (selectedCategories.length > 0) {
+                categoryDropdown.textContent = `${selectedCategories.length} categories selected`;
+            } else {
+                categoryDropdown.textContent = 'Select Categories';
+            }
+            
+            // Update selected categories display
+            selectedCategoriesContainer.innerHTML = '';
+            selectedCategories.forEach(category => {
+                const badge = document.createElement('span');
+                badge.className = 'badge bg-primary me-1';
+                badge.textContent = category.name;
+                badge.dataset.categoryId = category.id;
+                
+                // Create hidden input for form submission
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'categories[]';
+                hiddenInput.value = category.id;
+                
+                badge.appendChild(hiddenInput);
+                selectedCategoriesContainer.appendChild(badge);
+            });
+        }
     });
 </script>
 
