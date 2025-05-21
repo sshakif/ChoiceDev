@@ -4,8 +4,8 @@ export class Faq implements Deserializable {
   id?: number;
   question: string = '';
   answer: string = '';
-  // is_active: boolean = false;
-  is_active?: boolean = true;
+  is_active: boolean = false;
+  // is_active?: boolean;
   created_at?: string;
   updated_at?: string;
 

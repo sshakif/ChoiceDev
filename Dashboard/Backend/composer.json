@@ -10,7 +10,8 @@
         "flat3/lodata": "^5.0",
         "illuminate/support": "*",
         "laravel/framework": "^11.31",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "spatie/laravel-medialibrary": "^11.12"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

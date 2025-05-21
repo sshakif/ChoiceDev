@@ -13,6 +13,7 @@ import { ToastMessageComponent } from '@app/components/toast-message/toast-messa
 import { CommonService } from '@app/services/common-service/common.service';
 import { ServicePage } from '@app/shared/Model/servicePage';
 import { LabelComponent, TextAreaComponent } from '@ui5/webcomponents-ngx';
+import { AttachmentsComponent } from "../../attachments/attachments.component";
 
 @Component({
   selector: 'app-edit-service',
@@ -23,7 +24,8 @@ import { LabelComponent, TextAreaComponent } from '@ui5/webcomponents-ngx';
     LabelComponent,
     TextAreaComponent,
     ToastMessageComponent,
-  ],
+    AttachmentsComponent
+],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './edit-service.component.html',
   styleUrl: './edit-service.component.scss',
@@ -115,7 +117,8 @@ export class EditServiceComponent implements OnInit {
         },
       });
   }
-  toggleActive(event: any): void {
+  
+  toggleAction(event: any): void {
     this.isActive = event.target.checked;
     this.Service.is_active = this.isActive;
   }

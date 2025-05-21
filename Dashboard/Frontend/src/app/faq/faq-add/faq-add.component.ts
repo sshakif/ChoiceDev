@@ -114,6 +114,7 @@ export class FaqAddComponent implements OnInit, OnChanges {
   };
   toggleAction(event: any): void {
     this.isActive = event.target.checked;
+    this.faq.is_active = this.isActive;
     console.log('Switch toggled:', this.isActive);
   }
 

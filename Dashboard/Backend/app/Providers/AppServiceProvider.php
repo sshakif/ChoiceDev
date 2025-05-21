@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Employee;
 use App\Models\Faq;
 use App\Models\ServicePage;
 use Flat3\Lodata\Facades\Lodata;
+use App\Models\ServicePageDetails;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,5 +27,7 @@ class AppServiceProvider extends ServiceProvider
         //
         Lodata::discover(Faq::class);
         Lodata::discover(ServicePage::class);
+        Lodata::discover(Employee::class);
+
     }
 }

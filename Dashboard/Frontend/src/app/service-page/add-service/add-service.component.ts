@@ -21,6 +21,7 @@ import {
 //import { InputComponent } from '@ui5/webcomponents-ngx'; // Uncomment and use the correct component if needed
 import { InputComponent } from '@ui5/webcomponents-ngx/main/input';
 import '@ui5/webcomponents/dist/Input.js';
+import { AttachmentsComponent } from "../../attachments/attachments.component";
 @Component({
   selector: 'app-add-service',
   standalone: true,
@@ -33,7 +34,8 @@ import '@ui5/webcomponents/dist/Input.js';
     ToastMessageComponent,
     InputComponent,
     Ui5MainModule,
-  ],
+    AttachmentsComponent
+],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './add-service.component.html',
   styleUrl: './add-service.component.scss',
@@ -117,79 +119,5 @@ export class AddServiceComponent {
     console.log('Switch toggled:', this.isActive);
   }
 
-  //Image file start
-  selectedFile: File | null = null;
-  previewUrl: string | null = null;
-
- attachments: { file: File; selected: boolean; previewUrl?: string }[] = [];
-
-  // Check if a file is an image
-  isImage(file: File): boolean {
-    return file.type.startsWith('image/');
-  }
-
-  onFilesSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const files = Array.from(input.files).map((f) => {
-        const attachment: { file: File; selected: boolean; previewUrl?: string } = {
-          file: f,
-          selected: false,
-        };
-        if (this.isImage(f)) {
-          attachment.previewUrl = URL.createObjectURL(f);
-        }
-        return attachment;
-      });
-      this.attachments.push(...files);
-      console.log('Added attachments:', files);
-      this.cdr.detectChanges();
-    }
-    input.value = '';
-  }
-
-  toggleSelection(index: number): void {
-    this.attachments[index].selected = !this.attachments[index].selected;
-    this.cdr.detectChanges();
-  }
-
-  removeFile(index: number): void {
-    const attachment = this.attachments[index];
-    if (attachment.previewUrl) {
-      URL.revokeObjectURL(attachment.previewUrl);
-    }
-    this.attachments.splice(index, 1);
-    this.cdr.detectChanges();
-  }
-
-  downloadSelected(): void {
-    const selectedFiles = this.attachments
-      .filter((a) => a.selected)
-      .map((a) => a.file);
-    if (selectedFiles.length === 0) {
-      alert('No files selected for download.');
-      return;
-    }
-    try {
-      selectedFiles.forEach((file) => {
-        const url = URL.createObjectURL(file);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = file.name;
-        a.click();
-        URL.revokeObjectURL(url);
-      });
-    } catch (error) {
-      console.error('Download failed:', error);
-      alert('An error occurred while downloading files.');
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.attachments.forEach((attachment) => {
-      if (attachment.previewUrl) {
-        URL.revokeObjectURL(attachment.previewUrl);
-      }
-    });
-  }
+  
 }
