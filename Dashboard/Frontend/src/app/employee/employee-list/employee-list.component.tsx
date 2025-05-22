@@ -10,34 +10,36 @@ import {
 import { FormsModule } from "@angular/forms";
 import { AnalyticalTableComponent } from "@app/components/analytical-table/analytical-table.component";
 import { ToastMessageComponent } from "@app/components/toast-message/toast-message.component";
-import { AddServiceComponent } from "@app/service-page/add-service/add-service.component";
-import { EditServiceComponent } from "@app/service-page/edit-service/edit-service.component";
-import { ServiceDetailsComponent } from "@app/service-page/service-details/service-details.component";
-import { ServicePage } from "@app/shared/Model/servicePage";
+import { CommonService } from "@app/services/common-service/common.service";
+import { Employee } from "@app/shared/Model/employee";
 import { Button, Icon, TextAlign } from "@ui5/webcomponents-react";
 import React from "react";
-import { CommonService } from "../../services/common-service/common.service";
+import { EmployeeAddComponent } from "../employee-add/employee-add.component";
+import { EmployeeDetailsComponent } from "../employee-details/employee-details.component";
+import { EmployeeEditComponent } from "../employee-edit/employee-edit.component";
+
 @Component({
-  selector: "app-service-list",
+  selector: "app-employee-list",
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
     AnalyticalTableComponent,
-    AddServiceComponent,
-    EditServiceComponent,
-    ServiceDetailsComponent,
+   EmployeeAddComponent,
+   EmployeeListComponent,
+   EmployeeDetailsComponent,
+   EmployeeEditComponent,
     ToastMessageComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  templateUrl: "./service-list.component.html",
-  styleUrl: "./service-list.component.scss",
+  templateUrl: "./employee-list.component.html",
+  styleUrl: "./employee-list.component.scss",
 })
-export class ServiceListComponent implements OnInit {
+export class EmployeeListComponent implements OnInit {
   @Output() refreshTable: EventEmitter<void> = new EventEmitter<void>();
   @Output() IsOpenToastAlert = new EventEmitter<void>();
   ToastType: string = "";
-  totalFaqs: number = 0;
+  totalEmployee: number = 0;
   itemsPerPage: number;
   currentPage = 1;
   odata: boolean;
@@ -53,10 +55,10 @@ export class ServiceListComponent implements OnInit {
   filter: string = "";
   Title: string;
   type: string | null = null;
-  selectedServiceId: number | null = null;
-  selectedServiceData: any = null;
-  ServicePages = ServicePage;
-  servicePages = new ServicePage().deserialize({});
+  selectedEmployeeId: number | null = null;
+  selectedEmployeeData: any = null;
+  Employee = Employee;
+  employee = new Employee().deserialize({});
   constructor(
     private commonService: CommonService,
     private datePipe: DatePipe,
@@ -64,11 +66,11 @@ export class ServiceListComponent implements OnInit {
   ) {
     this.itemsPerPage = this.commonService.itemsPerPage;
     this.odata = this.commonService.odata;
-    this.Title = "ServicePage List";
+    this.Title = "Employee List";
     this.tableColum();
   }
   ngOnInit(): void {
-    console.log(this.selectedServiceData)
+    console.log(this.selectedEmployeeData);
   }
 
   tableColum() {
@@ -87,29 +89,47 @@ export class ServiceListComponent implements OnInit {
         hAlign: "Center" as TextAlign,
         width: 70,
       },
-      // {
-      //   Header: "Profile",
-      //   accessor: "image",
-      //   autoResizable: true,
-      //   className: "custom-class-name",
-      // },
       {
-        Header: "Title",
-        accessor: "title",
+        Header: "First Name",
+        accessor: "first_name",
         autoResizable: true,
         className: "custom-class-name",
       },
       {
-        Header: "Short Description",
-        accessor: "short_description",
+        Header: "Last Name",
+        accessor: "last_name",
         autoResizable: true,
         className: "custom-class-name",
       },
       {
-        Header: "Long Description",
-        accessor: "long_description",
+        Header: "Email",
+        accessor: "email",
         autoResizable: true,
         className: "custom-class-name",
+      },
+    {
+        Header: 'phone',
+        accessor: 'phone',
+        autoResizable: true,
+        className: 'custom-class-name',
+      },
+      {
+        Header: 'designation',
+        accessor: 'designation',
+        autoResizable: true,
+        className: 'custom-class-name',
+      },
+       {
+        Header: 'department',
+        accessor: 'department',
+        autoResizable: true,
+        className: 'custom-class-name',
+      },
+                  {
+        Header: 'address',
+        accessor: 'address',
+        autoResizable: true,
+        className: 'custom-class-name',
       },
       {
         Header: "Active",
@@ -159,14 +179,14 @@ export class ServiceListComponent implements OnInit {
               icon="edit"
               design="Transparent"
               onClick={() => {
-                this.editService(row.original);
+                this.editEmployee(row.original);
               }}
             />
             <Button
               icon="information"
               design="Transparent"
               onClick={() => {
-                this.DetailsService(row.original);
+                this.DetailsEmployee(row.original);
               }}
             ></Button>
 
@@ -174,7 +194,7 @@ export class ServiceListComponent implements OnInit {
               icon="delete"
               design="Transparent"
               onClick={() => {
-                this.deleteService(row.original);
+                this.deleteEmployee(row.original);
               }}
             ></Button>
           </div>
@@ -184,19 +204,10 @@ export class ServiceListComponent implements OnInit {
     return columns;
   }
 
-
-  handleInsertData(isInsert: boolean): void {
-    console.log("Received isInsertData:", isInsert);
-    if (isInsert) {
-      this.isInsert = isInsert;
-    }
-  }
-
-
   deleteItemConfirm() {
     this.isDeleteLoading = true;
-    const id = this.selectedServiceId;
-    this.commonService.delete(`Faqs/${id}`, this.odata).subscribe({
+    const id = this.selectedEmployeeId;
+    this.commonService.delete(`Employees/${id}`, this.odata).subscribe({
       next: (response: any) => {
         this.isDeleteOpen = false;
         this.isDeleteLoading = false;
@@ -215,35 +226,39 @@ export class ServiceListComponent implements OnInit {
       },
     });
   }
-//  list Icon Show 
-editService(original: any) {
-    this.isEdit = true;
-    this.selectedServiceId = original.id;
-    this.selectedServiceData = { ...original };
-  }
 
-  DetailsService(original: any) {
-    this.selectedServiceId = original.id;
-    this.selectedServiceData = { ...original };
+  editEmployee(original: any) {
+    this.isEdit = true;
+    this.selectedEmployeeId = original.id;
+    this.selectedEmployeeData = { ...original };
+  }
+  DetailsEmployee(original: any) {
+    this.selectedEmployeeId = original.id;
+    this.selectedEmployeeData = { ...original };
     this.isDetails = true;
     this.cdr.detectChanges();
   }
-  deleteService(original: any) {
+  deleteEmployee(original: any) {
     this.isDeleteOpen = true;
-    this.selectedServiceId = original.id;
+    this.selectedEmployeeId = original.id;
   }
-  //Model Open
-  closeAddServiceModal() {
+
+  handleInsertData(isInsert: boolean): void {
+    console.log("Received isInsertData:", isInsert);
+    if (isInsert) {
+      this.isInsert = isInsert;
+    }
+  }
+  closeAddEmployeeModal(){
     this.isInsert = false;
     this.refreshTable.emit();
   }
-  
-  closeEditServiceModal() {
+  closeEditEmployeeModal(){
     this.isEdit = false;
   }
-  closeServiceDetailsModal() {
+  closeEmployeeDetailsModal(){
     this.isDetails = false;
-    this.selectedServiceId = null;
-    this.selectedServiceData = null;
+    this.selectedEmployeeId = null;
+    this.selectedEmployeeData = null;
   }
 }

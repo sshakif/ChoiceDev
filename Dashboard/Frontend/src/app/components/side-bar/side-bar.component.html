@@ -21,8 +21,30 @@
       icon="question-mark"
       routerLink="/faq-list"
     ></ui5-side-navigation-item>
-    
-    
+     <ui5-side-navigation-item text="Events" icon="calendar">
+      <ui5-side-navigation-sub-item text="Local"></ui5-side-navigation-sub-item>
+      <ui5-side-navigation-sub-item
+        text="External Link"
+        href="https://hybri.tech/"
+        target="_blank"
+      ></ui5-side-navigation-sub-item>
+      <ui5-side-navigation-sub-item
+        text="Others"
+      ></ui5-side-navigation-sub-item>
+    </ui5-side-navigation-item>
+
+
+    <ui5-side-navigation-item text="Demo Dropdwon" expanded icon="form">
+      <ui5-side-navigation-sub-item
+        text="Add Demo"
+        routerLink="home"
+      ></ui5-side-navigation-sub-item>
+      <ui5-side-navigation-sub-item
+        text="Edit Demo"
+        routerLink="/"
+      ></ui5-side-navigation-sub-item>
+    </ui5-side-navigation-item>
+
     <ui5-side-navigation-item
       text="User Management"
       slot="fixedItems"

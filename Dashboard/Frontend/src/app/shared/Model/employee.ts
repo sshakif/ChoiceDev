@@ -4,7 +4,7 @@ export class Employee implements Deserializable {
   id?: number;
   first_name: string = '';
   last_name?: string;
-  email: string = '';
+  email?: string = '';
   phone?: string;
   designation?: string;
   department?: string;
