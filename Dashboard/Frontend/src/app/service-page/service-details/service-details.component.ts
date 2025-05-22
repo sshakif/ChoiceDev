@@ -31,7 +31,7 @@ export class ServiceDetailsComponent implements OnInit {
   
   ngOnInit(): void {
     // this.isOpen = true;
-    this.setData();
+    // this.setData();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,14 +39,18 @@ export class ServiceDetailsComponent implements OnInit {
       this.setData();
     }
   }
-
-  setData() {
-    if (this.ServiceData) {
-      this.Service.title = this.ServiceData.title;
-      this.Service.short_description = this.ServiceData.short_description;
-      this.Service.long_description = this.ServiceData.long_description;
-    }
+setData() {
+  if (this.ServiceData) {
+    Object.assign(this.Service, this.ServiceData);
   }
+}
+  // setData() {
+  //   if (this.ServiceData) {
+  //     this.Service.title = this.ServiceData.title;
+  //     this.Service.short_description = this.ServiceData.short_description;
+  //     this.Service.long_description = this.ServiceData.long_description;
+  //   }
+  // }
   closeDialog() {
     this.isOpen = false;
     this.close.emit();

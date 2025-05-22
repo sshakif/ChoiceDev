@@ -64,7 +64,7 @@ export class EmployeeAddComponent {
   constructor(private commandService: CommonService, private datepipe: DatePipe, private cdr: ChangeDetectorRef){}
  
   ngOnInit(): void {
-    this.isOpen = true; //model open
+    // this.isOpen = true; //model open
   }
     insertData() {
       if (!this.employee.first_name || !this.employee.email) {
@@ -125,6 +125,7 @@ export class EmployeeAddComponent {
         this.employee.is_active = this.isActive;
       console.log('Switch toggled:', this.isActive);
     }
+
     departmentList: string[] = ['Select','IT', 'HR', 'Finance', 'Marketing'];
     designationList: string[] = ['Select','Manager', 'Developer', 'Analyst', 'Support'];
 

@@ -34,19 +34,19 @@
   (close)="closeAddEmployeeModal()"
 ></app-employee-add>
 
-<app-edit-service
+<app-employee-edit
   [isOpen]="isEdit"
-  [ServiceId]="selectedEmployeeId"
-  [ServiceData]="selectedEmployeeData"
+  [employeeId]="selectedEmployeeId"
+  [employeeData]="selectedEmployeeData"
   (close)="closeEditEmployeeModal()"
   (refreshTable)="refreshTable.emit()"
-></app-edit-service>
-<app-service-details
-  [ServiceId]="selectedEmployeeId"
-  [ServiceData]="selectedEmployeeData"
+></app-employee-edit>
+<app-employee-details
+  [employeeId]="selectedEmployeeId"
+  [employeeData]="selectedEmployeeData"
   [isOpen]="isDetails"
   (close)="closeEmployeeDetailsModal()"
-></app-service-details>
+></app-employee-details>
 
 <ui5-dialog [open]="isDeleteOpen" header-text="Warning" state="Critical">
   <p *ngIf="!isDeleteLoading">Are you sure you want to delete this data?</p>
