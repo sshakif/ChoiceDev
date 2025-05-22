@@ -253,8 +253,9 @@ label {
   margin-bottom: 0.5rem;
 }
 .navbar img {
-  width: 150px;
-  height: 60px;
+  width: 250px;
+  height: 100px;
+  background: white;
 
 }
 button {
@@ -10590,6 +10591,17 @@ h6,
     position: relative;
     top: -38px;
     margin: auto;
+}
+.inner-style .service-icon  img{
+    width: 75px;
+    height: 65px;
+    /* border-radius: 43px;
+    background-color: #f3f8fd;
+    border: 2px solid #ffffff;
+    line-height: 80px;
+    position: relative;
+    top: -38px;
+    margin: auto; */
 }
 .inner-style .service-icon img{
   color: #008080;
