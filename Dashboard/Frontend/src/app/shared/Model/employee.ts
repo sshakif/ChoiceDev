@@ -6,8 +6,8 @@ export class Employee implements Deserializable {
   last_name?: string;
   email?: string = '';
   phone?: string;
-  designation?: string;
-  department?: string;
+  // designation?: string;
+  // department?: string;
   date_of_birth?: string;
   joining_date?: string;
   salary?: number;

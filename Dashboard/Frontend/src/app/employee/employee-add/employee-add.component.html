@@ -185,7 +185,7 @@
     <ui5-tab text="Others">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
         <!-- Department Dropdown -->
-        <div>
+        <!-- <div>
           <ui5-label
             show-colon
             required
@@ -193,14 +193,14 @@
           >
             Department
           </ui5-label>
-          <ui5-select class="w-full" required [(ngModel)]="employee.department">
+          <ui5-select class="w-full" required [(ngModel)]="employees.department">
             <ui5-option *ngFor="let dept of departmentList" [value]="dept">{{
               dept
             }}</ui5-option>
           </ui5-select>
-        </div>
+        </div> -->
 
-        <!-- Designation Dropdown -->
+        <!-- Designation Dropdown
         <div>
           <ui5-label
             show-colon
@@ -210,7 +210,7 @@
             Designation
           </ui5-label>
           <ui5-select
-            [(ngModel)]="employee.designation"
+            [(ngModel)]="employees.designation"
             required
             class="w-full"
           >
@@ -218,7 +218,7 @@
               desig
             }}</ui5-option>
           </ui5-select>
-        </div>
+        </div> -->
 
         <!-- Date of Birth -->
         <div>
@@ -279,7 +279,6 @@
   <ui5-toolbar slot="footer">
     <ui5-toolbar-button
       design="Emphasized"
-      [disabled]="loading"
       (click)="insertData()"
       text="Submit"
     ></ui5-toolbar-button>
