@@ -24,7 +24,7 @@ import { AttachmentsComponent } from "../../attachments/attachments.component";
     LabelComponent,
     TextAreaComponent,
     ToastMessageComponent,
-    AttachmentsComponent
+
 ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './edit-service.component.html',

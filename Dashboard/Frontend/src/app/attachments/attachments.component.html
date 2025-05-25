@@ -1,82 +1,58 @@
-<!-- Header Area -->
-<div class="flex justify-between items-center bg-white p-4 shadow-sm">
-  <label class="text-base font-semibold"
-    >Attachments ({{ attachments.length }})</label
+<div class="attachment-wrapper p-4 border rounded shadow-sm max-w-md mx-auto">
+  <!-- Upload Button -->
+  <button class="btn-upload px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+    (click)="onUploadClick()"
   >
-  <div class="flex gap-2 items-center">
-    <ui5-button
-      class="text-gray-500"
-      tooltip="Upload files"
-      [disabled]="isImageAlreadyUploaded()"
-      (click)="onUploadClick()"
-    >
-      Upload
-    </ui5-button>
+    Upload
+  </button>
 
-    <ui5-button
-      class="text-gray-500"
-      design="Transparent"
-      tooltip="Download selected files"
-      (click)="downloadSelected()"
-    >
-      Download
-    </ui5-button>
-  </div>
-</div>
+  <!-- Hidden File Input -->
+  <input type="file" hidden #fileInput (change)="onFilesSelected($event)" />
 
-<!-- Hidden File Input -->
-<input type="file" hidden #fileInput (change)="onFilesSelected($event)" />
-
-<!-- File List -->
-<ui5-list mode="MultiSelect" id="fileList">
-  <ui5-li-custom
-    *ngFor="let file of attachments; let i = index"
-    [selected]="file.selected"
-    (click)="toggleSelection(i)"
-  >
-    <div class="flex items-center justify-between w-full">
-      <div class="flex items-center gap-2">
-        <!-- Image preview -->
+  <!-- Media List -->
+  <ul class="media-list mt-4 space-y-3">
+    <li *ngFor="let media of mediaItems; let i = index" class="media-item flex items-center gap-4 border p-2 rounded">
+      <div class="media-preview w-12 h-12 flex-shrink-0">
         <img
-          *ngIf="isImage(file.file)"
-          [src]="file.previewUrl"
-          alt="preview"
-          style="
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            border-radius: 4px;
-          "
+          *ngIf="media.mime_type.startsWith('image/')"
+          [src]="media.original_url"
+          alt="{{ media.name }}"
+          class="w-full h-full object-cover rounded"
         />
-
-        <!-- Icon if not image -->
-        <ui5-icon *ngIf="!isImage(file.file)" name="paperclip"></ui5-icon>
-
-        <span>{{ file.file.name }}</span>
+        <ui5-icon
+          *ngIf="!media.mime_type.startsWith('image/')"
+          name="document"
+          style="font-size: 32px; color: gray;"
+        ></ui5-icon>
       </div>
 
-      <!-- Delete -->
-      <ui5-button
-        icon="delete"
-        design="Transparent"
-        tooltip="Delete file"
-        (click)="removeFile(i); $event.stopPropagation()"
-      ></ui5-button>
-    </div>
-  </ui5-li-custom>
-</ui5-list>
+      <div class="media-info flex-1">
+        <span class="block font-semibold truncate" title="{{ media.name }}">{{ media.name }}</span>
+      </div>
 
-<!-- No Files Image -->
-<div *ngIf="attachments.length === 0" class="p-4 text-center">
-  <div class="w-full flex flex-wrap justify-start gap-4 p-4">
-    <div class="text-center text-gray-500 w-full">
-      <img
-        src="../../assets/img/Uploder.png"
-        alt="No files"
-        class="mx-auto w-32 mb-4"
-      />
-      <div class="text-lg font-medium">No files found</div>
-      <div class="text-sm">Drop files to upload, or use the Upload button.</div>
-    </div>
+      <div class="media-actions flex gap-2">
+        <button
+          class="btn-download px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+          (click)="downloadMedia(media)"
+          title="Download"
+        >
+          Download
+        </button>
+        <button
+          class="btn-delete px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+          (click)="deleteMedia(media.id, i)"
+          title="Delete"
+        >
+          Delete
+        </button>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Empty state -->
+  <div *ngIf="mediaItems.length === 0" class="text-center text-gray-500 mt-8">
+    <img src="../../assets/img/Uploder.png" alt="No files" class="mx-auto w-24 mb-4" />
+    <div class="text-lg font-medium">No files found</div>
+    <div class="text-sm">Drop files to upload, or use the Upload button.</div>
   </div>
 </div>
