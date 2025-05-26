@@ -27,17 +27,21 @@
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
-
-    <!-- Customized Bootstrap Stylesheet -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">    
+<!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet" />
   </head>
 
   <body>
     <!-- Navbar Start -->
-    <div class="container  position-relative">
-      <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
+    <div class="nav-container  position-relative">
+      <div class="container">
+      <nav class="navbar navbar-expand-lg nav-bg navbar-light py-3 py-lg-0">
         <a href="index.html" class="navbar-brand text-secondary">
-            <img src="img/ChoiceDev_GPT-removebg-preview.png" alt="Logo">
+            <img src="img/Asset 1@4x 11.png" alt="Logo">
         </a>
         <button
           type="button"
@@ -50,13 +54,13 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav ml-auto py-0 pr-3 border-right">
             <a href="index.html" class="nav-item nav-link active">Home</a>
-            <!-- <a href="about.html" class="nav-item nav-link">About</a> -->
             <a href="service.html" class="nav-item nav-link">Services</a>
             <a href="price.html" class="nav-item nav-link">Resources</a>
             <a href="contact.html" class="nav-item nav-link">Contact</a>
           </div>
         </div>
       </nav>
+      </div>
     </div>
     <!-- Navbar End -->
 
@@ -74,7 +78,7 @@
           <p class="text-light">
             Driving innovation to unlock new possibilities and accelerate progress. Powering growth through forward-thinking solutions that shape the future.
           </p>
-          <a href="" class="btn btn-home text-uppercase mt-1 py-3 px-5"
+          <a href="service.html" class="btn btn-home text-uppercase mt-1 py-3 px-5"
             >Learn More</a
           >
         </div>
@@ -91,12 +95,12 @@
          </div>
     <!-- Header End -->
 
-<div class="common-bg style-two pb-5 pt-5">
+<div class="common-bg style-two solution-part pb-5 pt-5">
   <div class="container">
          <h1 class="display-4 text-uppercase text-center mb-5">
           Our Solutions
         </h1>
-        <h3 class="display-5 text-uppercase text-center mb-5">
+        <h3 class="text-uppercase text-center mb-5">
           We design and deploy future-ready solutions,harnessing technology, expertise, and strategic insight to solve complex challenges and propel your success.
         </h3>
     <div class="row">
@@ -156,29 +160,23 @@
           About Us
         </h1>
         <div class="row align-items-center">
-          <div class="col-lg-6">
+          <div class="col-lg-6 mb-3">
             <img
               class="img-fluid mb-4 mb-lg-0"
               src="img/about-thumb.png"
               alt=""
             />
           </div>
-          <div class="col-lg-6 mb-5">
+          <div class="col-lg-6">
             <h1 class="display-5 text-uppercase mb-4">
               Your Most Trusted Digital Solutions Partner in Downtown
             </h1>
             <h5 class="text-primary mb-3">
          ChoiceDev specializes in custom web design, development, and digital solutions tailored to your business needs. We combine creativity, cutting-edge technology, and strategic thinking to build fast, scalable, and secure platforms that drive growth. Your success is our code.
             </h5>
-            <p class="mb-4">
+            <p>
               At ChoiceDev, we don’t just build websites—we craft digital experiences that elevate your brand and engage your audience. From responsive designs to robust e-commerce platforms, our team delivers innovative, future-proof tools that align with your goals. Let us transform your vision into a high-performing online presence that stands out in today’s competitive landscape.
             </p>
-            <!-- <a href="" class="btn btn-dark text-uppercase py-3 px-5"
-              >Read More</a
-            > -->
-                      <a href="" class="btn btn-home text-uppercase mt-1 py-3 px-5"
-            >Read More</a
-          >
           </div>
         </div>
       </div>
@@ -216,78 +214,68 @@
           </div>
         </div>
         <div class="row portfolio-container common-bg ">
-          <div class="col-lg-4 col-md-6 mb-4 portfolio-item first">
-            <div class="position-relative rounded overflow-hidden mb-2">
-              <img class="img-fluid w-100" src="img/portfolio-1.jpg" alt="" />
-              <div
-                class="portfolio-btn d-flex align-items-center justify-content-center"
-              >
-                <a href="img/portfolio-1.jpg" data-lightbox="portfolio">
-                  <i class="fa fa-4x fa-plus text-primary"></i>
-                </a>
-              </div>
-            </div>
-          </div>
           <div class="col-lg-4 col-md-6 mb-4 portfolio-item second">
-            <div class="position-relative rounded overflow-hidden mb-2">
-              <img class="img-fluid w-100" src="img/portfolio-2.jpg" alt="" />
-              <div
-                class="portfolio-btn d-flex align-items-center justify-content-center"
-              >
-                <a href="img/portfolio-2.jpg" data-lightbox="portfolio">
-                  <i class="fa fa-4x fa-plus text-primary"></i>
-                </a>
-              </div>
-            </div>
-          </div>
+  <img src="img/portfolio-1.jpg" class="card-img-top" alt="Portfolio Item">
+
+    <div class="portfolio-btn d-flex align-items-center justify-content-center">
+      <a href="#" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+        <i class="fa fa-4x fa-plus text-primary"></i>
+      </a>
+    </div>
+  </div>
           <div class="col-lg-4 col-md-6 mb-4 portfolio-item first">
-            <div class="position-relative rounded overflow-hidden mb-2">
-              <img class="img-fluid w-100" src="img/portfolio-3.jpg" alt="" />
-              <div
-                class="portfolio-btn d-flex align-items-center justify-content-center"
-              >
-                <a href="img/portfolio-3.jpg" data-lightbox="portfolio">
-                  <i class="fa fa-4x fa-plus text-primary"></i>
-                </a>
-              </div>
+<!-- Portfolio Card -->
+  <img src="img/portfolio-3.jpg" class="card-img-top" alt="Portfolio Item">
+
+    <div class="portfolio-btn d-flex align-items-center justify-content-center">
+      <a href="#" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+        <i class="fa fa-4x fa-plus text-primary"></i>
+      </a>
+    </div>
+  </div>
+<div class="modal fade" id="portfolioModal1" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Project Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Image Carousel -->
+        <div id="carouselPortfolio1" class="carousel slide mb-4" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="img/portfolio-3.jpg" class="d-block w-100" alt="Project Image 1">
+            </div>
+            <div class="carousel-item">
+              <img src="img/portfolio-5.jpg" class="d-block w-100" alt="Project Image 2">
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 mb-4 portfolio-item second">
-            <div class="position-relative rounded overflow-hidden mb-2">
-              <img class="img-fluid w-100" src="img/portfolio-4.jpg" alt="" />
-              <div
-                class="portfolio-btn d-flex align-items-center justify-content-center"
-              >
-                <a href="img/portfolio-4.jpg" data-lightbox="portfolio">
-                  <i class="fa fa-4x fa-plus text-primary"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4 portfolio-item first">
-            <div class="position-relative rounded overflow-hidden mb-2">
-              <img class="img-fluid w-100" src="img/portfolio-5.jpg" alt="" />
-              <div
-                class="portfolio-btn d-flex align-items-center justify-content-center"
-              >
-                <a href="img/portfolio-3.jpg" data-lightbox="portfolio">
-                  <i class="fa fa-4x fa-plus text-primary"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4 portfolio-item second">
-            <div class="position-relative rounded overflow-hidden mb-2">
-              <img class="img-fluid w-100" src="img/portfolio-6.jpg" alt="" />
-              <div
-                class="portfolio-btn d-flex align-items-center justify-content-center"
-              >
-                <a href="img/portfolio-4.jpg" data-lightbox="portfolio">
-                  <i class="fa fa-4x fa-plus text-primary"></i>
-                </a>
-              </div>
-            </div>
-          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselPortfolio1" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselPortfolio1" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        
+        <!-- Content Section -->
+        <div class="portfolio-content">
+          <h3>Project Title</h3>
+          <p class="text-muted">Project Subtitle or Category</p>
+          <p>Detailed description of the project goes here. You can include information about the client, your role, technologies used, challenges faced, and results achieved.</p>
+          <ul class="list-inline">
+            <li class=""><strong>Client:</strong> Client Name</li>
+            <li class=""><strong>Category:</strong> Web Design</li>
+            <li class=""><strong>Date:</strong> January 2023</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
       </div>
     </div>
@@ -321,14 +309,24 @@
                   <li>Transparent collaboration with dedicated support from start to finish</li>
               </ul>
             </p>
-   <a href="#" class="btn btn-home text-uppercase mt-1 py-3 px-5"
-            >Read More</a
-          >
           </div>
         </div>
+                <div class="row align-items-center pt-5">
+          <div class="col-md-8">
+            <h5 class="text-uppercase mb-3">
+           Ready to Level Up Your Impact with Advanced Tech Innovation?
+            </h5>
+            <p class="mb-4">
+Step into a future of untapped possibilities and substantial gains. With Scopic as your ally, expect a journey marked by tailored tech innovation, increased profit margins, and a dominant presence in your industry.
+            </p>
+
+          </div>
+        </div>
+               <a href="contact.html" class="btn btn-qoute text-uppercase mt-1 py-3 px-5"
+            >Request a Free Quote</a
+          >
       </div>
     </div>
-    <!-- Footer Start -->
 
     <div
       class="container-fluid py-4 px-sm-3 px-md-5"
@@ -369,8 +367,8 @@
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
     <script src="lib/lightbox/js/lightbox.min.js"></script>
-
-    <!-- Contact Javascript File -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
 
