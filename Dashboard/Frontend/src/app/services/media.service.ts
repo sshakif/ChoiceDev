@@ -43,18 +43,20 @@
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CommonService } from '../services/common-service/common.service'; 
-import { MediaItem } from '.././shared/Model/MediaItem'; 
+import { MediaItem } from '.././shared/Model/MediaItem';
+import { CommonService } from '../services/common-service/common.service';
 
 @Injectable({ providedIn: 'root' })
 export class MediaService {
-  private baseUrl = 'media';  
+  private baseUrl = 'media';
 
   constructor(private commonService: CommonService) {}
 
   getMedia(model: string, id: number): Observable<MediaItem[]> {
-    return this.commonService.get<MediaItem[]>(`${this.baseUrl}/${model}/${id}`, false);
-   
+    return this.commonService.get<MediaItem[]>(
+      `${this.baseUrl}/${model}/${id}`,
+      false
+    );
   }
 
   uploadMedia(
@@ -77,6 +79,9 @@ export class MediaService {
   }
 
   deleteMedia(mediaId: number): Observable<void> {
-    return this.commonService.delete<void>(`${this.baseUrl}/item/${mediaId}`, false);
+    return this.commonService.delete<void>(
+      `${this.baseUrl}/item/${mediaId}`,
+      false
+    );
   }
 }

@@ -9,20 +9,24 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-use App\Http\Controllers\ServicePageController;
+// use App\Http\Controllers\ServicePageController;
 
-Route::post('/service-pages', [ServicePageController::class, 'store']);
+// Route::post('/service-pages', [ServicePageController::class, 'store']);
 
 
-use App\Http\Controllers\MediaController;
+ use App\Http\Controllers\MediaController;
 
-Route::prefix('media')->group(function () {
-    // Get media list for a model and record
-    Route::get('{model}/{id}', [MediaController::class, 'getMedia']);
+// Route::prefix('media')->group(function () {
+//     // Get media list for a model and record
+//     Route::get('{model}/{id}', [MediaController::class, 'getMedia']);
 
+//     // Upload media for a model and record
+//     Route::post('{model}/{id}', [MediaController::class, 'uploadMedia']);
+
+//     // Delete a media item by media ID
+//     Route::delete('item/{mediaId}', [MediaController::class, 'deleteMediaItem']);
+// });
+
+ 
     // Upload media for a model and record
     Route::post('{model}/{id}', [MediaController::class, 'uploadMedia']);
-
-    // Delete a media item by media ID
-    Route::delete('item/{mediaId}', [MediaController::class, 'deleteMediaItem']);
-});

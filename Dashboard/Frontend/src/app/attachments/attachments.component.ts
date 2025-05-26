@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -9,8 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonService } from '@app/services/common-service/common.service';
-import {  MediaService } from '@app/services/media.service';
+import { MediaService } from '@app/services/media.service';
 import { MediaItem } from '@app/shared/Model/MediaItem';
 
 @Component({
@@ -22,7 +21,7 @@ import { MediaItem } from '@app/shared/Model/MediaItem';
   styleUrl: './attachments.component.scss',
 })
 export class AttachmentsComponent implements OnInit, OnDestroy {
-   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   mediaItems: MediaItem[] = [];
 
   attachments: { file: File; selected: boolean; previewUrl?: string }[] = [];
@@ -30,7 +29,10 @@ export class AttachmentsComponent implements OnInit, OnDestroy {
   modelName = 'servicepage';
   recordId = 1;
 
-  constructor(private mediaService: MediaService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private mediaService: MediaService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadMedia();
@@ -57,16 +59,17 @@ export class AttachmentsComponent implements OnInit, OnDestroy {
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
 
-      this.mediaService.uploadMedia(this.modelName, this.recordId, file).subscribe(
-        (uploadedMedia) => {
-
-          this.mediaItems.push(uploadedMedia);
-          this.cdr.detectChanges();
-        },
-        (error) => {
-          console.error('Upload failed', error);
-        }
-      );
+      this.mediaService
+        .uploadMedia(this.modelName, this.recordId, file)
+        .subscribe(
+          (uploadedMedia) => {
+            this.mediaItems.push(uploadedMedia);
+            this.cdr.detectChanges();
+          },
+          (error) => {
+            console.error('Upload failed', error);
+          }
+        );
     }
     input.value = '';
   }

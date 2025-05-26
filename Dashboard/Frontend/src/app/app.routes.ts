@@ -3,6 +3,7 @@ import { ServiceListComponent } from '@app/service-page/service-list/service-lis
 import { FaqListComponent } from '@app/faq/faq-list/faq-list.component';
 import { HomeComponent } from '@app/home/home.component';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
+import { AttachmentsComponent } from './attachments/attachments.component';
 
 export const routes: Routes = [
   {
@@ -24,5 +25,9 @@ export const routes: Routes = [
    {
     path: 'employee-list',
     component: EmployeeListComponent,
+  },
+     {
+    path: 'attachments',
+    component: AttachmentsComponent,
   },
 ];
