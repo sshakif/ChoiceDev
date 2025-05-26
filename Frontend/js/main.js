@@ -75,6 +75,8 @@
     });
 
 
+
+
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({
         autoplay: true,
@@ -101,3 +103,57 @@
     
 })(jQuery);
 
+// Portfolio isotope and filter
+var portfolioIsotope = $('.portfolio-container').isotope({
+    itemSelector: '.portfolio-item',
+    layoutMode: 'fitRows',
+    onLayout: function() {
+        centerSingleCards();
+    }
+});
+
+function centerSingleCards() {
+    $('.portfolio-container').each(function() {
+        var $container = $(this);
+        var $items = $container.find('.portfolio-item:visible');
+        
+        if ($items.length === 1) {
+            // Force center the single item
+            $container.css({
+                'display': 'flex',
+                'justify-content': 'center'
+            });
+            $items.css({
+                'margin-left': '0',
+                'margin-right': '0',
+                'float': 'none'
+            });
+        } else {
+            // Reset for multiple items
+            $container.css({
+                'display': '',
+                'justify-content': ''
+            });
+            $items.css({
+                'margin-left': '',
+                'margin-right': '',
+                'float': ''
+            });
+        }
+    });
+}
+
+$('#portfolio-flters li').on('click', function() {
+    $("#portfolio-flters li").removeClass('active');
+    $(this).addClass('active');
+    
+    portfolioIsotope.isotope({filter: $(this).data('filter')});
+});
+
+// Run on initial load and after images load
+$(window).on('load', function() {
+    setTimeout(centerSingleCards, 300);
+    portfolioIsotope.imagesLoaded().progress(function() {
+        centerSingleCards();
+    });
+});

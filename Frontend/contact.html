@@ -36,6 +36,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet" />
+        <script src="js/vendor/modernizr-3.5.0.min.js"></script>
   </head>
 
   <body>
@@ -81,15 +82,15 @@
                 <div class="info-content">
                   <h4>Don’t Forget to Contact Us</h4>
                 </div>
-				<div class="contact-info-box">
-						<div class="contact-info-icon">
-				<i class="fa-regular fa-envelope"></i>
-						</div>
-						<div class="contact-info-content">
-							<p>Send E-Mail</p>
-							<h4>example@gmail.com</h4>
-						</div>
-					</div>	
+                <div class="contact-info-box">
+                  <div class="contact-info-icon">
+                    <i class="fa-regular fa-envelope"></i>
+                  </div>
+                  <div class="contact-info-content">
+                    <p>Send E-Mail</p>
+                    <h4>example@gmail.com</h4>
+                  </div>
+                </div>
                 <div class="contact-info-box">
                   <div class="contact-info-icon">
                     <i class="fa-regular fa-address-card"></i>
@@ -106,7 +107,7 @@
                 <div class="contact-contetn pt-5">
                   <h4>Write to Us Anytime</h4>
                 </div>
-                <form action="#">
+                <form action="contact.php" method="POST">
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="single-input-box">
@@ -118,11 +119,11 @@
                         />
                       </div>
                     </div>
-					 <div class="col-lg-6">
+                    <div class="col-lg-6">
                       <div class="single-input-box">
                         <input
                           type="text"
-                          name="name"
+                          name="company"
                           placeholder="Your Company"
                           required
                         />
@@ -131,8 +132,8 @@
                     <div class="col-lg-6">
                       <div class="single-input-box">
                         <input
-                          type="text"
-                          name="Email"
+                          type="email"
+                          name="email"
                           placeholder="Enter E-Mail"
                           required
                         />
@@ -141,8 +142,8 @@
                     <div class="col-lg-6">
                       <div class="single-input-box">
                         <input
-                          type="text"
-                          name="Phone"
+                          type="number"
+                          name="number"
                           placeholder="Phone Number"
                           required
                         />
@@ -152,7 +153,7 @@
                       <div class="single-input-box">
                         <input
                           type="text"
-                          name="Subject"
+                          name="subject"
                           placeholder="Subject"
                           required
                         />
@@ -161,8 +162,8 @@
                     <div class="col-lg-12">
                       <div class="single-input-box">
                         <textarea
-                          name="massage"
-                          id="massage"
+                          name="message"
+                          id="message"
                           placeholder="Write Massage"
                           required
                         ></textarea>
@@ -190,8 +191,7 @@
       <div class="row">
         <div class="col-md-6">
           <p class="pt-3 text-white-50">
-            &copy; <a href="#">ChoiceDev Ltd</a>. All Rights
-            Reserved.
+            &copy; <a href="#">ChoiceDev Ltd</a>. All Rights Reserved.
           </p>
         </div>
         <div class="col-md-6 pt-2">
@@ -201,13 +201,7 @@
                 <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
               </li>
               <li>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-              </li>
-              <li>
                 <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
               </li>
             </ul>
           </div>
@@ -229,7 +223,10 @@
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
     <script src="lib/lightbox/js/lightbox.min.js"></script>
-
+    <!-- jquery js -->
+    <script src="js/vendor/jquery-3.6.2.min.js"></script>
+       <!-- ajax-mail js -->
+    <script src="js/ajax-mail.js"></script>
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>

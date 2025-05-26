@@ -347,6 +347,42 @@ legend {
 .footer-botton-social-icon ul{
   margin-right: 45px;
 }
+
+/* Force centering for single items */
+.portfolio-container {
+    margin: 0 auto;
+}
+
+/* Important: Override Isotope positioning for single items */
+.portfolio-container.single-item .portfolio-item {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+}
+
+/* Make sure the container is full width */
+.portfolio-container {
+    width: 100% !important;
+}
+/* Center single portfolio items */
+.portfolio-container.single-item {
+    display: block !important;
+    text-align: center;
+}
+
+/* Ensure proper spacing */
+.portfolio-item {
+    transition: all 0.3s ease;
+}
+
+/* Fix for isotope layout */
+.portfolio-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Default for multiple items */
+}
+
 /* card-section */
 
 .portfolio-btn {
@@ -435,6 +471,10 @@ legend {
     background-color: #fff;
     color: #000!important;
 }
+
+
+
+
 @media (max-width: 1200px) {
   legend {
     font-size: calc(1.275rem + 0.3vw);
@@ -10522,16 +10562,22 @@ h6,
   width: 100%;
   height: 100%;
 }
-.banner-overlay {
+/* .banner-overlay {
   background: radial-gradient(
     29.22% 167.9% at 76.69% 62.63%,
     rgba(10, 147, 150, 0.6) 0%,
-    /* More transparent vibrant teal */ rgba(8, 88, 94, 0.5) 50%,
-    /* Medium teal with more transparency */ rgba(15, 31, 31, 0.4) 80%,
-    /* More transparent dark teal-gray */ rgba(10, 10, 10, 0.3) 100%
-      /* Very transparent dark base */
+rgba(8, 88, 94, 0.5) 50%,
+ rgba(15, 31, 31, 0.4) 80%,
+   rgba(10, 10, 10, 0.3) 100%
+  
   );
   min-height: 82vh;
+} */
+.banner-overlay{
+ /* background: linear-gradient(270deg, rgba(0, 89, 129, 0) 0%, #002E42 100%); */
+/* background: linear-gradient(270deg, rgba(0, 105, 92, 0) 0%, #003D33 100%); */
+background: linear-gradient(270deg, rgba(0, 147, 147, 0) 0%, #005F73 100%);
+   min-height: 82vh;
 }
 .banner2 {
   min-height: 82vh;
@@ -10697,6 +10743,7 @@ h6,
   text-align: center;
   transition: 0.5s;
   padding: 0px 20px 32px;
+  height: 300px;
   /* filter: drop-shadow(0px 10px 50px rgba(217, 217, 217, 0.5)); */
   background-color: #008080;
   border-radius: 3px;
@@ -10715,8 +10762,8 @@ h6,
   margin: auto;
 }
 .inner-style .service-icon img {
-  width: 75px;
-  height: 65px;
+  width: 55px;
+  height: 45px;
   /* border-radius: 43px;
     background-color: #f3f8fd;
     border: 2px solid #ffffff;
@@ -11304,9 +11351,19 @@ button.icons {
   .banner-overlay {
     min-height: 20vh;
   }
+  .banner2 {
+  min-height: 20vh;
+}
+  .banner3{
+  min-height: 20vh;
+}
+  .banner-items-resources {
+  padding-top: 8vh;
+}
   .banner-items {
-    padding-top: 2vh;
+    padding-top: 4vh;
   }
+
   .banner-items h1 {
     font-size: 15px;
   }
@@ -11316,6 +11373,12 @@ button.icons {
   .banner-items a {
     display: none;
   }
+  .footer-botton-social-icon ul{
+  margin-right: 150px;
+}
+.single-services-box {
+  height: 400px;
+}
 }
 @media screen and (min-width: 390px) and (max-width: 575px) {
   .banner {
@@ -11324,12 +11387,21 @@ button.icons {
   .banner-overlay {
     min-height: 20vh;
   }
+    .banner2 {
+  min-height: 20vh;
+}
   .banner-items {
-    padding-top: 8vh;
+    padding-top: 2vh!important;
   }
   .banner-items h1 {
     font-size: 25px;
   }
+    .banner3{
+  min-height: 20vh;
+}
+  .banner-items-resources {
+  padding-top: 8vh;
+}
   .banner-items p {
     font-size: 15px;
   }
@@ -11338,6 +11410,18 @@ button.icons {
   }
 }
 @media screen and (min-width: 576px) and (max-width: 767px) {
+    .banner-overlay {
+    min-height: 20vh;
+  }
+    .banner2 {
+  min-height: 20vh;
+}
+  .banner3{
+  min-height: 20vh;
+}
+  .banner-items-resources {
+  padding-top: 10vh;
+}
   .text-sm-left {
     text-align: left !important;
   }
@@ -11365,6 +11449,18 @@ button.icons {
 }
 
 @media screen and (min-width: 769px) and (max-width: 920px) {
+      .banner-overlay {
+    min-height: 20vh;
+  }
+    .banner2 {
+  min-height: 20vh;
+}
+  .banner3{
+  min-height: 20vh;
+}
+  .banner-items-resources {
+  padding-top: 12vh;
+}
   .text-md-left {
     text-align: left !important;
   }
@@ -11391,6 +11487,18 @@ button.icons {
   }
 }
 @media screen and (min-width: 921px) and (max-width: 1250px) {
+      .banner-overlay {
+    min-height: 20vh;
+  }
+    .banner2 {
+  min-height: 20vh;
+}
+  .banner3{
+  min-height: 20vh;
+}
+  .banner-items-resources {
+  padding-top: 12vh;
+}
   .text-md-left {
     text-align: left !important;
   }
@@ -11415,4 +11523,9 @@ button.icons {
   .banner-overlay {
     min-height: 60vh;
   }
+}
+@media screen and (min-width: 1250px) {
+  .banner-items-resources {
+  padding-top: 20vh;
+}
 }
