@@ -38,13 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </html>";
         $mail->AltBody = 'Contact Details: ' . $message;
         if ($mail->send()) {
-            // echo $mail->AltBody;
-//            echo '<script type="text/javascript"> alert("Message has been sent"); window.history.back(); </script>';
-             header("Location: contact.html");
+            header("Location: contact.html?status=success");
             exit;
         } else {
-            // echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
-            header("Location: index.html");
+            header("Location: contact.html?status=error");
+            exit;
         }
     } catch (Exception $e) {
         // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";

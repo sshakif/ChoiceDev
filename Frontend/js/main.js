@@ -157,3 +157,106 @@ $(window).on('load', function() {
         centerSingleCards();
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Debugging: Log when DOM is loaded
+    console.log('DOM fully loaded and parsed');
+    
+    const form = document.querySelector('form');
+    let messageDiv = document.getElementById('form-message');
+
+    // Debugging: Check if elements exist
+    console.log('Form element:', form);
+    console.log('Message div:', messageDiv);
+
+    // Create message div if it doesn't exist
+    if (!messageDiv && form) {
+        console.log('Creating message div dynamically');
+        messageDiv = document.createElement('div');
+        messageDiv.id = 'form-message';
+        messageDiv.style.display = 'none';
+        form.appendChild(messageDiv);
+    }
+
+    function showMessage(text, type) {
+        console.log('Attempting to show message:', text);
+        if (!messageDiv) {
+            console.error('Message div not found!');
+            return;
+        }
+        
+        // Apply basic styles if CSS isn't working
+        messageDiv.style.padding = '10px 15px';
+        messageDiv.style.margin = '15px 0';
+        messageDiv.style.borderRadius = '4px';
+        messageDiv.style.fontSize = '14px';
+        
+        // Set content and classes
+        messageDiv.textContent = text;
+        messageDiv.className = type;
+        messageDiv.style.display = 'block';
+        
+        // Set colors based on type
+        if (type === 'success') {
+            messageDiv.style.backgroundColor = '#d4edda';
+            messageDiv.style.color = '#155724';
+            messageDiv.style.border = '1px solid #c3e6cb';
+        } else {
+            messageDiv.style.backgroundColor = '#f8d7da';
+            messageDiv.style.color = '#721c24';
+            messageDiv.style.border = '1px solid #f5c6cb';
+        }
+        
+        // Hide after 5 seconds
+        setTimeout(() => {
+            messageDiv.style.display = 'none';
+        }, 5000);
+    }
+
+    // Check URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    console.log('URL status parameter:', status);
+    
+    if (status === 'success') {
+        showMessage('Thank you! Your message has been sent successfully.', 'success');
+        history.replaceState(null, '', window.location.pathname);
+    } else if (status === 'error') {
+        showMessage('There was an error sending your message. Please try again.', 'error');
+        history.replaceState(null, '', window.location.pathname);
+    }
+
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Form submitted');
+            
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (!submitButton) {
+                console.error('Submit button not found!');
+                return;
+            }
+            
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+            
+            // Send form data
+            fetch('contact.php', {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(response => {
+                console.log('Form submission complete, reloading');
+                window.location.href = 'contact.html?status=success';
+            })
+            .catch(error => {
+                console.error('Form submission error:', error);
+                showMessage('There was a network error. Please try again.', 'error');
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            });
+        });
+    }
+});
