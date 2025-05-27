@@ -468,11 +468,16 @@ legend {
   color: #fff;
 }
 .btn-home:hover{
+  border: 1px solid #008080;
     background-color: #fff;
     color: #000!important;
 }
 
-
+.blog-card-caption a:hover{
+  border: 1px solid #008080!important;
+    background-color: #fff;
+  color: #008080!important;
+}
 
 
 @media (max-width: 1200px) {
@@ -10562,7 +10567,7 @@ h6,
   width: 100%;
   height: 100%;
 }
-/* .banner-overlay {
+.banner-overlay {
   background: radial-gradient(
     29.22% 167.9% at 76.69% 62.63%,
     rgba(10, 147, 150, 0.6) 0%,
@@ -10572,12 +10577,12 @@ rgba(8, 88, 94, 0.5) 50%,
   
   );
   min-height: 82vh;
-} */
+}
 .banner-overlay{
  /* background: linear-gradient(270deg, rgba(0, 89, 129, 0) 0%, #002E42 100%); */
 /* background: linear-gradient(270deg, rgba(0, 105, 92, 0) 0%, #003D33 100%); */
-background: linear-gradient(270deg, rgba(0, 147, 147, 0) 0%, #005F73 100%);
-   min-height: 82vh;
+/* background: linear-gradient(270deg, rgba(0, 147, 147, 0) 0%, #005F73 100%); */
+   /* min-height: 82vh; */
 }
 .banner2 {
   min-height: 82vh;

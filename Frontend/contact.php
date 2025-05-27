@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->Host = 'smtp.gmail.com'; 
         $mail->SMTPAuth = true;  
         $mail->Port = 587;  
-        $mail->Username = 'arahman.hybritech65@gmail.com';  
+        $mail->Username = 'hybritechinnovationsltd@gmail.com';  
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Password = 'gizflulxmzwywrpd';  
         $mail->setFrom($email, $name);  
