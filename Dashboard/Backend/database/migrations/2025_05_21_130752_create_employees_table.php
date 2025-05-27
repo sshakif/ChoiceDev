@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
-            $table->string('designation')->nullable(); // Job title
-            $table->string('department')->nullable();
+            $table->string('title')->nullable(); // Add title here
             $table->date('date_of_birth')->nullable();
             $table->date('joining_date')->nullable();
             $table->decimal('salary', 10, 2)->nullable();

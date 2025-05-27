@@ -5,24 +5,31 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use App\Traits\HasCustomId;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Flat3\Lodata\Attributes\LodataRelationship;
 
 class ServicePage extends Model implements HasMedia
 {
-    use InteractsWithMedia;
-    protected $guarded = [];
-    //  protected $fillable = [
-    //     'title',
-    //     'slug',
-    //     'short_description',
-    //     'long_description',
-    //     // 'image',
-    //     'is_active',
-    // ];
-    //  protected $casts = [
-    //     'is_active' => 'boolean',
-    // ];
-      public function registerMediaCollections(): void
-    {
-        $this->addMediaCollection('image');
+  
+ 
+    use InteractsWithMedia {
+        media as protected trait_media;
     }
+
+    protected $guarded = [];
+
+    #[LodataRelationship]
+    public function media(): MorphMany
+    {
+        return $this->trait_media();
+    }
+   public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    
 }
+

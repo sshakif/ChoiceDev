@@ -4,114 +4,99 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Str;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
 
 class MediaController extends Controller
 {
-    // Model namespace, change if needed
-    protected $modelNamespace = 'App\\Models\\';
-
-    /**
-     * Get media for any model and record id.
-     * URL: GET /api/media/{model}/{id}
-     */
-    public function getMedia($model, $id)
+    public function upload(Request $request): JsonResponse
     {
-        // Convert model name to proper case and namespace
-        $modelClass = $this->modelNamespace . ucfirst($model);
-
-        if (!class_exists($modelClass)) {
-            return response()->json(['error' => 'Model not found.'], 404);
-        }
-
         try {
-            $record = $modelClass::findOrFail($id);
-
-            $mediaItems = $record->getMedia();
-
-            $mediaData = $mediaItems->map(function ($media) {
-                return [
-                    'id' => $media->id,
-                    'name' => $media->name,
-                    'file_name' => $media->file_name,
-                    'mime_type' => $media->mime_type,
-                    'size' => $media->size,
-                    'collection_name' => $media->collection_name,
-                    'original_url' => $media->getUrl(),
-                    'created_at' => $media->created_at,
-                ];
-            });
-
-            return response()->json($mediaData);
-
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'Record not found.'], 404);
-        }
-    }
-
-
-    /**
-     * Upload media to a given model and record id.
-     * URL: POST /api/media/{model}/{id}
-     * Form Data: file (uploaded file), collection_name (optional)
-     */
-    public function uploadMedia(Request $request, $model, $id)
-    {
-        $modelClass = $this->modelNamespace . ucfirst($model);
-
-        if (!class_exists($modelClass)) {
-            return response()->json(['error' => 'Model not found.'], 404);
-        }
-
-        try {
-            $record = $modelClass::findOrFail($id);
-
             $request->validate([
-                'file' => 'required|file|max:5120', // max 5MB
-                'collection_name' => 'nullable|string',
+                'file' => 'required|file|mimes:jpg,jpeg,png,webp,pdf,docx|max:2048',
+                'model' => 'required|string',
+                'id' => 'required|integer'
             ]);
 
-            $collectionName = $request->input('collection_name', 'default');
+            $fullModel = $this->getModelClass($request->model);
 
-            $media = $record->addMediaFromRequest('file')
-                ->toMediaCollection($collectionName);
+            if (!$fullModel || !class_exists($fullModel)) {
+                return response()->json(['error' => 'Invalid model'], 400);
+            }
+
+            $instance = $fullModel::findOrFail($request->id);
+
+            $media = $instance->addMediaFromRequest('file')->toMediaCollection('default');
 
             return response()->json([
-                'message' => 'Media uploaded successfully.',
+                'success' => true,
+                'message' => 'File uploaded successfully',
                 'media' => [
                     'id' => $media->id,
+                    'url' => $media->getUrl(),
+                    'full_url' => $media->getFullUrl(),
                     'name' => $media->name,
                     'file_name' => $media->file_name,
                     'mime_type' => $media->mime_type,
                     'size' => $media->size,
-                    'collection_name' => $media->collection_name,
-                    'original_url' => $media->getUrl(),
-                    'created_at' => $media->created_at,
+                    'created_at' => $media->created_at
                 ]
-            ], 201);
-
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Validation failed',
+                'errors' => $e->errors()
+            ], 422);
         } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'Record not found.'], 404);
+            return response()->json(['success' => false, 'error' => 'Record not found'], 404);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => 'Upload failed', 'message' => $e->getMessage()], 500);
         }
     }
 
-    /**
-     * Delete a media item by id.
-     * URL: DELETE /api/media/item/{mediaId}
-     */
-    public function deleteMediaItem($mediaId)
+    public function get($model, $id): JsonResponse
     {
-        $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::find($mediaId);
-
-        if (!$media) {
-            return response()->json(['error' => 'Media not found.'], 404);
-        }
-
         try {
-            $media->delete();
+            $fullModel = $this->getModelClass($model);
 
-            return response()->json(['message' => 'Media deleted successfully.']);
+            if (!$fullModel || !class_exists($fullModel)) {
+                return response()->json(['error' => 'Invalid model'], 400);
+            }
+
+            $instance = $fullModel::findOrFail($id);
+            $mediaItems = $instance->getMedia('default');
+
+            return response()->json([
+                'success' => true,
+                'media' => $mediaItems->map(function ($media) {
+                    return [
+                        'id' => $media->id,
+                        'url' => $media->getUrl(),
+                        'full_url' => $media->getFullUrl(),
+                        'name' => $media->name,
+                        'file_name' => $media->file_name,
+                        'mime_type' => $media->mime_type,
+                        'size' => $media->size,
+                        'created_at' => $media->created_at
+                    ];
+                })
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['success' => false, 'error' => 'Record not found'], 404);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Failed to delete media.', 'details' => $e->getMessage()], 500);
+            return response()->json(['success' => false, 'error' => 'Failed to retrieve media'], 500);
         }
+    }
+
+    private function getModelClass($model): ?string
+    {
+        $map = [
+            'user' => \App\Models\User::class,
+            'service-page' => \App\Models\ServicePage::class,
+            'employee' => \App\Models\Employee::class,
+        ];
+        return $map[$model] ?? null;
     }
 }
