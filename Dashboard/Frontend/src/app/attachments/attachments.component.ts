@@ -15,7 +15,6 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonService } from '@app/services/common-service/common.service';
-// import { MediaService } from '@app/services/media.service';
 import { MediaItem } from '@app/shared/Model/MediaItem';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -32,7 +31,7 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
   api: boolean;
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   @Input() modelName: string = 'service-page';
-  @Input() recordId: string | number = '';
+  @Input() recordId: string | number = ''; 
   @Input() allowedTypes: string[] = [
     'image/jpeg',
     'image/png',
@@ -48,14 +47,14 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
 
   mediaItems: MediaItem[] = [];
   selectedMediaIds: number[] = [];
-  isUploading: boolean = false; // Indicates if any upload is in progress
+  isUploading: boolean = false; 
   isDragging: boolean = false;
-  public pendingFiles: File[] = []; // <--- CHANGE THIS LINE from private to public
-
+  public pendingFiles: File[] = [];
+  
+  ToastType: string = '';
   private destroy$ = new Subject<void>();
 
   constructor(
-    // private mediaService: MediaService,
     private commonService: CommonService,
     private cdr: ChangeDetectorRef
   ) {
@@ -63,22 +62,28 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
-    // Only load existing media if recordId is already present on init
     if (this.recordId) {
+      console.log('AttachmentsComponent: ngOnInit - Initial recordId:', this.recordId);
       this.loadExistingMediaIfReady();
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // When recordId input changes or becomes available
-    if (changes['recordId'] && changes['recordId'].currentValue) {
-      this.loadExistingMediaIfReady(); // Load any media for the (new) record
-      this.processPendingUploads(); // Process files that were staged before ID was available
-    } else if (changes['recordId'] && !changes['recordId'].currentValue) {
-      // If recordId becomes null/empty, clear current media items
-      this.mediaItems = [];
-      this.pendingFiles = []; // Also clear pending files if the record is being reset
-      this.cdr.detectChanges();
+    if (changes['recordId']) {
+      const currentRecordId = changes['recordId'].currentValue;
+      const previousRecordId = changes['recordId'].previousValue;
+      if (currentRecordId && currentRecordId !== previousRecordId) {
+        console.log(`AttachmentsComponent: recordId changed from "${previousRecordId}" to "${currentRecordId}". Loading media.`);
+        this.loadExistingMediaIfReady(); 
+        this.processPendingUploads();
+      } 
+      else if (!currentRecordId && previousRecordId) {
+        console.log(`AttachmentsComponent: recordId became empty. Clearing media and pending files.`);
+        this.mediaItems = [];
+        this.pendingFiles = [];
+        this.selectedMediaIds = []; 
+        this.cdr.detectChanges(); 
+      }
     }
   }
 
@@ -88,24 +93,27 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   loadExistingMediaIfReady(): void {
-    if (!this.modelName || !this.recordId) {
-      this.mediaItems = [];
+    if (!this.modelName || !this.recordId || String(this.recordId).trim() === '') {
+      console.warn('AttachmentsComponent: Cannot load media, modelName or recordId is missing or empty.');
+      this.mediaItems = []; 
+      this.selectedMediaIds = []; 
       this.cdr.detectChanges();
       return;
     }
 
+    console.log(`AttachmentsComponent: Calling API to load media for ${this.modelName}/${this.recordId}`);
     this.commonService
       .get(`media/${this.modelName}/${this.recordId}`)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response: any) => {
-          if (response && response.success) {
-            this.mediaItems =
-              response.media.map((media: any) => ({
-                ...media,
-                original_url: media.full_url || media.url,
-                selected: false,
-              })) || [];
+          console.log('AttachmentsComponent: Media API response:', response);
+          if (response && response.success && Array.isArray(response.media)) {
+            this.mediaItems = response.media.map((media: any) => ({
+              ...media,
+              original_url: media.full_url || media.url,
+              selected: false,
+            })) || [];
           } else if (Array.isArray(response)) {
             this.mediaItems = response.map((media: any) => ({
               ...media,
@@ -113,20 +121,24 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
               selected: false,
             }));
           } else {
-            this.mediaItems = [];
+            console.warn('AttachmentsComponent: Unexpected media API response format.', response);
+            this.mediaItems = []; 
           }
-          this.cdr.detectChanges();
+         
+          this.selectedMediaIds = []; 
+          this.cdr.detectChanges(); 
         },
         error: (error) => {
-          console.error('Failed to load existing media:', error);
-          this.mediaItems = [];
+          console.error('AttachmentsComponent: Failed to load existing media:', error);
+          this.mediaItems = []; 
+          this.selectedMediaIds = [];
           this.cdr.detectChanges();
+          this.uploadError.emit('Failed to load existing attachments.'); 
         },
       });
   }
 
   onUploadClick(): void {
-    // Allow clicking even if recordId is missing; files will be staged
     this.fileInput.nativeElement.click();
   }
 
@@ -134,28 +146,26 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
     const input = event.target as HTMLInputElement;
     if (input.files) {
       this.handleIncomingFiles(Array.from(input.files));
-      this.clearFileInput(); // Always clear the input after selection
+      this.clearFileInput(); 
     }
   }
 
   onDragEnter(event: DragEvent): void {
-    event.preventDefault(); // Prevent default to allow drop
+    event.preventDefault(); 
     this.isDragging = true;
   }
 
   onDragOver(event: DragEvent): void {
-    event.preventDefault(); // Prevent default to allow drop
+    event.preventDefault(); 
     this.isDragging = true;
   }
 
   onDragLeave(event: DragEvent): void {
-    // Check if the mouse is leaving the drop zone area
+    
     const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
     if (
-      event.clientX < rect.left ||
-      event.clientX >= rect.right ||
-      event.clientY < rect.top ||
-      event.clientY >= rect.bottom
+      event.clientX < rect.left || event.clientX >= rect.right ||
+      event.clientY < rect.top || event.clientY >= rect.bottom
     ) {
       this.isDragging = false;
     }
@@ -169,11 +179,6 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  /**
-   * Processes incoming files, validating them and either uploading directly
-   * or staging them if the recordId is not yet available.
-   * @param files The File objects to process.
-   */
   private handleIncomingFiles(files: File[]): void {
     if (!this.multiple && files.length > 1) {
       this.uploadError.emit('Only one file can be selected at a time.');
@@ -183,41 +188,47 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
     const validFiles = files.filter((file) => this.validateFile(file));
     if (validFiles.length === 0) {
       if (files.length > 0) {
-        // If some files were attempted but none were valid
-        this.uploadError.emit(
-          'None of the selected files are valid. Check allowed types and sizes.'
-        );
+        this.uploadError.emit('None of the selected files are valid. Check allowed types and sizes.');
       }
       return;
     }
 
-    if (this.recordId) {
-      // If recordId is available, upload immediately
+    
+    if (this.recordId && String(this.recordId).trim() !== '') {
+      console.log('AttachmentsComponent: RecordId available, uploading files directly.');
       validFiles.forEach((file) => this.uploadFile(file));
     } else {
-      // If recordId is not available, stage files
+      console.log('AttachmentsComponent: No RecordId, staging files.');
       this.pendingFiles.push(...validFiles);
-      this.uploadError.emit(
-        'Files will be uploaded after you save the service page.'
-      );
-      this.cdr.detectChanges(); // Update UI to reflect pending files
+      this.uploadError.emit('Files will be uploaded after you save the service page.');
+      this.cdr.detectChanges(); 
     }
   }
 
-  /**
-   * Public method to be called by the parent component (AddServiceComponent)
-   * to trigger uploads of any files that were staged.
-   */
   public processPendingUploads(): void {
-    if (this.recordId && this.pendingFiles.length > 0) {
-      console.log(
-        `AttachmentsComponent: Processing ${this.pendingFiles.length} pending uploads.`
-      );
-      // Take a copy and clear the pending list immediately to prevent re-processing
-      const filesToUpload = [...this.pendingFiles];
-      this.pendingFiles = [];
+    if (this.recordId && String(this.recordId).trim() !== '' && this.pendingFiles.length > 0) {
+      console.log(`AttachmentsComponent: Processing ${this.pendingFiles.length} pending uploads for record ID: ${this.recordId}.`);
+      
+      const filesToUpload = [...this.pendingFiles]; 
+      this.pendingFiles = []; 
 
-      filesToUpload.forEach((file) => this.uploadFile(file));
+      let uploadsInProgress = filesToUpload.length;
+      this.isUploading = true;
+      this.cdr.detectChanges();
+
+      filesToUpload.forEach(file => {
+        this.uploadFile(file).finally(() => {
+          uploadsInProgress--;
+          if (uploadsInProgress === 0) {
+            this.isUploading = false;
+            this.cdr.detectChanges();
+            this.loadExistingMediaIfReady(); 
+          }
+        });
+      });
+    } else if (this.pendingFiles.length > 0) {
+      console.warn('AttachmentsComponent: Cannot process pending uploads without a valid recordId.');
+      this.uploadError.emit('Cannot upload pending files: Service Page ID is not yet available.');
     }
   }
 
@@ -239,55 +250,48 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
     return true;
   }
 
-  uploadFile(file: File): void {
-    if (!this.modelName || !this.recordId) {
-      // This should ideally not happen if handleIncomingFiles and processPendingUploads are used correctly,
-      // but acts as a final safeguard.
-      this.uploadError.emit(
-        'Cannot upload: Model name or record ID is missing.'
-      );
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('model', this.modelName);
-    formData.append('id', this.recordId.toString());
-
-    this.isUploading = true; // Set general uploading state
-    this.cdr.detectChanges();
-
-    this.commonService
-      .post('media/upload', formData, this.api)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (response: any) => {
-          if (response && response.success) {
-            const newMedia = {
-              ...response.media,
-              original_url: response.media.full_url || response.media.url,
-              selected: false,
-            };
-            this.mediaItems.push(newMedia);
-            this.fileUploaded.emit(newMedia);
-          } else {
-            this.uploadError.emit(
-              response?.error || `Upload failed for "${file.name}".`
-            );
-          }
-          // Consider checking if all uploads are complete to set isUploading to false
-          this.isUploading = false; // Reset for simplicity, or manage per-file status
-          this.cdr.detectChanges();
-        },
-        error: (error) => {
-          console.error('Upload error:', error);
-          this.uploadError.emit(
-            `Upload failed for "${file.name}". Please try again.`
-          );
-          this.isUploading = false;
-          this.cdr.detectChanges();
-        },
-      });
+  uploadFile(file: File): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (!this.modelName || !this.recordId || String(this.recordId).trim() === '') {
+        this.uploadError.emit('Cannot upload: Model name or record ID is missing.');
+        reject(new Error('Missing modelName or recordId for upload'));
+        return;
+      }
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('model', this.modelName);
+      formData.append('id', this.recordId.toString());
+      this.commonService
+        .post('media/upload', formData, this.api)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (response: any) => {
+            if (response && response.success) {
+              const newMedia = {
+                ...response.media,
+                original_url: response.media.full_url || response.media.url,
+                selected: false,
+                
+              };
+              if (!this.isUploading) { // If not part of a batch process, add immediately
+                 this.mediaItems.push(newMedia);
+                 this.cdr.detectChanges();
+              }
+              this.fileUploaded.emit(newMedia);
+              console.log(`AttachmentsComponent: File "${file.name}" uploaded successfully.`);
+              resolve();
+            } else {
+              this.uploadError.emit(response?.error || `Upload failed for "${file.name}".`);
+              reject(new Error(response?.error || `Upload failed for "${file.name}"`));
+            }
+          },
+          error: (error) => {
+            console.error('AttachmentsComponent: Upload error:', error);
+            this.uploadError.emit(`Upload failed for "${file.name}". Please try again.`);
+            reject(error);
+          },
+        });
+    });
   }
 
   clearFileInput(): void {
@@ -312,6 +316,7 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   downloadSelected(): void {
+    if (this.selectedMediaIds.length === 0) return;
     this.selectedMediaIds.forEach((mediaId) => {
       const media = this.mediaItems.find((m) => m.id === mediaId);
       if (media) this.downloadMedia(media);
@@ -324,18 +329,15 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   deleteSelected(): void {
-    if (
-      !confirm(
-        `Are you sure you want to delete ${this.selectedMediaIds.length} selected file(s)?`
-      )
-    ) {
+    if (this.selectedMediaIds.length === 0) return;
+
+    if (!confirm(`Are you sure you want to delete ${this.selectedMediaIds.length} selected file(s)?`)) {
       return;
     }
 
-    // Create a copy of selected IDs to iterate over, as selectedMediaIds will change during deletion
-    const idsToDelete = [...this.selectedMediaIds];
-    let deletedCount = 0;
-    const totalToDelete = idsToDelete.length;
+    const idsToDelete = [...this.selectedMediaIds]; 
+    let successfulDeletes = 0;
+    const totalDeletes = idsToDelete.length;
 
     idsToDelete.forEach((mediaId) => {
       this.commonService
@@ -343,25 +345,18 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: () => {
-            // Remove the deleted item from mediaItems locally
             this.mediaItems = this.mediaItems.filter((m) => m.id !== mediaId);
-            // Remove from selectedMediaIds
-            this.selectedMediaIds = this.selectedMediaIds.filter(
-              (id) => id !== mediaId
-            );
-            deletedCount++;
-            this.cdr.detectChanges(); // Update UI after each successful deletion
+            this.selectedMediaIds = this.selectedMediaIds.filter((id) => id !== mediaId); 
+            successfulDeletes++;
+            this.cdr.detectChanges();
 
-            if (deletedCount === totalToDelete) {
-              this.uploadError.emit('Selected file(s) deleted successfully.'); // Generic success message
+            if (successfulDeletes === totalDeletes) {
+              this.uploadError.emit('Selected file(s) deleted successfully.');
             }
           },
           error: (error) => {
-            console.error(`Failed to delete media ${mediaId}:`, error);
-            this.uploadError.emit(
-              `Failed to delete some files. Error deleting ${mediaId}.`
-            );
-            // Even on error, try to update UI for others that might have succeeded
+            console.error(`AttachmentsComponent: Failed to delete media ${mediaId}:`, error);
+            this.uploadError.emit(`Failed to delete file ID ${mediaId}.`);
             this.cdr.detectChanges();
           },
         });
@@ -377,19 +372,16 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe({
         next: (response: any) => {
           this.mediaItems.splice(index, 1);
-          this.selectedMediaIds = this.selectedMediaIds.filter(
-            (id) => id !== mediaId
-          );
-          this.cdr.detectChanges();
+          this.selectedMediaIds = this.selectedMediaIds.filter((id) => id !== mediaId); 
+          this.uploadError.emit('File deleted successfully.');
         },
         error: (error) => {
-          console.error('Delete error:', error);
+          console.error('AttachmentsComponent: Delete error:', error);
           this.uploadError.emit('Failed to delete file.');
         },
       });
   }
 
-  // New: Method to remove a pending file before upload
   removePendingFile(index: number): void {
     if (index >= 0 && index < this.pendingFiles.length) {
       const removedFileName = this.pendingFiles[index].name;
@@ -434,7 +426,8 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
 
   handleImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    img.style.display = 'none';
+    img.style.display = 'none'; 
+   
   }
 
   getFileExtension(filename: string): string {
@@ -451,7 +444,7 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
         const parts = type.split('/');
         return parts.length > 1 ? parts[1].toUpperCase() : type.toUpperCase();
       })
-      .filter((value, index, self) => self.indexOf(value) === index)
+      .filter((value, index, self) => self.indexOf(value) === index) 
       .join(', ');
   }
 
@@ -459,11 +452,7 @@ export class AttachmentsComponent implements OnInit, OnDestroy, OnChanges {
     return media.id;
   }
 
-  // Determines if the upload UI elements should be active.
-  // Uploads are allowed even if recordId is missing, but files will be staged.
   get isUploadAllowed(): boolean {
-    // This getter controls the visual state (e.g., cursor, opacity)
-    // The actual staging/upload logic is within handleIncomingFiles
-    return true; // Always allow users to select files, they will be staged if no ID
+    return true; 
   }
 }

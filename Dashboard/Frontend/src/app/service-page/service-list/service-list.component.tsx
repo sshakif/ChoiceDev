@@ -87,12 +87,6 @@ export class ServiceListComponent implements OnInit {
         hAlign: "Center" as TextAlign,
         width: 70,
       },
-      // {
-      //   Header: "Profile",
-      //   accessor: "image",
-      //   autoResizable: true,
-      //   className: "custom-class-name",
-      // },
       {
         Header: "Title",
         accessor: "title",

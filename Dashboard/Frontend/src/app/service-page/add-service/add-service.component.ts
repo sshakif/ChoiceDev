@@ -57,6 +57,7 @@ export class AddServiceComponent {
   isActive: boolean = false;
 
   Service = new ServicePage().deserialize({});
+  formloading: boolean|undefined;
 
   constructor(
     private commandService: CommonService,
@@ -83,6 +84,8 @@ export class AddServiceComponent {
     if (!this.servicePageId) return;
 
     this.loading = true;
+    this.formloading = true;
+    this.ToastType = 'add';
     this.commandService.get(`ServicePages(${this.servicePageId})`).subscribe({
       next: (response: any) => {
         this.Service = new ServicePage().deserialize(response);
@@ -122,7 +125,8 @@ export class AddServiceComponent {
       next: (response: any) => {
         this.loading = false;
         this.isSuccess = true;
-        this.ToastType = this.servicePageId ? 'updated' : 'created';
+        // this.ToastType = this.servicePageId ? 'updated' : 'created';
+        this.ToastType = 'add';
 
         // Determine if it's a new record creation
         const isNewRecord = !this.servicePageId;

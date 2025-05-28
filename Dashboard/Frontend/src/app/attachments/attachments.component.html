@@ -1,10 +1,7 @@
-<div
-  class="flex justify-between items-center bg-white p-4 shadow-sm rounded-t-lg"
->
+<div class="flex justify-between items-center bg-white p-4 shadow-sm rounded-t-lg">
   <label class="text-base font-semibold text-gray-700">
-    Attachments ({{ mediaItems.length + pendingFiles.length }})
-  </label>
-
+    Attachments ({{ mediaItems.length + pendingFiles.length }}) </label>
+  
   <div class="flex gap-2 items-center">
     <button
       class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
@@ -14,9 +11,7 @@
     >
       <span *ngIf="!isUploading">Upload</span>
       <span *ngIf="isUploading" class="flex items-center gap-2">
-        <div
-          class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"
-        ></div>
+        <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
         Uploading...
       </span>
     </button>
@@ -42,18 +37,19 @@
   </div>
 </div>
 
-<input
-  type="file"
-  hidden
-  #fileInput
+<input 
+  type="file" 
+  hidden 
+  #fileInput 
   (change)="onFilesSelected($event)"
   [multiple]="multiple"
   [accept]="allowedTypes.join(',')"
 />
 
 <div class="attachment-wrapper bg-white border-x border-b rounded-b-lg">
-  <div
-    *ngIf="mediaItems.length === 0 && pendingFiles.length === 0"
+  
+  <div 
+    *ngIf="mediaItems.length === 0 && pendingFiles.length === 0 && !isUploading"
     class="p-8 text-center border-2 border-dashed border-gray-300 rounded-lg m-4 hover:border-blue-400 transition-colors"
     [class.cursor-pointer]="isUploadAllowed"
     [class.pointer-events-none]="!isUploadAllowed"
@@ -66,51 +62,42 @@
     [class.border-blue-400]="isDragging"
     [class.bg-blue-50]="isDragging"
   >
-    <img
-      src="../../assets/img/Uploder.png"
-      alt="Upload files"
+    <img 
+      src="../../assets/img/Uploder.png" 
+      alt="Upload files" 
       class="mx-auto w-20 h-20 mb-4 opacity-60"
     />
     <div class="text-lg font-medium text-gray-700 mb-2">
-      {{ recordId ? "No files uploaded yet" : "Select files or drag and drop" }}
+      {{ recordId ? 'No files uploaded yet' : 'Select files or drag and drop' }}
     </div>
     <div class="text-sm text-gray-500 mb-4">
-      {{
-        recordId
-          ? "Drag and drop files here, or click to browse."
-          : "Files will be staged until you save the service page."
-      }}
+      {{ recordId ? 'Drag and drop files here, or click to browse.' : 'Files will be staged until you save the service page.' }}
     </div>
     <div class="text-xs text-gray-400">
       Supported: {{ getAllowedTypesDisplay() }} | Max: {{ maxFileSize }}KB
     </div>
   </div>
 
-  <div *ngIf="isUploading && pendingFiles.length === 0" class="p-8 text-center">
-    <div
-      class="inline-block w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"
-    ></div>
+  <div *ngIf="isUploading && mediaItems.length === 0 && pendingFiles.length === 0" class="p-8 text-center">
+    <div class="inline-block w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div>
     <div class="text-blue-600 font-medium">Uploading files...</div>
   </div>
 
   <div *ngIf="mediaItems.length > 0 || pendingFiles.length > 0" class="p-4">
     <div class="space-y-3">
-      <div
-        *ngFor="let file of pendingFiles; let i = index"
+      <div 
+        *ngFor="let file of pendingFiles; let i = index;"
         class="flex items-center gap-4 p-3 border rounded-lg bg-yellow-50 border-yellow-300"
         title="This file will be uploaded after you save the service page."
       >
-        <div
-          class="w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center text-yellow-700"
-        >
+        <div class="w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center text-yellow-700">
           <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M4 18h12V6l-4-4H4v16z" />
+            <path d="M4 18h12V6l-4-4H4v16z"/>
           </svg>
         </div>
         <div class="flex-1 min-w-0">
           <div class="font-medium text-gray-900 truncate">
-            {{ file.name }}
-            <span class="text-xs text-yellow-600">(Pending Upload)</span>
+            {{ file.name }} <span class="text-xs text-yellow-600">(Pending Upload)</span>
           </div>
           <div class="text-sm text-gray-500">
             {{ formatFileSize(file.size) }}
@@ -122,23 +109,13 @@
           title="Remove pending file"
           (click)="removePendingFile(i); $event.stopPropagation()"
         >
-          <svg
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
         </button>
       </div>
 
-      <div
+      <div 
         *ngFor="let media of mediaItems; let i = index; trackBy: trackByMediaId"
         class="flex items-center gap-4 p-3 border rounded-lg hover:shadow-md transition-shadow"
         [class.bg-blue-50]="media.selected"
@@ -146,6 +123,7 @@
         [class.border-gray-200]="!media.selected"
         (click)="toggleSelection(media.id)"
       >
+        
         <input
           type="checkbox"
           [checked]="media.selected"
@@ -154,9 +132,7 @@
           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
         />
 
-        <div
-          class="w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center"
-        >
+        <div class="w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
           <img
             *ngIf="isImage(media.mime_type) && media.original_url"
             [src]="media.original_url"
@@ -164,46 +140,14 @@
             class="w-full h-full object-cover"
             (error)="handleImageError($event)"
           />
-
-          <div
-            *ngIf="!isImage(media.mime_type)"
-            class="text-gray-500 text-center flex flex-col items-center justify-center w-full h-full"
-          >
+          
+          <div *ngIf="!isImage(media.mime_type)" class="text-gray-500 text-center flex flex-col items-center justify-center w-full h-full">
             <ng-container [ngSwitch]="getFileIcon(media.mime_type)">
-              <svg
-                *ngSwitchCase="'picture_as_pdf'"
-                class="w-8 h-8 text-red-500"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M19.5 22h-15C3.12 22 2 20.88 2 19.5v-15C2 3.12 3.12 2 4.5 2h15C20.88 2 22 3.12 22 4.5v15c0 1.38-1.12 2.5-2.5 2.5zM12 4.5a.5.5 0 01.5.5v5.5H16l-4 4-4-4h3.5V5a.5.5 0 01.5-.5z"
-                />
-              </svg>
-              <svg
-                *ngSwitchCase="'description'"
-                class="w-8 h-8 text-blue-500"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"
-                />
-              </svg>
-              <svg
-                *ngSwitchDefault
-                class="w-8 h-8 text-gray-500"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M16 2H8C6.9 2 6 2.9 6 4v16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20V4h8l.01 16H8z"
-                />
-              </svg>
+              <svg *ngSwitchCase="'picture_as_pdf'" class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M19.5 22h-15C3.12 22 2 20.88 2 19.5v-15C2 3.12 3.12 2 4.5 2h15C20.88 2 22 3.12 22 4.5v15c0 1.38-1.12 2.5-2.5 2.5zM12 4.5a.5.5 0 01.5.5v5.5H16l-4 4-4-4h3.5V5a.5.5 0 01.5-.5z"/></svg>
+              <svg *ngSwitchCase="'description'" class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
+              <svg *ngSwitchDefault class="w-8 h-8 text-gray-500" fill="currentColor" viewBox="0 0 24 24"><path d="M4 18h12V6l-4-4H4v16z"/></svg>
             </ng-container>
-            <span class="text-xs text-gray-600 mt-1">{{
-              getFileExtension(media.name)
-            }}</span>
+            <span class="text-xs text-gray-600 mt-1">{{ getFileExtension(media.name) }}</span>
           </div>
         </div>
 
@@ -214,9 +158,7 @@
           <div class="text-sm text-gray-500 flex items-center gap-2">
             <span>{{ formatFileSize(media.size) }}</span>
             <span class="text-gray-300">•</span>
-            <span *ngIf="media.created_at">{{
-              formatDate(media.created_at)
-            }}</span>
+            <span *ngIf="media.created_at">{{ formatDate(media.created_at) }}</span>
           </div>
         </div>
 
@@ -227,39 +169,19 @@
             title="Download"
             (click)="downloadMedia(media); $event.stopPropagation()"
           >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
             </svg>
           </button>
-
+          
           <button
             type="button"
             class="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
             title="Delete"
             (click)="deleteMedia(media.id, i); $event.stopPropagation()"
           >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-              />
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
             </svg>
           </button>
         </div>
@@ -276,21 +198,20 @@
     (drop)="onDrop($event)"
   >
     <div class="text-center">
-      <svg
-        class="mx-auto w-12 h-12 text-blue-500 mb-4"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 48 48"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M7 16l3-3m0 0l3 3M10 13v18M21 10h8a4 4 0 014 4v4m-8-4v4m0 0h4"
-        />
+      <svg class="mx-auto w-12 h-12 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 48 48">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l3-3m0 0l3 3M10 13v18M21 10h8a4 4 0 014 4v4m-8-4v4m0 0h4"/>
       </svg>
       <div class="text-lg font-medium text-blue-700">Drop files to add</div>
       <div class="text-sm text-blue-600">Release to upload</div>
     </div>
   </div>
+
 </div>
+
+<div 
+  class="fixed inset-0 pointer-events-none"
+  (dragover)="onDragOver($event)"
+  (dragenter)="onDragEnter($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+></div>
