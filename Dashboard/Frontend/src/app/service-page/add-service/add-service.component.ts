@@ -1,3 +1,4 @@
+// This code remains the same as in your previous submission, it's already correct for the desired flow.
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {
@@ -13,7 +14,6 @@ import {
 import { FormsModule } from '@angular/forms';
 import { ToastMessageComponent } from '@app/components/toast-message/toast-message.component';
 import { CommonService } from '@app/services/common-service/common.service';
-import { MediaItem } from '@app/shared/Model/MediaItem';
 import { ServicePage } from '@app/shared/Model/servicePage';
 import {
   LabelComponent,
@@ -54,9 +54,9 @@ export class AddServiceComponent {
   isSuccess: boolean = false;
   errorMessage: string = '';
   isTabCollapsed = false;
-  isActive: boolean = true;
+  isActive: boolean = false;
 
-  Service = new ServicePage().deserialize({ is_active: true });
+  Service = new ServicePage().deserialize({});
 
   constructor(
     private commandService: CommonService,
@@ -102,53 +102,6 @@ export class AddServiceComponent {
     });
   }
 
-  // insertData(): void {
-  //   if (!this.Service.title || !this.Service.short_description) {
-  //     this.errorMessage = 'Please fill all required fields.';
-  //     return;
-  //   }
-
-  //   this.Service.is_active = this.isActive;
-  //   this.loading = true;
-
-  //   const request = this.servicePageId
-  //     ? this.commandService.put(`ServicePages(${this.servicePageId})`, this.Service.toOdata())
-  //     : this.commandService.post('ServicePages', this.Service.toOdata());
-
-  //   request.subscribe({
-  //     next: (response: any) => {
-  //       console.log(this.servicePageId ? 'Service page updated:' : 'Service page created:', response);
-
-  //       if (!this.servicePageId && response && response.id) {
-  //         this.servicePageId = response.id;
-  //         // Update attachment component with the new service page ID
-  //         if (this.attachmentComponent) {
-  //           this.attachmentComponent.recordId = this.servicePageId.toString();
-  //           this.attachmentComponent.modelName = 'service-page';
-  //           this.attachmentComponent.loadExistingMediaIfReady();
-  //         }
-  //       }
-
-  //       this.loading = false;
-  //       this.isSuccess = true;
-  //       this.ToastType = this.servicePageId ? 'update' : 'add';
-
-  //       setTimeout(() => {
-  //         this.IsOpenToastAlert.emit();
-  //       }, 1000);
-
-  //       this.closeDialog();
-  //     },
-  //     error: (error: any) => {
-  //       this.loading = false;
-  //       this.errorMessage = this.servicePageId
-  //         ? 'An error occurred while updating the service page.'
-  //         : 'An error occurred while creating the service page.';
-  //       console.error(error);
-  //       this.cdr.detectChanges();
-  //     },
-  //   });
-  // }
   insertData(): void {
     if (!this.Service.title || !this.Service.short_description) {
       this.errorMessage = 'Please fill all required fields.';
@@ -167,44 +120,44 @@ export class AddServiceComponent {
 
     request.subscribe({
       next: (response: any) => {
-        console.log(
-          this.servicePageId
-            ? 'Service page updated:'
-            : 'Service page created:',
-          response
-        );
+        this.loading = false;
+        this.isSuccess = true;
+        this.ToastType = this.servicePageId ? 'updated' : 'created';
 
-        if (!this.servicePageId && response && response.id) {
+        // Determine if it's a new record creation
+        const isNewRecord = !this.servicePageId;
+
+        // If it's a new item and we received an ID
+        if (isNewRecord && response?.id) {
           this.servicePageId = response.id;
-          // Update attachment component with the new service page ID
-          if (this.attachmentComponent && this.servicePageId !== null) {
-            this.attachmentComponent.recordId = this.servicePageId.toString();
-            this.attachmentComponent.modelName = 'service-page';
-            this.attachmentComponent.loadExistingMediaIfReady();
+        }
+
+        // Update attachment component with the correct ID and trigger actions
+        if (this.attachmentComponent && this.servicePageId !== null) {
+          this.attachmentComponent.recordId = this.servicePageId.toString();
+          this.attachmentComponent.modelName = 'service-page';
+
+          // Load existing media (important for subsequent edits or if already saved)
+          this.attachmentComponent.loadExistingMediaIfReady();
+
+          // If it was a new record, process any files that were staged before saving
+          if (isNewRecord) {
+            this.attachmentComponent.processPendingUploads();
           }
         }
 
-        this.loading = false;
-        this.isSuccess = true;
-        this.ToastType = this.servicePageId ? 'update' : 'add';
-
-        setTimeout(() => {
-          this.IsOpenToastAlert.emit();
-          26;
-        }, 1000);
-
-        this.closeDialog();
+        this.IsOpenToastAlert.emit();
+        this.cdr.detectChanges();
       },
-      error: (error: any) => {
+      error: (error) => {
         this.loading = false;
-        this.errorMessage = this.servicePageId
-          ? 'An error occurred while updating the service page.'
-          : 'An error occurred while creating the service page.';
+        this.errorMessage = 'Failed to save service page.';
         console.error(error);
         this.cdr.detectChanges();
       },
     });
   }
+
   closeDialog(): void {
     this.isOpen = false;
     this.close.emit();
@@ -212,33 +165,17 @@ export class AddServiceComponent {
 
   resetForm(): void {
     this.Service = new ServicePage().deserialize({ is_active: true });
-    this.isActive = true;
+    this.servicePageId = null; // Important to reset for new creation
     this.errorMessage = '';
+    this.isSuccess = false;
+    this.loading = false;
+    this.isActive = true;
+
+    // Also reset attachment component when the form is reset
     if (this.attachmentComponent) {
-      this.attachmentComponent.mediaItems = [];
-      this.attachmentComponent.selectedMediaIds = [];
-      this.attachmentComponent.recordId = this.servicePageId
-        ? this.servicePageId.toString()
-        : '';
-      this.attachmentComponent.loadExistingMediaIfReady();
+      this.attachmentComponent.recordId = ''; // Clear recordId
+      this.attachmentComponent.loadExistingMediaIfReady(); // This will clear its mediaItems
+      // The pendingFiles are cleared implicitly by ngOnChanges now as recordId becomes ''
     }
-    this.cdr.detectChanges();
-  }
-
-  toggleAction(event: any): void {
-    this.isActive = event.target.checked;
-    this.Service.is_active = this.isActive;
-    this.cdr.detectChanges();
-  }
-
-  onFileUploaded(media: MediaItem): void {
-    console.log('File uploaded:', media);
-    this.cdr.detectChanges();
-  }
-
-  onUploadError(error: string): void {
-    console.error('Upload error:', error);
-    this.errorMessage = error;
-    this.cdr.detectChanges();
   }
 }

@@ -1,8 +1,15 @@
-<ui5-dialog [open]="isOpen" [header-text]="servicePageId ? 'Edit Service' : 'New Service'" class="w-50" state="Information">
+<ui5-dialog
+  [open]="isOpen"
+  [header-text]="servicePageId ? 'Edit Service' : 'New Service'"
+  class="w-50"
+  state="Information"
+>
   <ui5-tabcontainer [collapsed]="isTabCollapsed">
     <ui5-tab text="Info" selected>
       <ui5-bar slot="header" design="Header">
-        <ui5-title level="H5" slot="startContent">{{ servicePageId ? 'Edit Service' : 'New Service' }}</ui5-title>
+        <ui5-title level="H5" slot="startContent">{{
+          servicePageId ? "Edit Service" : "New Service"
+        }}</ui5-title>
         <ui5-button
           class="dialogCloser"
           design="Transparent"
@@ -30,7 +37,6 @@
                 accessible-name="graphical"
                 design="Graphical"
                 [checked]="isActive"
-                (change)="toggleAction($event)"
               ></ui5-switch>
             </div>
 
@@ -95,21 +101,25 @@
         #attachmentComponent
         [modelName]="'service-page'"
         [recordId]="servicePageId ? servicePageId.toString() : ''"
-        [allowedTypes]="['image/jpeg', 'image/png', 'image/webp', 'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']"
+        [allowedTypes]="[
+          'image/jpeg',
+          'image/png',
+          'image/webp',
+          'application/pdf',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ]"
         [maxFileSize]="2048"
         [multiple]="true"
-        (fileUploaded)="onFileUploaded($event)"
-        (uploadError)="onUploadError($event)"
       ></app-attachments>
 
-      <ui5-message-strip
+      <!-- <ui5-message-strip
         class="w-100 mt-3"
         design="Information"
         *ngIf="!servicePageId"
       >
         <ui5-icon name="information" slot="icon"></ui5-icon>
         Please save the service page first before uploading attachments.
-      </ui5-message-strip>
+      </ui5-message-strip> -->
     </ui5-tab>
   </ui5-tabcontainer>
 

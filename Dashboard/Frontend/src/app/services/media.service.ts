@@ -28,18 +28,18 @@
 //   }
 // }
 
-import { Injectable } from '@angular/core';
+// import { Injectable } from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
-export class MediaService {
-  constructor() {}
+// @Injectable({ providedIn: 'root' })
+// export class MediaService {
+//   constructor() {}
 
-  prepareFormData(file: File, model: string, id: string | number): FormData {
-    const formData = new FormData();
-    formData.append('model_type', model);
-    formData.append('model_id', id.toString());
-    formData.append('file', file);
-    return formData;
-  }
+//   prepareFormData(file: File, model: string, id: string | number): FormData {
+//     const formData = new FormData();
+//     formData.append('model_type', model);
+//     formData.append('model_id', id.toString());
+//     formData.append('file', file);
+//     return formData;
+//   }
   
-}
+// }
