@@ -113,12 +113,18 @@ export class EmployeeListComponent implements OnInit {
         autoResizable: true,
         className: 'custom-class-name',
       },
-      // {
-      //   Header: 'designation',
-      //   accessor: 'designation',
-      //   autoResizable: true,
-      //   className: 'custom-class-name',
-      // },
+      {
+        Header: 'Birth Date',
+        accessor: 'date_of_birth',
+        autoResizable: true,
+        className: 'custom-class-name',
+      },
+      {
+        Header: 'Title',
+        accessor: 'title',
+        autoResizable: true,
+        className: 'custom-class-name',
+      },
       //  {
       //   Header: 'department',
       //   accessor: 'department',

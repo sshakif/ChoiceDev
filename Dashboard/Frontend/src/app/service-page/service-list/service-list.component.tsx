@@ -68,7 +68,7 @@ export class ServiceListComponent implements OnInit {
     this.tableColum();
   }
   ngOnInit(): void {
-    console.log(this.selectedServiceData)
+    console.log(this.selectedServiceData);
   }
 
   tableColum() {
@@ -108,6 +108,12 @@ export class ServiceListComponent implements OnInit {
       {
         Header: "Long Description",
         accessor: "long_description",
+        autoResizable: true,
+        className: "custom-class-name",
+      },
+      {
+        Header: "Media",
+        accessor: "media",
         autoResizable: true,
         className: "custom-class-name",
       },
@@ -184,14 +190,12 @@ export class ServiceListComponent implements OnInit {
     return columns;
   }
 
-
   handleInsertData(isInsert: boolean): void {
     console.log("Received isInsertData:", isInsert);
     if (isInsert) {
       this.isInsert = isInsert;
     }
   }
-
 
   deleteItemConfirm() {
     this.isDeleteLoading = true;
@@ -215,8 +219,8 @@ export class ServiceListComponent implements OnInit {
       },
     });
   }
-//  list Icon Show 
-editService(original: any) {
+  //  list Icon Show
+  editService(original: any) {
     this.isEdit = true;
     this.selectedServiceId = original.id;
     this.selectedServiceData = { ...original };
@@ -237,7 +241,7 @@ editService(original: any) {
     this.isInsert = false;
     this.refreshTable.emit();
   }
-  
+
   closeEditServiceModal() {
     this.isEdit = false;
   }

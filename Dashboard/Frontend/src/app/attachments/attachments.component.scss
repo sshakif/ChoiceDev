@@ -1,0 +1,30 @@
+.attachment-wrapper {
+  position: relative;
+  
+  .space-y-3 > div {
+    &:hover .opacity-0 {
+      opacity: 1;
+    }
+  }
+}
+
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+
+// Smooth transitions
+.transition-all {
+  transition: all 0.2s ease-in-out;
+}
+
+.transition-colors {
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.transition-opacity {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.transition-shadow {
+  transition: box-shadow 0.2s ease-in-out;
+}

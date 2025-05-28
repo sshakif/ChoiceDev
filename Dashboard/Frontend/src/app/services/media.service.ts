@@ -2,86 +2,44 @@
 // import { Injectable } from '@angular/core';
 // import { Observable } from 'rxjs';
 
-// export interface MediaItem {
-//   id: number;
-//   name: string;
-//   file_name: string;
-//   mime_type: string;
-//   size: number;
-//   collection_name: string;
-//   original_url: string;
-//   created_at: string;
-// }
-
 // @Injectable({ providedIn: 'root' })
 // export class MediaService {
-//   private baseUrl = '/api/media';
+//   private apiUrl = 'http://localhost:8000/api';
 
 //   constructor(private http: HttpClient) {}
 
-//   getMedia(model: string, id: number): Observable<MediaItem[]> {
-//     return this.http.get<MediaItem[]>(`${this.baseUrl}/${model}/${id}`);
-//   }
+// getMedia(model: string, id: string | number): Observable<any> {
+//   console.log(`Fetching media for model: ${model}, id: ${id}`);
+//   return this.http.get(`${this.apiUrl}/media/${model}/${id}`);
+// }
 
-//   uploadMedia(
-//     model: string,
-//     id: number,
-//     file: File,
-//     collectionName: string = 'default'
-//   ): Observable<MediaItem> {
+//   uploadFile(file: File, model: string, id: string | number): Observable<any> {
 //     const formData = new FormData();
-//     formData.append('file', file);
-//     formData.append('collection_name', collectionName);
+//   formData.append('model_type', 'Post');
+//   formData.append('model_id', '1');
+//   formData.append('file', file);
 
-//     return this.http.post<MediaItem>(`${this.baseUrl}/${model}/${id}`, formData);
-//   }
+//   this.http.post('http://127.0.0.1:8000/api/media/upload', formData)
+//     .subscribe(response => {
+//       console.log('Upload success:', response);
+//     });
 
-//   deleteMedia(mediaId: number): Observable<void> {
-//     return this.http.delete<void>(`${this.baseUrl}/item/${mediaId}`);
+//   return this.http.post(`${this.apiUrl}/media/upload`, formData);
 //   }
 // }
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { MediaItem } from '.././shared/Model/MediaItem';
-import { CommonService } from '../services/common-service/common.service';
 
 @Injectable({ providedIn: 'root' })
 export class MediaService {
-  private baseUrl = 'media';
+  constructor() {}
 
-  constructor(private commonService: CommonService) {}
-
-  getMedia(model: string, id: number): Observable<MediaItem[]> {
-    return this.commonService.get<MediaItem[]>(
-      `${this.baseUrl}/${model}/${id}`,
-      false
-    );
-  }
-
-  uploadMedia(
-    model: string,
-    id: number,
-    file: File,
-    collectionName: string = 'default'
-  ): Observable<MediaItem> {
+  prepareFormData(file: File, model: string, id: string | number): FormData {
     const formData = new FormData();
+    formData.append('model_type', model);
+    formData.append('model_id', id.toString());
     formData.append('file', file);
-    formData.append('collection_name', collectionName);
-
-    return this.commonService.post<MediaItem>(
-      `${this.baseUrl}/${model}/${id}`,
-      formData,
-      false,
-      undefined,
-      'json'
-    );
+    return formData;
   }
-
-  deleteMedia(mediaId: number): Observable<void> {
-    return this.commonService.delete<void>(
-      `${this.baseUrl}/item/${mediaId}`,
-      false
-    );
-  }
+  
 }

@@ -1,58 +1,197 @@
-<div class="attachment-wrapper p-4 border rounded shadow-sm max-w-md mx-auto">
-  <!-- Upload Button -->
-  <button class="btn-upload px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-    (click)="onUploadClick()"
-  >
-    Upload
-  </button>
+<!-- Header Area -->
+<div class="flex justify-between items-center bg-white p-4 shadow-sm rounded-t-lg">
+  <label class="text-base font-semibold text-gray-700">
+    Attachments ({{ mediaItems.length }})
+  </label>
+  
+  <div class="flex gap-2 items-center">
+    <button
+      class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+      title="Upload files"
+      [disabled]="isUploading || !isUploadAllowed"
+      (click)="onUploadClick()"
+    >
+      <span *ngIf="!isUploading">Upload</span>
+      <span *ngIf="isUploading" class="flex items-center gap-2">
+        <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+        Uploading...
+      </span>
+    </button>
 
-  <!-- Hidden File Input -->
-  <input type="file" hidden #fileInput (change)="onFilesSelected($event)" />
-
-  <!-- Media List -->
-  <ul class="media-list mt-4 space-y-3">
-    <li *ngFor="let media of mediaItems; let i = index" class="media-item flex items-center gap-4 border p-2 rounded">
-      <div class="media-preview w-12 h-12 flex-shrink-0">
-        <img
-          *ngIf="media.mime_type.startsWith('image/')"
-          [src]="media.original_url"
-          alt="{{ media.name }}"
-          class="w-full h-full object-cover rounded"
-        />
-        <ui5-icon
-          *ngIf="!media.mime_type.startsWith('image/')"
-          name="document"
-          style="font-size: 32px; color: gray;"
-        ></ui5-icon>
-      </div>
-
-      <div class="media-info flex-1">
-        <span class="block font-semibold truncate" title="{{ media.name }}">{{ media.name }}</span>
-      </div>
-
-      <div class="media-actions flex gap-2">
-        <button
-          class="btn-download px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
-          (click)="downloadMedia(media)"
-          title="Download"
-        >
-          Download
-        </button>
-        <button
-          class="btn-delete px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
-          (click)="deleteMedia(media.id, i)"
-          title="Delete"
-        >
-          Delete
-        </button>
-      </div>
-    </li>
-  </ul>
-
-  <!-- Empty state -->
-  <div *ngIf="mediaItems.length === 0" class="text-center text-gray-500 mt-8">
-    <img src="../../assets/img/Uploder.png" alt="No files" class="mx-auto w-24 mb-4" />
-    <div class="text-lg font-medium">No files found</div>
-    <div class="text-sm">Drop files to upload, or use the Upload button.</div>
+    <button
+      class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+      title="Download selected files"
+      [disabled]="selectedMediaIds.length === 0"
+      (click)="downloadSelected()"
+    >
+      Download ({{ selectedMediaIds.length }})
+    </button>
   </div>
 </div>
+
+<!-- Hidden File Input -->
+<input 
+  type="file" 
+  hidden 
+  #fileInput 
+  (change)="onFilesSelected($event)"
+  [multiple]="multiple"
+  [accept]="allowedTypes.join(',')"
+/>
+
+<!-- Main Content Area -->
+<div class="attachment-wrapper bg-white border-x border-b rounded-b-lg">
+  
+  <!-- Drag and Drop Zone (when no files) -->
+  <div 
+    *ngIf="mediaItems.length === 0 && !isUploading"
+    class="p-8 text-center border-2 border-dashed border-gray-300 rounded-lg m-4 hover:border-blue-400 transition-colors"
+    [class.cursor-pointer]="isUploadAllowed"
+    [class.pointer-events-none]="!isUploadAllowed"
+    [class.opacity-50]="!isUploadAllowed"
+    (click)="onUploadClick()"
+    (dragover)="onDragOver($event)"
+    (dragenter)="onDragEnter($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+    [class.border-blue-400]="isDragging && isUploadAllowed"
+    [class.bg-blue-50]="isDragging && isUploadAllowed"
+  >
+    <img 
+      src="../../assets/img/Uploder.png" 
+      alt="Upload files" 
+      class="mx-auto w-20 h-20 mb-4 opacity-60"
+    />
+    <div class="text-lg font-medium text-gray-700 mb-2">
+      {{ isUploadAllowed ? 'No files uploaded' : 'Please save the service page first' }}
+    </div>
+    <div class="text-sm text-gray-500 mb-4">
+      {{ isUploadAllowed ? 'Drag and drop files here, or click to browse' : 'Uploads disabled until service page is saved' }}
+    </div>
+    <div class="text-xs text-gray-400">
+      Supported: {{ getAllowedTypesDisplay() }} | Max: {{ maxFileSize }}KB
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isUploading" class="p-8 text-center">
+    <div class="inline-block w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div>
+    <div class="text-blue-600 font-medium">Uploading files...</div>
+  </div>
+
+  <!-- Media List -->
+  <div *ngIf="mediaItems.length > 0" class="p-4">
+    <div class="space-y-3">
+      <div 
+        *ngFor="let media of mediaItems; let i = index; trackBy: trackByMediaId"
+        class="flex items-center gap-4 p-3 border rounded-lg hover:shadow-md transition-shadow cursor-pointer"
+        [class.bg-blue-50]="media.selected"
+        [class.border-blue-300]="media.selected"
+        [class.border-gray-200]="!media.selected"
+        (click)="toggleSelection(media.id)"
+      >
+        
+        <!-- Selection Checkbox -->
+        <input
+          type="checkbox"
+          [checked]="media.selected"
+          (click)="$event.stopPropagation()"
+          (change)="toggleSelection(media.id)"
+          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+        />
+
+        <!-- Media Preview -->
+        <div class="w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+          <img
+            *ngIf="isImage(media.mime_type)"
+            [src]="media.original_url"
+            [alt]="media.name"
+            class="w-full h-full object-cover"
+            (error)="handleImageError($event)"
+          />
+          
+          <!-- File Type Icons for Non-Images -->
+          <div *ngIf="!isImage(media.mime_type)" class="text-gray-500 text-center">
+            <!-- PDF Icon -->
+            <svg *ngIf="media.mime_type === 'application/pdf'" class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M4 18h12V6l-4-4H4v16z"/>
+              <text x="10" y="14" text-anchor="middle" class="text-xs font-bold fill-white">PDF</text>
+            </svg>
+            
+            <!-- Word Document Icon -->
+            <svg *ngIf="media.mime_type.includes('document') || media.mime_type.includes('word')" class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M4 18h12V6l-4-4H4v16z"/>
+              <text x="10" y="14" text-anchor="middle" class="text-xs font-bold fill-white">DOC</text>
+            </svg>
+            
+            <!-- Generic File Icon -->
+            <svg *ngIf="!media.mime_type.includes('pdf') && !media.mime_type.includes('document') && !media.mime_type.includes('word')" class="w-8 h-8 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M4 18h12V6l-4-4H4v16z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- File Information -->
+        <div class="flex-1 min-w-0">
+          <div class="font-medium text-gray-900 truncate" [title]="media.name">
+            {{ media.name }}
+          </div>
+          <div class="text-sm text-gray-500 flex items-center gap-2">
+            <span>{{ formatFileSize(media.size) }}</span>
+            <span class="text-gray-300">•</span>
+            <span *ngIf="media.created_at">{{ formatDate(media.created_at) }}</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <button
+            type="button"
+            class="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+            title="Download"
+            (click)="downloadMedia(media); $event.stopPropagation()"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+          </button>
+          
+          <button
+            type="button"
+            class="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+            title="Delete"
+            (click)="deleteMedia(media.id, i); $event.stopPropagation()"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drag and Drop Overlay (when files exist) -->
+  <div
+    *ngIf="isDragging && isUploadAllowed && mediaItems.length > 0"
+    class="absolute inset-0 bg-blue-50 bg-opacity-90 border-2 border-dashed border-blue-400 rounded-lg flex items-center justify-center z-50 m-4"
+  >
+    <div class="text-center">
+      <svg class="mx-auto w-12 h-12 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 48 48">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l3-3m0 0l3 3M10 13v18M21 10h8a4 4 0 014 4v4m-8-4v4m0 0h4"/>
+      </svg>
+      <div class="text-lg font-medium text-blue-700">Drop files to add</div>
+      <div class="text-sm text-blue-600">Release to upload</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Drag and Drop Event Handlers (Global) -->
+<div 
+  class="fixed inset-0 pointer-events-none"
+  (dragover)="onDragOver($event)"
+  (dragenter)="onDragEnter($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+></div>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaController extends Controller
 {
@@ -36,6 +37,7 @@ class MediaController extends Controller
                     'id' => $media->id,
                     'url' => $media->getUrl(),
                     'full_url' => $media->getFullUrl(),
+                    'original_url' => $media->getFullUrl(),
                     'name' => $media->name,
                     'file_name' => $media->file_name,
                     'mime_type' => $media->mime_type,
@@ -75,6 +77,7 @@ class MediaController extends Controller
                         'id' => $media->id,
                         'url' => $media->getUrl(),
                         'full_url' => $media->getFullUrl(),
+                        'original_url' => $media->getFullUrl(),
                         'name' => $media->name,
                         'file_name' => $media->file_name,
                         'mime_type' => $media->mime_type,
@@ -90,12 +93,32 @@ class MediaController extends Controller
         }
     }
 
+    public function delete($id): JsonResponse
+    {
+        try {
+            $media = Media::findOrFail($id);
+            
+            // Delete the media file and database record
+            $media->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Media deleted successfully'
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['success' => false, 'error' => 'Media not found'], 404);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => 'Failed to delete media', 'message' => $e->getMessage()], 500);
+        }
+    }
+
     private function getModelClass($model): ?string
     {
         $map = [
             'user' => \App\Models\User::class,
             'service-page' => \App\Models\ServicePage::class,
             'employee' => \App\Models\Employee::class,
+            'faq' => \App\Models\Faq::class,
         ];
         return $map[$model] ?? null;
     }

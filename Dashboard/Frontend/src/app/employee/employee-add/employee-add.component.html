@@ -185,20 +185,25 @@
     <ui5-tab text="Others">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
         <!-- Department Dropdown -->
-        <!-- <div>
+        <div>
           <ui5-label
             show-colon
-            required
             class="block text-sm font-medium text-gray-700 mb-1"
           >
-            Department
+            Service Title
           </ui5-label>
-          <ui5-select class="w-full" required [(ngModel)]="employees.department">
-            <ui5-option *ngFor="let dept of departmentList" [value]="dept">{{
-              dept
-            }}</ui5-option>
+
+          <!-- Bind selected value to selectedServiceId -->
+          <ui5-select
+            class="w-full"
+            [(ngModel)]="selectedServiceId"
+            (change)="onServiceChange($event)"
+          >
+            <ui5-option *ngFor="let s of serviceslist" [value]="s.id">
+              {{ s.title }}
+            </ui5-option>
           </ui5-select>
-        </div> -->
+        </div>
 
         <!-- Designation Dropdown
         <div>

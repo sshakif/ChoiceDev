@@ -2,12 +2,12 @@ import { Deserializable } from '../interfaces/deserializable';
 
 export class Employee implements Deserializable {
   id?: number;
-  first_name: string = '';
+  first_name?: string = '';
   last_name?: string;
   email?: string = '';
   phone?: string;
   // designation?: string;
-  // department?: string;
+  title?: string;
   date_of_birth?: string;
   joining_date?: string;
   salary?: number;

@@ -28,9 +28,11 @@ class AppServiceProvider extends ServiceProvider
                 // ✅ Step 1: Discover the Eloquent models FIRST
                 Lodata::discover(ServicePage::class); // Must be first
                 Lodata::discover(Employee::class);
+                Lodata::discover(Faq::class);
+
 
                 // ✅ Step 2: Now define relationships AFTER discovery
-                // Lodata::getEntitySet('ServicePage')->discoverRelationship('employee'); // lowercase
+                //Lodata::getEntitySet('ServicePage')->discoverRelationship('employee'); // lowercase
                 // Lodata::getEntitySet('Employee')->discoverRelationship('servicePage'); // lowercase
             }
 

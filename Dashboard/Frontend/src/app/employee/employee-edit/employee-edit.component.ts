@@ -119,6 +119,6 @@ populateData(): void {
     event.stopPropagation();
     this.errorMessage = '';
   }
-   departmentList: string[] = ['Select','IT', 'HR', 'Finance', 'Marketing'];
-    designationList: string[] = ['Select','Manager', 'Developer', 'Analyst', 'Support'];
+  //  departmentList: string[] = ['Select','IT', 'HR', 'Finance', 'Marketing'];
+  //   designationList: string[] = ['Select','Manager', 'Developer', 'Analyst', 'Support'];
 }
