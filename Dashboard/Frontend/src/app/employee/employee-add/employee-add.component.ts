@@ -94,34 +94,7 @@ export class EmployeeAddComponent {
   //   );
   // }
 
-// insertData() {
-//   if (!this.employee.first_name || !this.employee.email) {
-//     this.errorMessage = 'Please fill all the fields.';
-//     return;
-//   }
 
-//   this.loading = true;
-//   this.commandService.post('Employees', this.employee.toOdata).subscribe(
-//     (response: any) => {
-//       console.log('response', response);
-//       this.loading = false;
-//       this.isSuccess = true;
-//       this.ToastType = 'add';
-
-//       setTimeout(() => {
-//         this.IsOpenToastAlert.emit();
-//         // ✅ Only close when submission is confirmed
-//         this.resetForm();
-//         this.closeDialog(); 
-//       }, 1000);
-//     },
-//     (error: any) => {
-//       this.loading = false;
-//       this.errorMessage = 'An error occurred while submitting the data.';
-//       console.error(error);
-//     }
-//   );
-// }
 insertData(): void {
   // 1. Validate required fields
   if (!this.employee.first_name || !this.employee.email) {

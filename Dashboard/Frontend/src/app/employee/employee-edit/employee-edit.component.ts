@@ -10,7 +10,6 @@ import {
 import { FormsModule } from '@angular/forms';
 import { ToastMessageComponent } from '@app/components/toast-message/toast-message.component';
 import { Employee } from '@app/shared/Model/employee';
-import { Faq } from '@app/shared/Model/faq';
 import { LabelComponent, TextAreaComponent, Ui5MainModule } from '@ui5/webcomponents-ngx';
 import { CommonService, } from 'app/services/common-service/common.service';
 
@@ -101,7 +100,7 @@ populateData(): void {
       error: (error) => {
         this.formloading = false;
         this.isEditError = true;
-        this.errorMessage = error.error?.message || 'Error updating FAQ';
+        this.errorMessage = error.error?.message || 'Error updating Employee';
       },
     });
   }

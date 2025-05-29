@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Support\Facades\Log;
 
 class MediaController extends Controller
 {
@@ -95,19 +96,25 @@ class MediaController extends Controller
 
     public function delete($id): JsonResponse
     {
+        Log::info("Attempting to delete media with ID: {$id}"); // Log the ID received
+
         try {
             $media = Media::findOrFail($id);
-            
+            Log::info("Media found: {$media->id}, Path: {$media->getPath()}"); // Log media details and path
+
             // Delete the media file and database record
             $media->delete();
+            Log::info("Media ID {$id} deleted successfully."); // Log success
 
             return response()->json([
                 'success' => true,
                 'message' => 'Media deleted successfully'
             ]);
         } catch (ModelNotFoundException $e) {
+            Log::warning("Media not found for ID: {$id}"); // Log if not found
             return response()->json(['success' => false, 'error' => 'Media not found'], 404);
         } catch (\Exception $e) {
+            Log::error("Failed to delete media ID {$id}: " . $e->getMessage()); // Log detailed error
             return response()->json(['success' => false, 'error' => 'Failed to delete media', 'message' => $e->getMessage()], 500);
         }
     }

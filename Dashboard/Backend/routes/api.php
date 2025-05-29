@@ -50,3 +50,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/media/upload', [MediaController::class, 'upload']);
 Route::get('/media/{model}/{id}', [MediaController::class, 'get']);
+Route::delete('media/{id}', [MediaController::class, 'delete']);

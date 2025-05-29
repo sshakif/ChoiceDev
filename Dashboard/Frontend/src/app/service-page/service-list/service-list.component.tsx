@@ -14,9 +14,11 @@ import { AddServiceComponent } from "@app/service-page/add-service/add-service.c
 import { EditServiceComponent } from "@app/service-page/edit-service/edit-service.component";
 import { ServiceDetailsComponent } from "@app/service-page/service-details/service-details.component";
 import { ServicePage } from "@app/shared/Model/servicePage";
-import { Button, Icon, TextAlign } from "@ui5/webcomponents-react";
+import { Button, Icon, TextAlign } from "@ui5/webcomponents-react"; // Make sure Icon is imported
 import React from "react";
 import { CommonService } from "../../services/common-service/common.service";
+
+
 @Component({
   selector: "app-service-list",
   standalone: true,
@@ -37,7 +39,6 @@ export class ServiceListComponent implements OnInit {
   @Output() refreshTable: EventEmitter<void> = new EventEmitter<void>();
   @Output() IsOpenToastAlert = new EventEmitter<void>();
   ToastType: string = "";
-  totalFaqs: number = 0;
   itemsPerPage: number;
   currentPage = 1;
   odata: boolean;
@@ -106,10 +107,37 @@ export class ServiceListComponent implements OnInit {
         className: "custom-class-name",
       },
       {
-        Header: "Media",
-        accessor: "media",
+        Header: "Media", 
+        accessor: "media", 
         autoResizable: true,
         className: "custom-class-name",
+        hAlign: "Center" as TextAlign,
+        width: 120,
+        Cell: ({ value }: { value: any[] }) => {
+          if (!value || value.length === 0) {
+            return React.createElement("span", null, "No Media");
+          }
+
+          const firstImage = value.find((item) => item.mime_type?.startsWith("image/"));
+
+          return React.createElement(
+            "div",
+            { style: { display: "flex", alignItems: "center", gap: "8px" } },
+            firstImage
+              ? React.createElement("img", {
+                  src: firstImage.full_url || firstImage.url,
+                  alt: firstImage.name,
+                  style: {
+                    width: "30px",
+                    height: "30px",
+                    objectFit: "cover",
+                    borderRadius: "4px",
+                  },
+                })
+              : React.createElement(Icon, { name: "attachment" }), 
+            React.createElement("span", null, `${value.length} files`)
+          );
+        },
       },
       {
         Header: "Active",
@@ -121,7 +149,7 @@ export class ServiceListComponent implements OnInit {
         width: 100,
         hAlign: "Center" as TextAlign,
         Cell: ({ value }: any) =>
-          value ? <Icon name="accept" /> : <Icon name="decline" />,
+          value ? React.createElement(Icon, { name: "accept" }) : React.createElement(Icon, { name: "decline" }),
       },
       {
         Header: "Created At",
@@ -153,32 +181,32 @@ export class ServiceListComponent implements OnInit {
         className: "custom-class-name",
         width: 150,
         hAlign: "Center" as TextAlign,
-        Cell: ({ row }: any) => (
-          <div>
-            <Button
-              icon="edit"
-              design="Transparent"
-              onClick={() => {
+        Cell: ({ row }: any) =>
+          React.createElement(
+            "div",
+            null,
+            React.createElement(Button, {
+              icon: "edit",
+              design: "Transparent",
+              onClick: () => {
                 this.editService(row.original);
-              }}
-            />
-            <Button
-              icon="information"
-              design="Transparent"
-              onClick={() => {
+              },
+            }),
+            React.createElement(Button, {
+              icon: "information",
+              design: "Transparent",
+              onClick: () => {
                 this.DetailsService(row.original);
-              }}
-            ></Button>
-
-            <Button
-              icon="delete"
-              design="Transparent"
-              onClick={() => {
+              },
+            }),
+            React.createElement(Button, {
+              icon: "delete",
+              design: "Transparent",
+              onClick: () => {
                 this.deleteService(row.original);
-              }}
-            ></Button>
-          </div>
-        ),
+              },
+            })
+          ),
       },
     ];
     return columns;
@@ -194,7 +222,7 @@ export class ServiceListComponent implements OnInit {
   deleteItemConfirm() {
     this.isDeleteLoading = true;
     const id = this.selectedServiceId;
-    this.commonService.delete(`Faqs/${id}`, this.odata).subscribe({
+    this.commonService.delete(`ServicePages/${id}`, this.odata).subscribe({
       next: (response: any) => {
         this.isDeleteOpen = false;
         this.isDeleteLoading = false;
