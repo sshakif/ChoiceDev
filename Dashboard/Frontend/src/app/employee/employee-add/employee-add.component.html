@@ -185,16 +185,16 @@
     <ui5-tab text="Others">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
         <!-- Department Dropdown -->
-        <div>
+        <!-- <div>
           <ui5-label
             show-colon
             class="block text-sm font-medium text-gray-700 mb-1"
           >
             Service Title
-          </ui5-label>
+          </ui5-label> -->
 
-          <!-- Bind selected value to selectedServiceId -->
-          <ui5-select
+        <!-- Bind selected value to selectedServiceId -->
+        <!-- <ui5-select
             class="w-full"
             [(ngModel)]="selectedServiceId"
             (change)="onServiceChange($event)"
@@ -203,7 +203,7 @@
               {{ s.title }}
             </ui5-option>
           </ui5-select>
-        </div>
+        </div> -->
 
         <!-- Designation Dropdown
         <div>
@@ -276,9 +276,22 @@
       </div>
     </ui5-tab>
 
-    <!-- Attachments File Uploder Start  -->
+    <!-- Attachments File Uploader Tab -->
     <ui5-tab separator text="Attachments">
-      <app-attachments></app-attachments>
+      <app-attachments
+        #attachmentComponent
+        [modelName]="'employee'"
+        [recordId]="employeeId ? employeeId.toString() : ''"
+        [allowedTypes]="[
+          'image/jpeg',
+          'image/png',
+          'image/webp',
+          'application/pdf',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ]"
+        [maxFileSize]="2048"
+        [multiple]="true"
+      ></app-attachments>
     </ui5-tab>
   </ui5-tabcontainer>
   <ui5-toolbar slot="footer">

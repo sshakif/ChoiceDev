@@ -85,11 +85,12 @@ export class AddServiceComponent {
 
     this.loading = true;
     this.formloading = true;
-    this.ToastType = 'add';
+  
     this.commandService.get(`ServicePages(${this.servicePageId})`).subscribe({
       next: (response: any) => {
         this.Service = new ServicePage().deserialize(response);
         this.isActive = this.Service.is_active;
+        this.ToastType = 'add';
         this.attachmentComponent.recordId = this.servicePageId!.toString();
         this.attachmentComponent.modelName = 'service-page';
         this.attachmentComponent.loadExistingMediaIfReady();
@@ -115,8 +116,7 @@ export class AddServiceComponent {
     this.loading = true;
 
     const request = this.servicePageId
-      ? this.commandService.put(
-          `ServicePages(${this.servicePageId})`,
+      ? this.commandService.put(`ServicePages(${this.servicePageId})`,
           this.Service.toOdata()
         )
       : this.commandService.post('ServicePages', this.Service.toOdata());

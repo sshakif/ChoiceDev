@@ -8,6 +8,7 @@ import {
   Input,
   Output,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToastMessageComponent } from '@app/components/toast-message/toast-message.component';
@@ -44,8 +45,10 @@ import { AttachmentsComponent } from '../../attachments/attachments.component';
 })
 export class EmployeeAddComponent {
   @Input() isOpen: boolean | null = null;
+  @Input() employeeId: number | null = null; // Input for editing existing service page
   @Output() close = new EventEmitter<void>();
   @Output() IsOpenToastAlert = new EventEmitter<void>();
+  @ViewChild(AttachmentsComponent) attachmentComponent!: AttachmentsComponent;
 
   ToastType: string = '';
   loading: boolean = false;
@@ -73,53 +76,104 @@ export class EmployeeAddComponent {
 
   ngOnInit(): void {
     // this.isOpen = true; //model open
-    this.getServicesList(); // Load services list on initialization
+    // this.getServicesList(); // Load services list on initialization
   }
 
   // Inside your component or service
-  getServicesList(): void {
-    this.commandService.get('ServicePages').subscribe(
-      (response: any) => {
-        console.log('Services list response:', response);
-        this.serviceslist = response.value // or response, depends on your API structure
-        console.log(response.time);
-        console.log('Services loaded:', this.serviceslist);
-      },
-      (error) => {
-        console.error('Failed to load services list:', error);
-      }
-    );
-  }
+  // getServicesList(): void {
+  //   this.commandService.get('ServicePages').subscribe(
+  //     (response: any) => {
+  //       console.log('Services list response:', response);
+  //       this.serviceslist = response.value // or response, depends on your API structure
+  //       console.log(response.time);
+  //       console.log('Services loaded:', this.serviceslist);
+  //     },
+  //     (error) => {
+  //       console.error('Failed to load services list:', error);
+  //     }
+  //   );
+  // }
 
-insertData() {
+// insertData() {
+//   if (!this.employee.first_name || !this.employee.email) {
+//     this.errorMessage = 'Please fill all the fields.';
+//     return;
+//   }
+
+//   this.loading = true;
+//   this.commandService.post('Employees', this.employee.toOdata).subscribe(
+//     (response: any) => {
+//       console.log('response', response);
+//       this.loading = false;
+//       this.isSuccess = true;
+//       this.ToastType = 'add';
+
+//       setTimeout(() => {
+//         this.IsOpenToastAlert.emit();
+//         // ✅ Only close when submission is confirmed
+//         this.resetForm();
+//         this.closeDialog(); 
+//       }, 1000);
+//     },
+//     (error: any) => {
+//       this.loading = false;
+//       this.errorMessage = 'An error occurred while submitting the data.';
+//       console.error(error);
+//     }
+//   );
+// }
+insertData(): void {
+  // 1. Validate required fields
   if (!this.employee.first_name || !this.employee.email) {
     this.errorMessage = 'Please fill all the fields.';
     return;
   }
 
-  this.loading = true;
-  this.commandService.post('Employees', this.employee).subscribe(
-    (response: any) => {
-      console.log('response', response);
-      this.loading = false;
+  this.loading = true; // Show loading indicator
+
+  // 2. Make the POST request to create a new employee
+  this.commandService.post('Employees', this.employee.toOdata()).subscribe({
+    next: (response: any) => {
+      this.loading = false; // Hide loading indicator
       this.isSuccess = true;
-      this.ToastType = 'add';
+      this.ToastType = 'add'; // Set toast type for "add"
 
-      setTimeout(() => {
-        this.IsOpenToastAlert.emit();
-        // ✅ Only close when submission is confirmed
-        this.resetForm();
-        this.closeDialog(); 
-      }, 1000);
+      // 3. Store the ID of the newly created employee
+      if (response?.id) {
+        this.employeeId = response.id; // Assuming API returns 'id' for new record
+      }
+
+      // 4. Handle attachments if the component and employeeId are ready
+      // Make sure 'attachmentComponent' is a @ViewChild in your component
+      if (this.attachmentComponent && this.employeeId !== null) {
+        this.attachmentComponent.recordId = this.employeeId.toString();
+        this.attachmentComponent.modelName = 'employee'; // Link to 'employee' model
+
+        // Load existing media (though for a *new* record, this might be empty initially)
+        this.attachmentComponent.loadExistingMediaIfReady();
+
+        // Process any files the user staged *before* the employee was saved
+        this.attachmentComponent.processPendingUploads();
+      }
+
+      // 5. Emit toast alert and update UI
+      this.IsOpenToastAlert.emit();
+      this.cdr.detectChanges();
+
+      // 6. Reset form and close dialog after successful submission
+      // Consider if you want to wait for attachments to fully upload before closing
+      // If attachments are background uploads, this is fine.
+      this.resetForm();
+      this.closeDialog();
     },
-    (error: any) => {
-      this.loading = false;
-      this.errorMessage = 'An error occurred while submitting the data.';
+    error: (error) => {
+      this.loading = false; // Hide loading indicator
+      this.errorMessage = 'An error occurred while creating the employee.';
       console.error(error);
-    }
-  );
+      this.cdr.detectChanges(); // Update UI with error message
+    },
+  });
 }
-
   // toggleAction method removed to resolve duplicate implementation error
 
   closeDialog() {
