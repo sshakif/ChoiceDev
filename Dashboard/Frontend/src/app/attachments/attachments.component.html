@@ -4,7 +4,7 @@
   
   <div class="flex gap-2 items-center">
     <button
-      class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+      
       title="Upload files"
       [disabled]="isUploading"
       (click)="onUploadClick()"
@@ -17,7 +17,7 @@
     </button>
 
     <button
-      class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+      class="px-4 py-2"
       title="Download selected files"
       [disabled]="selectedMediaIds.length === 0"
       (click)="downloadSelected()"
@@ -27,7 +27,7 @@
 
     <button
       *ngIf="selectedMediaIds.length > 0"
-      class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+      class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 "
       title="Delete selected files"
       (click)="deleteSelected()"
       [disabled]="selectedMediaIds.length === 0"
