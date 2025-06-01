@@ -1,0 +1,1 @@
+{"version":3,"file":"Assets.js","sourceRoot":"","sources":["../src/Assets.ts"],"names":[],"mappings":"AAAA,OAAO,kCAAkC,CAAC","sourcesContent":["import \"./generated/json-imports/i18n.js\";\n"]}

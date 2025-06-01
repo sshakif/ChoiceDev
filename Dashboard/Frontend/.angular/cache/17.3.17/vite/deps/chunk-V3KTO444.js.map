@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../node_modules/@ui5/webcomponents-base/dist/util/getActiveElement.js", "../../../../../node_modules/@ui5/webcomponents-base/dist/util/isElementHidden.js"],
+  "sourcesContent": ["const getActiveElement = () => {\n    let element = document.activeElement;\n    while (element && element.shadowRoot && element.shadowRoot.activeElement) {\n        element = element.shadowRoot.activeElement;\n    }\n    return element;\n};\nexport default getActiveElement;\n", "const isElementHidden = (el) => {\n    if (el.nodeName === \"SLOT\") {\n        return false;\n    }\n    return (el.offsetWidth <= 0 && el.offsetHeight <= 0) || (el.style && el.style.visibility === \"hidden\");\n};\nexport default isElementHidden;\n"],
+  "mappings": ";AAAA,IAAM,mBAAmB,MAAM;AAC3B,MAAI,UAAU,SAAS;AACvB,SAAO,WAAW,QAAQ,cAAc,QAAQ,WAAW,eAAe;AACtE,cAAU,QAAQ,WAAW;AAAA,EACjC;AACA,SAAO;AACX;AACA,IAAO,2BAAQ;;;ACPf,IAAM,kBAAkB,CAAC,OAAO;AAC5B,MAAI,GAAG,aAAa,QAAQ;AACxB,WAAO;AAAA,EACX;AACA,SAAQ,GAAG,eAAe,KAAK,GAAG,gBAAgB,KAAO,GAAG,SAAS,GAAG,MAAM,eAAe;AACjG;AACA,IAAO,0BAAQ;",
+  "names": []
+}

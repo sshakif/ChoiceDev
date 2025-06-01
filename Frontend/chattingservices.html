@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Smart Chat Widget</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="m-0 font-sans">
+    <div
+      class="fixed bottom-20 right-6 bg-teal-800 text-white rounded-full w-14 h-14 text-2xl flex items-center justify-center cursor-pointer z-50 shadow-lg"
+      onclick="toggleChat()"
+    >
+      💬
+    </div>
+
+    <div
+      id="chatBox"
+      class="fixed bottom-40 right-6 w-80 bg-white border border-gray-300 rounded-lg shadow-xl flex flex-col hidden z-50 h-[450px]"
+    >
+      <div
+        class="bg-teal-800 text-white px-4 py-2 flex justify-between items-center"
+      >
+        <span class="font-semibold">Need Help?</span>
+        <button
+          class="text-white text-lg focus:outline-none"
+          onclick="closeChat()"
+        >
+          ✖
+        </button>
+      </div>
+
+      <div
+        id="chatContent"
+        class="px-4 py-3 flex-1 overflow-y-auto text-sm border-b border-gray-200"
+      >
+        <div class="italic text-gray-500">
+          Click a button for help or type a message...
+        </div>
+      </div>
+
+      <div id="chatButtons" class="p-3 flex flex-col gap-2">
+        <button
+          class="chat-button border-2 text-black text-center px-4 py-2 rounded text-sm text-left"
+          onclick="handleButtonClick(this, ['Custom Software Available', 'Yes sir, Custom Software Available', 'Please Talk About Your Company Details...?'])"
+        >
+          Custom Software Available
+        </button>
+        <button
+          class="chat-button text-center border-2 text-black px-4 py-2 rounded text-sm text-left"
+          onclick="handleButtonClick(this, ['Support', '📞 Thank you for reaching out!', 'Please Wait.... Emergency Contact Numbar: +088xxxx.'])"
+        >
+          Support
+        </button>
+        <button
+          class="chat-button border-2 text-black text-center px-4 py-2 rounded text-sm text-left"
+          onclick="handleButtonClick(this, ['Live Chat', '💬 Please visit our website to chat live with an agent.', 'Link: your-chat-link.com'])"
+        >
+          Live Chat
+        </button>
+        <button
+          class="chat-button border-2 text-black text-center px-4 py-2 rounded text-sm text-left"
+          onclick="handleButtonClick(this, ['Our Team', '👨‍💻 We have expert developers, designers, and project managers.', 'We are here to help you succeed.'])"
+        >
+          Our Team
+        </button>
+      </div>
+
+      <div class="flex items-center p-3 border-t border-gray-200 bg-white">
+        <input
+          type="text"
+          id="chatInput"
+          class="flex-1 px-3 py-2 border border-gray-300 rounded-l focus:outline-none text-sm"
+          placeholder="Type your message..."
+          onkeypress="handleKeyPress(event)"
+        />
+        <button
+          class="bg-teal-800 hover:bg-blue-700 text-white px-4 py-2 rounded-r text-sm"
+          onclick="sendMessage()"
+        >
+          Send
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function toggleChat() {
+        const chatBox = document.getElementById("chatBox");
+        const isHidden = chatBox.classList.contains("hidden");
+
+        chatBox.classList.toggle("hidden", !isHidden);
+        chatBox.classList.toggle("flex", isHidden);
+      }
+
+      function closeChat() {
+        document.getElementById("chatBox").classList.remove("flex");
+        document.getElementById("chatBox").classList.add("hidden");
+      }
+
+      function addMessage(sender, message, isCustomer = false) {
+        const content = document.getElementById("chatContent");
+        const msgContainer = document.createElement("div");
+        msgContainer.className = `mb-2 p-2 rounded ${
+          isCustomer
+            ? "bg-blue-100 text-right ml-auto max-w-[80%]"
+            : "bg-gray-200 text-left mr-auto max-w-[80%]"
+        }`;
+
+        const senderName = document.createElement("div");
+        senderName.className = `font-semibold text-xs ${
+          isCustomer ? "text-blue-700" : "text-gray-700"
+        }`;
+        senderName.textContent = sender;
+        msgContainer.appendChild(senderName);
+
+        const msgText = document.createElement("div");
+        msgText.className = "text-sm whitespace-pre-wrap";
+        msgText.textContent = message;
+        msgContainer.appendChild(msgText);
+
+        content.appendChild(msgContainer);
+        content.scrollTop = content.scrollHeight;
+      }
+
+      function handleButtonClick(clickedButton, messages = []) {
+        clickedButton.style.display = "none";
+        addMessage("", messages[0], true);
+
+        const choiceDevResponses = messages.slice(1);
+        if (choiceDevResponses.length > 0) {
+          showTypingMessages(choiceDevResponses, () => {
+            const remainingButtons = document.querySelectorAll(
+              '.chat-button[style="display: none;"]'
+            );
+            const allButtons = document.querySelectorAll(".chat-button");
+            if (remainingButtons.length === allButtons.length) {
+              document.getElementById("chatButtons").style.display = "none";
+            }
+          });
+        }
+      }
+
+      function showTypingMessages(messages, callback) {
+        let index = 0;
+        const content = document.getElementById("chatContent");
+
+        function typeNextMessage() {
+          if (index >= messages.length) {
+            if (callback) callback();
+            return;
+          }
+
+          const typingDiv = document.createElement("div");
+          typingDiv.className = "italic text-gray-500 mb-2";
+          typingDiv.textContent = "ChoiceDev is typing...";
+          content.appendChild(typingDiv);
+          content.scrollTop = content.scrollHeight;
+
+          setTimeout(() => {
+            typingDiv.remove();
+            addMessage("ChoiceDev: ", messages[index]);
+            index++;
+            typeNextMessage();
+          }, 800);
+        }
+
+        typeNextMessage();
+      }
+
+      function sendMessage() {
+        const chatInput = document.getElementById("chatInput");
+        const message = chatInput.value.trim();
+
+        if (message) {
+          addMessage("", message, true);
+          chatInput.value = "";
+          setTimeout(() => {
+            addMessage(
+              "ChoiceDev",
+              "Thank you for your message! How can I help you further?"
+            );
+          }, 1000);
+        }
+      }
+
+      function handleKeyPress(event) {
+        if (event.key === "Enter") {
+          sendMessage();
+        }
+      }
+    </script>
+  </body>
+</html>

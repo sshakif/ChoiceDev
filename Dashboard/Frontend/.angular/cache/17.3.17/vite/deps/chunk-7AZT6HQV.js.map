@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../node_modules/@ui5/webcomponents-base/dist/types/AriaHasPopup.js"],
+  "sourcesContent": ["/**\n * Different types of ARIA hasPopup.\n * @public\n */\nvar AriaHasPopup;\n(function (AriaHasPopup) {\n    /**\n     * Dialog popup type.\n     * @public\n     */\n    AriaHasPopup[\"Dialog\"] = \"Dialog\";\n    /**\n     * Grid popup type.\n     * @public\n     */\n    AriaHasPopup[\"Grid\"] = \"Grid\";\n    /**\n     * ListBox popup type.\n     * @public\n     */\n    AriaHasPopup[\"ListBox\"] = \"ListBox\";\n    /**\n     * Menu popup type.\n     * @public\n     */\n    AriaHasPopup[\"Menu\"] = \"Menu\";\n    /**\n     * Tree popup type.\n     * @public\n     */\n    AriaHasPopup[\"Tree\"] = \"Tree\";\n})(AriaHasPopup || (AriaHasPopup = {}));\nexport default AriaHasPopup;\n"],
+  "mappings": ";AAIA,IAAI;AAAA,CACH,SAAUA,eAAc;AAKrB,EAAAA,cAAa,QAAQ,IAAI;AAKzB,EAAAA,cAAa,MAAM,IAAI;AAKvB,EAAAA,cAAa,SAAS,IAAI;AAK1B,EAAAA,cAAa,MAAM,IAAI;AAKvB,EAAAA,cAAa,MAAM,IAAI;AAC3B,GAAG,iBAAiB,eAAe,CAAC,EAAE;AACtC,IAAO,uBAAQ;",
+  "names": ["AriaHasPopup"]
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../node_modules/@ui5/webcomponents-base/dist/types/ValueState.js"],
+  "sourcesContent": ["/**\n * Different types of ValueStates.\n *\n * @public\n */\nvar ValueState;\n(function (ValueState) {\n    /**\n     * @public\n     */\n    ValueState[\"None\"] = \"None\";\n    /**\n     * @public\n     */\n    ValueState[\"Positive\"] = \"Positive\";\n    /**\n     * @public\n     */\n    ValueState[\"Critical\"] = \"Critical\";\n    /**\n     * @public\n     */\n    ValueState[\"Negative\"] = \"Negative\";\n    /**\n     * @public\n     */\n    ValueState[\"Information\"] = \"Information\";\n})(ValueState || (ValueState = {}));\nexport default ValueState;\n"],
+  "mappings": ";AAKA,IAAI;AAAA,CACH,SAAUA,aAAY;AAInB,EAAAA,YAAW,MAAM,IAAI;AAIrB,EAAAA,YAAW,UAAU,IAAI;AAIzB,EAAAA,YAAW,UAAU,IAAI;AAIzB,EAAAA,YAAW,UAAU,IAAI;AAIzB,EAAAA,YAAW,aAAa,IAAI;AAChC,GAAG,eAAe,aAAa,CAAC,EAAE;AAClC,IAAO,qBAAQ;",
+  "names": ["ValueState"]
+}

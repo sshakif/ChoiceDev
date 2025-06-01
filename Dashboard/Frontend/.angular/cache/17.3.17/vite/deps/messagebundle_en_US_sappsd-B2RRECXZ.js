@@ -1,0 +1,270 @@
+import "./chunk-OQOTISLC.js";
+
+// node_modules/@ui5/webcomponents-fiori/dist/generated/assets/i18n/messagebundle_en_US_sappsd.json
+var BARCODE_SCANNER_DIALOG_CANCEL_BUTTON_TXT = "[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]";
+var BARCODE_SCANNER_DIALOG_LOADING_TXT = "[[[Ļŏąƌįŋğ∙∙∙∙∙∙∙]]]";
+var FCL_START_COLUMN_TXT = "[[[Ƒįŗşţ ċŏĺűɱŋ∙∙∙∙∙∙∙]]]";
+var FCL_MIDDLE_COLUMN_TXT = "[[[Μįƌƌĺē ċŏĺűɱŋ∙∙∙∙∙∙]]]";
+var FCL_END_COLUMN_TXT = "[[[Ļąşţ ċŏĺűɱŋ∙∙∙∙∙∙∙∙]]]";
+var FCL_START_COLUMN_EXPAND_BUTTON_TOOLTIP = "[[[Ĕχρąŋƌ ţĥē ƒįŗşţ ċŏĺűɱŋ∙∙∙∙∙∙]]]";
+var FCL_START_COLUMN_COLLAPSE_BUTTON_TOOLTIP = "[[[Ĉŏĺĺąρşē ţĥē ƒįŗşţ ċŏĺűɱŋ∙∙∙∙∙∙∙]]]";
+var FCL_END_COLUMN_EXPAND_BUTTON_TOOLTIP = "[[[Ĕχρąŋƌ ţĥē ĺąşţ ċŏĺűɱŋ∙∙∙∙∙]]]";
+var FCL_END_COLUMN_COLLAPSE_BUTTON_TOOLTIP = "[[[Ĉŏĺĺąρşē ţĥē ĺąşţ ċŏĺűɱŋ∙∙∙∙∙∙]]]";
+var NOTIFICATION_LIST_ITEM_TXT = "[[[Ńŏţįƒįċąţįŏŋ∙∙∙∙∙∙∙]]]";
+var NOTIFICATION_LIST_ITEM_SHOW_MORE = "[[[Ŝĥŏŵ Μŏŗē∙∙∙∙∙]]]";
+var NOTIFICATION_LIST_ITEM_SHOW_LESS = "[[[Ŝĥŏŵ Ļēşş∙∙∙∙∙]]]";
+var NOTIFICATION_LIST_ITEM_OVERLOW_BTN_TITLE = "[[[Μŏŗē]]]";
+var NOTIFICATION_LIST_ITEM_CLOSE_BTN_TITLE = "[[[Ĉĺŏşē∙∙∙∙∙∙∙∙∙]]]";
+var NOTIFICATION_LIST_ITEM_READ = "[[[ŗēąƌ]]]";
+var NOTIFICATION_LIST_ITEM_UNREAD = "[[[űŋŗēąƌ∙∙∙∙∙∙∙∙]]]";
+var NOTIFICATION_LIST_ITEM_HIGH_PRIORITY_TXT = "[[[Ĥįğĥ Ƥŗįŏŗįţŷ∙∙∙∙∙∙]]]";
+var NOTIFICATION_LIST_ITEM_MEDIUM_PRIORITY_TXT = "[[[Μēƌįűɱ Ƥŗįŏŗįţŷ∙∙∙∙]]]";
+var NOTIFICATION_LIST_ITEM_LOW_PRIORITY_TXT = "[[[Ļŏŵ Ƥŗįŏŗįţŷ∙∙∙∙∙∙∙]]]";
+var NOTIFICATION_LIST_GROUP_ITEM_TXT = "[[[Ńŏţįƒįċąţįŏŋ ğŗŏűρ∙∙∙∙∙∙]]]";
+var NOTIFICATION_LIST_GROUP_ITEM_COUNTER_TXT = "[[[Ĉŏűŋţēŗ∙∙∙∙∙∙∙]]]";
+var NOTIFICATION_LIST_GROUP_ITEM_CLOSE_BTN_TITLE = "[[[Ĉĺŏşē Āĺĺ∙∙∙∙∙]]]";
+var NOTIFICATION_LIST_GROUP_ITEM_TOGGLE_BTN_COLLAPSE_TITLE = "[[[Ĉŏĺĺąρşē Ģŗŏűρ∙∙∙∙∙]]]";
+var NOTIFICATION_LIST_GROUP_ITEM_TOGGLE_BTN_EXPAND_TITLE = "[[[Ĕχρąŋƌ Ģŗŏűρ∙∙∙∙∙∙∙]]]";
+var TIMELINE_ARIA_LABEL = "[[[Ţįɱēĺįŋē∙∙∙∙∙∙]]]";
+var UPLOADCOLLECTIONITEM_CANCELBUTTON_TEXT = "[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]";
+var UPLOADCOLLECTIONITEM_RENAMEBUTTON_TEXT = "[[[Řēŋąɱē∙∙∙∙∙∙∙∙]]]";
+var UPLOADCOLLECTIONITEM_ERROR_STATE = "[[[Ţēŗɱįŋąţēƌ∙∙∙∙]]]";
+var UPLOADCOLLECTIONITEM_READY_STATE = "[[[Ƥēŋƌįŋğ∙∙∙∙∙∙∙]]]";
+var UPLOADCOLLECTIONITEM_UPLOADING_STATE = "[[[Ůρĺŏąƌįŋğ∙∙∙∙∙]]]";
+var UPLOADCOLLECTIONITEM_TERMINATE_BUTTON_TEXT = "[[[Ţēŗɱįŋąţē∙∙∙∙∙]]]";
+var UPLOADCOLLECTIONITEM_RETRY_BUTTON_TEXT = "[[[Řēţŗŷ∙∙∙∙∙∙∙∙∙]]]";
+var UPLOADCOLLECTIONITEM_EDIT_BUTTON_TEXT = "[[[Ĕƌįţ]]]";
+var UPLOADCOLLECTION_NO_DATA_TEXT = "[[[Ńŏ ƒįĺēş ƒŏűŋƌ∙∙∙∙∙]]]";
+var UPLOADCOLLECTION_NO_DATA_DESCRIPTION = "[[[Ďŗŏρ ƒįĺēş ţŏ űρĺŏąƌ, ŏŗ űşē ţĥē Ůρĺŏąƌ ƃűţţŏŋ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var UPLOADCOLLECTION_ARIA_ROLE_DESCRIPTION = "[[[Ůρĺŏąƌ ċŏĺĺēċţįŏŋ∙∙∙∙∙∙∙]]]";
+var UPLOADCOLLECTION_DRAG_FILE_INDICATOR = "[[[Ďŗąğ ƒįĺēş ĥēŗē∙∙∙∙]]]";
+var UPLOADCOLLECTION_DROP_FILE_INDICATOR = "[[[Ďŗŏρ ƒįĺēş ţŏ űρĺŏąƌ∙∙∙∙]]]";
+var SHELLBAR_LABEL = "[[[Ŝĥēĺĺ Ɓąŗ∙∙∙∙∙]]]";
+var SHELLBAR_LOGO = "[[[Ļŏğŏ]]]";
+var SHELLBAR_COPILOT = "[[[ĈŏƤįĺŏţ∙∙∙∙∙∙∙]]]";
+var SHELLBAR_NOTIFICATIONS = "[[[{0} Ńŏţįƒįċąţįŏŋş]]]";
+var SHELLBAR_PROFILE = "[[[Ƥŗŏƒįĺē∙∙∙∙∙∙∙]]]";
+var SHELLBAR_PRODUCTS = "[[[Ƥŗŏƌűċţş∙∙∙∙∙∙]]]";
+var PRODUCT_SWITCH_CONTAINER_LABEL = "[[[Ƥŗŏƌűċţş∙∙∙∙∙∙]]]";
+var SHELLBAR_SEARCH = "[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]";
+var SHELLBAR_OVERFLOW = "[[[Μŏŗē]]]";
+var SHELLBAR_CANCEL = "[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]";
+var WIZARD_NAV_ARIA_LABEL = "[[[Ŵįžąŗƌ Ƥŗŏğŗēşş Ɓąŗ∙∙∙∙∙]]]";
+var WIZARD_LIST_ARIA_LABEL = "[[[Ŵįžąŗƌ Ŝţēρş∙∙∙∙∙∙∙]]]";
+var WIZARD_LIST_ARIA_DESCRIBEDBY = "[[[Ţŏ ąċţįʋąţē ρŗēşş şρąċē ƃąŗ ŏŗ ēŋţēŗ∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var WIZARD_ACTIONSHEET_STEPS_ARIA_LABEL = "[[[Ŝţēρş∙∙∙∙∙∙∙∙∙]]]";
+var WIZARD_OPTIONAL_STEP_ARIA_LABEL = "[[[Ŏρţįŏŋąĺ∙∙∙∙∙∙]]]";
+var WIZARD_STEP_ACTIVE = "[[[Āċţįʋē∙∙∙∙∙∙∙∙]]]";
+var WIZARD_STEP_INACTIVE = "[[[Ĭŋąċţįʋē∙∙∙∙∙∙]]]";
+var WIZARD_STEP_ARIA_LABEL = "[[[Ŝţēρ {0}]]]";
+var WIZARD_NAV_ARIA_ROLE_DESCRIPTION = "[[[Ŵįžąŗƌ∙∙∙∙∙∙∙∙]]]";
+var WIZARD_NAV_STEP_DEFAULT_HEADING = "[[[Ŝţēρ]]]";
+var VSD_DIALOG_TITLE_SORT = "[[[Ʋįēŵ Ŝēţţįŋğş∙∙∙∙∙∙]]]";
+var VSD_SUBMIT_BUTTON = "[[[ŎĶ∙∙]]]";
+var VSD_CANCEL_BUTTON = "[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]";
+var VSD_RESET_BUTTON = "[[[Řēşēţ∙∙∙∙∙∙∙∙∙]]]";
+var VSD_SORT_ORDER = "[[[Ŝŏŗţ Ŏŗƌēŗ∙∙∙∙]]]";
+var VSD_FILTER_BY = "[[[Ƒįĺţēŗ Ɓŷ∙∙∙∙∙]]]";
+var VSD_SORT_BY = "[[[Ŝŏŗţ Ɓŷ∙∙∙∙∙∙∙]]]";
+var VSD_ORDER_ASCENDING = "[[[Āşċēŋƌįŋğ∙∙∙∙∙]]]";
+var VSD_ORDER_DESCENDING = "[[[Ďēşċēŋƌįŋğ∙∙∙∙]]]";
+var IM_TITLE_BEFORESEARCH = "[[[Ļēţ''ş ğēţ şŏɱē ŗēşűĺţş∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_BEFORESEARCH = "[[[Ŝţąŗţ ƃŷ ρŗŏʋįƌįŋğ ŷŏűŗ şēąŗċĥ ċŗįţēŗįą.∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_NOACTIVITIES = "[[[Ŷŏű''ʋē ŋŏţ ąƌƌēƌ ąŋŷ ąċţįʋįţįēş ŷēţ∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_NOACTIVITIES = "[[[Ŵŏűĺƌ ŷŏű ĺįķē ţŏ ąƌƌ ŏŋē ŋŏŵ?∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_NOCOLUMNSSET = "[[[Āƌƌ ċŏĺűɱŋş ţŏ şēē ţĥē ċŏŋţēŋţ∙∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_NOCOLUMNSSET = "[[[Ŝēĺēċţ ţĥē ċŏĺűɱŋş ŷŏű ŋēēƌ įŋ ţĥē ţąƃĺē şēţţįŋğş.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_NODATA = "[[[Ţĥēŗē''ş ŋŏ ƌąţą ŷēţ∙∙∙∙]]]";
+var IM_SUBTITLE_NODATA = "[[[Ŵĥēŋ ţĥēŗē įş, ŷŏű''ĺĺ şēē įţ ĥēŗē.∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_NOMAIL = "[[[Ńŏ ŋēŵ ɱąįĺ∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_NOMAIL = "[[[Ĉĥēċķ ƃąċķ ąğąįŋ ĺąţēŗ.∙∙∙∙∙∙]]]";
+var IM_TITLE_NOENTRIES = "[[[Ţĥēŗē ąŗē ŋŏ ēŋţŗįēş ŷēţ∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_NOENTRIES = "[[[Ŵĥēŋ ţĥēŗē ąŗē, ŷŏű''ĺĺ şēē ţĥēɱ ĥēŗē.∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_NONOTIFICATIONS = "[[[Ŷŏű''ʋē ŋŏ ŋēŵ ŋŏţįƒįċąţįŏŋş∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_NONOTIFICATIONS = "[[[Ĉĥēċķ ƃąċķ ąğąįŋ ĺąţēŗ.∙∙∙∙∙∙]]]";
+var IM_TITLE_NOSAVEDITEMS = "[[[Ŷŏű''ʋē ŋŏţ ąƌƌēƌ ąŋŷ ƒąʋŏŗįţēş ŷēţ∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_NOSAVEDITEMS = "[[[Ŵŏűĺƌ ŷŏű ĺįķē ţŏ ċŗēąţē ą ĺįşţ ŏƒ ŷŏűŗ ƒąʋŏŗįţē įţēɱş ŋŏŵ?∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_NOSEARCHRESULTS = "[[[Ńŏ ŗēşűĺţş ƒŏűŋƌ∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_NOSEARCHRESULTS = "[[[Ţŗŷ ċĥąŋğįŋğ ŷŏűŗ şēąŗċĥ ċŗįţēŗįą.∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_NOTASKS = "[[[Ŷŏű''ʋē ŋŏ ŋēŵ ţąşķş∙∙∙∙]]]";
+var IM_SUBTITLE_NOTASKS = "[[[Ŵĥēŋ ŷŏű ƌŏ, ŷŏű''ĺĺ şēē ţĥēɱ ĥēŗē.∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_UNABLETOLOAD = "[[[Ůŋąƃĺē ţŏ ĺŏąƌ ƌąţą∙∙∙∙∙]]]";
+var IM_SUBTITLE_UNABLETOLOAD = "[[[Ĉĥēċķ ŷŏűŗ įŋţēŗŋēţ ċŏŋŋēċţįŏŋ. Ĭƒ ţĥąţ''ş ŋŏţ įţ, ţŗŷ ŗēĺŏąƌįŋğ. Ĭƒ ţĥąţ şţįĺĺ ƌŏēşŋ''ţ ĥēĺρ, ċĥēċķ ŵįţĥ ŷŏűŗ ąƌɱįŋįşţŗąţŏŗ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_UNABLETOLOADIMAGE = "[[[Ůŋąƃĺē ţŏ ĺŏąƌ įɱąğē∙∙∙∙]]]";
+var IM_SUBTITLE_UNABLETOLOADIMAGE = "[[[Ŵē ċŏűĺƌŋ''ţ ƒįŋƌ ţĥē įɱąğē ąţ ţĥē şρēċįƒįēƌ ĺŏċąţįŏŋ, ŏŗ ţĥē şēŗʋēŗ įşŋ''ţ ŗēşρŏŋƌįŋğ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_UNABLETOUPLOAD = "[[[Ůŋąƃĺē ţŏ űρĺŏąƌ ƌąţą∙∙∙∙∙]]]";
+var IM_SUBTITLE_UNABLETOUPLOAD = "[[[Ĉĥēċķ ŷŏűŗ įŋţēŗŋēţ ċŏŋŋēċţįŏŋ. Ĭƒ ţĥąţ''ş ŋŏţ įţ, ċĥēċķ ţĥē ƒįĺē ƒŏŗɱąţ ąŋƌ ƒįĺē şįžē. Ŏţĥēŗŵįşē, ċŏŋţąċţ ŷŏűŗ ąƌɱįŋįşţŗąţŏŗ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_UPLOADTOCLOUD = "[[[Μįğŗąţē ţŏ ŜĀƤ Ĭŋţēğŗąţįŏŋ Ŝűįţē∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_UPLOADTOCLOUD = "[[[Μŏʋē ŷŏűŗ įŋţēğŗąţįŏŋ ċŏŋţēŋţ ƒŗŏɱ ţĥē ēχįşţįŋğ Ƥŗŏċēşş Ĭŋţēğŗąţįŏŋ şűƃşċŗįρţįŏŋ ţŏ ţĥē Ĉĺŏűƌ Ĭŋţēğŗąţįŏŋ ċąρąƃįĺįţŷ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_ADDCOLUMN = "[[[Ļŏŏķş ĺįķē ţĥēŗē''ş ƒŗēē şρąċē∙∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_ADDCOLUMN = "[[[Ŷŏű ċąŋ ąƌƌ ɱŏŗē ċŏĺűɱŋş įŋ ţĥē ţąƃĺē şēţţįŋğş.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_ADDPEOPLE = "[[[Ŷŏű''ʋē ŋŏţ ąƌƌēƌ ąŋŷŏŋē ţŏ ţĥē ċąĺēŋƌąŗ ŷēţ∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_ADDPEOPLE = "[[[Ďŏ ŷŏű ŵąŋţ ţŏ ąƌƌ şŏɱēŏŋē ŋŏŵ?∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_BALLOONSKY = "[[[Ŷŏű''ʋē ƃēēŋ ąρρŗēċįąţēƌ!∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_BALLOONSKY = "[[[Ķēēρ űρ ţĥē ğŗēąţ ŵŏŗķ!∙∙∙∙∙∙]]]";
+var IM_TITLE_EMPTYPLANNINGCALENDAR = "[[[Ńŏţĥįŋğ ρĺąŋŋēƌ ŷēţ∙∙∙∙∙]]]";
+var IM_SUBTITLE_EMPTYPLANNINGCALENDAR = "[[[Ţĥēŗē ąŗē ŋŏ ąċţįʋįţįēş įŋ ţĥįş ţįɱē ƒŗąɱē.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_FILTERTABLE = "[[[Ƒįĺţēŗ ŏρţįŏŋş ąŗē ąʋąįĺąƃĺē∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_FILTERTABLE = "[[[Ƒįĺţēŗş ĥēĺρ ŷŏű ƒŏċűş ŏŋ ŵĥąţ''ş ɱŏşţ ŗēĺēʋąŋţ ƒŏŗ ŷŏű.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_GROUPTABLE = "[[[Ţŗŷ ğŗŏűρįŋğ įţēɱş ƒŏŗ ą ƃēţţēŗ ŏʋēŗʋįēŵ∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_GROUPTABLE = "[[[Ŷŏű ċąŋ ċĥŏŏşē ğŗŏűρįŋğ ċąţēğŏŗįēş įŋ ţĥē ğŗŏűρ şēţţįŋğş.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_NOFILTERRESULTS = "[[[Ńŏ ŗēşűĺţş ƒŏűŋƌ∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_NOFILTERRESULTS = "[[[Ţŗŷ ąƌĵűşţįŋğ ŷŏűŗ ƒįĺţēŗ ċŗįţēŗįą.∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_PAGENOTFOUND = "[[[Ŝŏŗŗŷ, ŵē ċąŋ''ţ ƒįŋƌ ţĥįş ρąğē∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_PAGENOTFOUND = "[[[Ƥĺēąşē ċĥēċķ ţĥē ŮŘĻ ŷŏű ąŗē űşįŋğ ţŏ ċąĺĺ ţĥē ąρρ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_RESIZECOLUMN = "[[[Ĉĥŏŏşē ŷŏűŗ ŏŵŋ ċŏĺűɱŋ ŵįƌţĥ∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_RESIZECOLUMN = "[[[Ŷŏű ċąŋ ŗēşįžē ċŏĺűɱŋş ƃŷ ƌŗąğğįŋğ ţĥē ċŏĺűɱŋ ƃŏŗƌēŗş.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_SORTCOLUMN = "[[[Ńŏţ şēēįŋğ ţĥē ɱŏşţ įɱρŏŗţąŋţ įţēɱş ƒįŗşţ?∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_SORTCOLUMN = "[[[Ĉĥŏŏşē ţĥē şŏŗţ ċŗįţēŗįą įŋ ţĥē şŏŗţ şēţţįŋğş.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_SUCCESSSCREEN = "[[[Ńįċēĺŷ ƌŏŋē!∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_SUCCESSSCREEN = "[[[Ŷŏű ċŏɱρĺēţēƌ ąĺĺ ŷŏűŗ ĺēąŗŋįŋğ ąşşįğŋɱēŋţş.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_UPLOADCOLLECTION = "[[[Ďŗŏρ ƒįĺēş ĥēŗē∙∙∙∙]]]";
+var IM_SUBTITLE_UPLOADCOLLECTION = "[[[Ŷŏű ċąŋ ąĺşŏ űρĺŏąƌ şēʋēŗąĺ ƒįĺēş ąţ ŏŋċē.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_ADDDIMENSIONS = "[[[Ŝŏɱē ƌįɱēŋşįŏŋş ąŗē ɱįşşįŋğ∙∙∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_ADDDIMENSIONS = "[[[Āƌƌ ɱŏŗē ƌįɱēŋşįŏŋş ţŏ ċŏɱρĺēţē ŷŏűŗ ċĥąŗţ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_NODIMENSIONSSET = "[[[Ńŏ Ĉĥąŗţ Ďąţą∙∙∙∙∙∙]]]";
+var IM_SUBTITLE_NODIMENSIONSSET = "[[[Ţŗŷ ąƌĵűşţįŋğ ŷŏűŗ ċĥąŗţ şēţţįŋğş.∙∙∙∙∙∙∙∙∙∙∙]]]";
+var IM_TITLE_SURVEY = "[[[Ŷŏűŗ Ŏρįŋįŏŋ Μąţţēŗş∙∙∙∙]]]";
+var IM_SUBTITLE_SURVEY = "[[[Ŵē ŵąŋţ ţŏ ĥēąŗ ŵĥąţ ŷŏű ţĥįŋķ ąƃŏűţ ŜĀƤ şŏƒţŵąŗē. Ŝĥąŗē ŷŏűŗ ƒēēƌƃąċķ ŵįţĥ űş ƃŷ ţąķįŋğ ŏűŗ şĥŏŗţ şűŗʋēŷ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]";
+var DSC_SIDE_ARIA_LABEL = "[[[Ŝįƌē Ĉŏŋţēŋţ∙∙∙∙∙∙∙]]]";
+var SIDE_NAVIGATION_POPOVER_HIDDEN_TEXT = "[[[Ńąʋįğąţįŏŋ∙∙∙∙]]]";
+var SIDE_NAVIGATION_COLLAPSED_LIST_ARIA_ROLE_DESC = "[[[Ńąʋįğąţįŏŋ Ļįşţ Μēŋű Ɓąŗ∙∙∙∙∙∙]]]";
+var SIDE_NAVIGATION_COLLAPSED_LIST_ITEMS_ARIA_ROLE_DESC = "[[[Ńąʋįğąţįŏŋ Ļįşţ Μēŋű Ĭţēɱ∙∙∙∙∙∙∙]]]";
+var SIDE_NAVIGATION_LIST_ARIA_ROLE_DESC = "[[[Ńąʋįğąţįŏŋ Ļįşţ Ţŗēē∙∙∙∙]]]";
+var SIDE_NAVIGATION_LIST_ITEMS_ARIA_ROLE_DESC = "[[[Ńąʋįğąţįŏŋ Ļįşţ Ţŗēē Ĭţēɱ∙∙∙∙∙∙∙]]]";
+var messagebundle_en_US_sappsd_default = { BARCODE_SCANNER_DIALOG_CANCEL_BUTTON_TXT, BARCODE_SCANNER_DIALOG_LOADING_TXT, FCL_START_COLUMN_TXT, FCL_MIDDLE_COLUMN_TXT, FCL_END_COLUMN_TXT, FCL_START_COLUMN_EXPAND_BUTTON_TOOLTIP, FCL_START_COLUMN_COLLAPSE_BUTTON_TOOLTIP, FCL_END_COLUMN_EXPAND_BUTTON_TOOLTIP, FCL_END_COLUMN_COLLAPSE_BUTTON_TOOLTIP, NOTIFICATION_LIST_ITEM_TXT, NOTIFICATION_LIST_ITEM_SHOW_MORE, NOTIFICATION_LIST_ITEM_SHOW_LESS, NOTIFICATION_LIST_ITEM_OVERLOW_BTN_TITLE, NOTIFICATION_LIST_ITEM_CLOSE_BTN_TITLE, NOTIFICATION_LIST_ITEM_READ, NOTIFICATION_LIST_ITEM_UNREAD, NOTIFICATION_LIST_ITEM_HIGH_PRIORITY_TXT, NOTIFICATION_LIST_ITEM_MEDIUM_PRIORITY_TXT, NOTIFICATION_LIST_ITEM_LOW_PRIORITY_TXT, NOTIFICATION_LIST_GROUP_ITEM_TXT, NOTIFICATION_LIST_GROUP_ITEM_COUNTER_TXT, NOTIFICATION_LIST_GROUP_ITEM_CLOSE_BTN_TITLE, NOTIFICATION_LIST_GROUP_ITEM_TOGGLE_BTN_COLLAPSE_TITLE, NOTIFICATION_LIST_GROUP_ITEM_TOGGLE_BTN_EXPAND_TITLE, TIMELINE_ARIA_LABEL, UPLOADCOLLECTIONITEM_CANCELBUTTON_TEXT, UPLOADCOLLECTIONITEM_RENAMEBUTTON_TEXT, UPLOADCOLLECTIONITEM_ERROR_STATE, UPLOADCOLLECTIONITEM_READY_STATE, UPLOADCOLLECTIONITEM_UPLOADING_STATE, UPLOADCOLLECTIONITEM_TERMINATE_BUTTON_TEXT, UPLOADCOLLECTIONITEM_RETRY_BUTTON_TEXT, UPLOADCOLLECTIONITEM_EDIT_BUTTON_TEXT, UPLOADCOLLECTION_NO_DATA_TEXT, UPLOADCOLLECTION_NO_DATA_DESCRIPTION, UPLOADCOLLECTION_ARIA_ROLE_DESCRIPTION, UPLOADCOLLECTION_DRAG_FILE_INDICATOR, UPLOADCOLLECTION_DROP_FILE_INDICATOR, SHELLBAR_LABEL, SHELLBAR_LOGO, SHELLBAR_COPILOT, SHELLBAR_NOTIFICATIONS, SHELLBAR_PROFILE, SHELLBAR_PRODUCTS, PRODUCT_SWITCH_CONTAINER_LABEL, SHELLBAR_SEARCH, SHELLBAR_OVERFLOW, SHELLBAR_CANCEL, WIZARD_NAV_ARIA_LABEL, WIZARD_LIST_ARIA_LABEL, WIZARD_LIST_ARIA_DESCRIBEDBY, WIZARD_ACTIONSHEET_STEPS_ARIA_LABEL, WIZARD_OPTIONAL_STEP_ARIA_LABEL, WIZARD_STEP_ACTIVE, WIZARD_STEP_INACTIVE, WIZARD_STEP_ARIA_LABEL, WIZARD_NAV_ARIA_ROLE_DESCRIPTION, WIZARD_NAV_STEP_DEFAULT_HEADING, VSD_DIALOG_TITLE_SORT, VSD_SUBMIT_BUTTON, VSD_CANCEL_BUTTON, VSD_RESET_BUTTON, VSD_SORT_ORDER, VSD_FILTER_BY, VSD_SORT_BY, VSD_ORDER_ASCENDING, VSD_ORDER_DESCENDING, IM_TITLE_BEFORESEARCH, IM_SUBTITLE_BEFORESEARCH, IM_TITLE_NOACTIVITIES, IM_SUBTITLE_NOACTIVITIES, IM_TITLE_NOCOLUMNSSET, IM_SUBTITLE_NOCOLUMNSSET, IM_TITLE_NODATA, IM_SUBTITLE_NODATA, IM_TITLE_NOMAIL, IM_SUBTITLE_NOMAIL, IM_TITLE_NOENTRIES, IM_SUBTITLE_NOENTRIES, IM_TITLE_NONOTIFICATIONS, IM_SUBTITLE_NONOTIFICATIONS, IM_TITLE_NOSAVEDITEMS, IM_SUBTITLE_NOSAVEDITEMS, IM_TITLE_NOSEARCHRESULTS, IM_SUBTITLE_NOSEARCHRESULTS, IM_TITLE_NOTASKS, IM_SUBTITLE_NOTASKS, IM_TITLE_UNABLETOLOAD, IM_SUBTITLE_UNABLETOLOAD, IM_TITLE_UNABLETOLOADIMAGE, IM_SUBTITLE_UNABLETOLOADIMAGE, IM_TITLE_UNABLETOUPLOAD, IM_SUBTITLE_UNABLETOUPLOAD, IM_TITLE_UPLOADTOCLOUD, IM_SUBTITLE_UPLOADTOCLOUD, IM_TITLE_ADDCOLUMN, IM_SUBTITLE_ADDCOLUMN, IM_TITLE_ADDPEOPLE, IM_SUBTITLE_ADDPEOPLE, IM_TITLE_BALLOONSKY, IM_SUBTITLE_BALLOONSKY, IM_TITLE_EMPTYPLANNINGCALENDAR, IM_SUBTITLE_EMPTYPLANNINGCALENDAR, IM_TITLE_FILTERTABLE, IM_SUBTITLE_FILTERTABLE, IM_TITLE_GROUPTABLE, IM_SUBTITLE_GROUPTABLE, IM_TITLE_NOFILTERRESULTS, IM_SUBTITLE_NOFILTERRESULTS, IM_TITLE_PAGENOTFOUND, IM_SUBTITLE_PAGENOTFOUND, IM_TITLE_RESIZECOLUMN, IM_SUBTITLE_RESIZECOLUMN, IM_TITLE_SORTCOLUMN, IM_SUBTITLE_SORTCOLUMN, IM_TITLE_SUCCESSSCREEN, IM_SUBTITLE_SUCCESSSCREEN, IM_TITLE_UPLOADCOLLECTION, IM_SUBTITLE_UPLOADCOLLECTION, IM_TITLE_ADDDIMENSIONS, IM_SUBTITLE_ADDDIMENSIONS, IM_TITLE_NODIMENSIONSSET, IM_SUBTITLE_NODIMENSIONSSET, IM_TITLE_SURVEY, IM_SUBTITLE_SURVEY, DSC_SIDE_ARIA_LABEL, SIDE_NAVIGATION_POPOVER_HIDDEN_TEXT, SIDE_NAVIGATION_COLLAPSED_LIST_ARIA_ROLE_DESC, SIDE_NAVIGATION_COLLAPSED_LIST_ITEMS_ARIA_ROLE_DESC, SIDE_NAVIGATION_LIST_ARIA_ROLE_DESC, SIDE_NAVIGATION_LIST_ITEMS_ARIA_ROLE_DESC };
+export {
+  BARCODE_SCANNER_DIALOG_CANCEL_BUTTON_TXT,
+  BARCODE_SCANNER_DIALOG_LOADING_TXT,
+  DSC_SIDE_ARIA_LABEL,
+  FCL_END_COLUMN_COLLAPSE_BUTTON_TOOLTIP,
+  FCL_END_COLUMN_EXPAND_BUTTON_TOOLTIP,
+  FCL_END_COLUMN_TXT,
+  FCL_MIDDLE_COLUMN_TXT,
+  FCL_START_COLUMN_COLLAPSE_BUTTON_TOOLTIP,
+  FCL_START_COLUMN_EXPAND_BUTTON_TOOLTIP,
+  FCL_START_COLUMN_TXT,
+  IM_SUBTITLE_ADDCOLUMN,
+  IM_SUBTITLE_ADDDIMENSIONS,
+  IM_SUBTITLE_ADDPEOPLE,
+  IM_SUBTITLE_BALLOONSKY,
+  IM_SUBTITLE_BEFORESEARCH,
+  IM_SUBTITLE_EMPTYPLANNINGCALENDAR,
+  IM_SUBTITLE_FILTERTABLE,
+  IM_SUBTITLE_GROUPTABLE,
+  IM_SUBTITLE_NOACTIVITIES,
+  IM_SUBTITLE_NOCOLUMNSSET,
+  IM_SUBTITLE_NODATA,
+  IM_SUBTITLE_NODIMENSIONSSET,
+  IM_SUBTITLE_NOENTRIES,
+  IM_SUBTITLE_NOFILTERRESULTS,
+  IM_SUBTITLE_NOMAIL,
+  IM_SUBTITLE_NONOTIFICATIONS,
+  IM_SUBTITLE_NOSAVEDITEMS,
+  IM_SUBTITLE_NOSEARCHRESULTS,
+  IM_SUBTITLE_NOTASKS,
+  IM_SUBTITLE_PAGENOTFOUND,
+  IM_SUBTITLE_RESIZECOLUMN,
+  IM_SUBTITLE_SORTCOLUMN,
+  IM_SUBTITLE_SUCCESSSCREEN,
+  IM_SUBTITLE_SURVEY,
+  IM_SUBTITLE_UNABLETOLOAD,
+  IM_SUBTITLE_UNABLETOLOADIMAGE,
+  IM_SUBTITLE_UNABLETOUPLOAD,
+  IM_SUBTITLE_UPLOADCOLLECTION,
+  IM_SUBTITLE_UPLOADTOCLOUD,
+  IM_TITLE_ADDCOLUMN,
+  IM_TITLE_ADDDIMENSIONS,
+  IM_TITLE_ADDPEOPLE,
+  IM_TITLE_BALLOONSKY,
+  IM_TITLE_BEFORESEARCH,
+  IM_TITLE_EMPTYPLANNINGCALENDAR,
+  IM_TITLE_FILTERTABLE,
+  IM_TITLE_GROUPTABLE,
+  IM_TITLE_NOACTIVITIES,
+  IM_TITLE_NOCOLUMNSSET,
+  IM_TITLE_NODATA,
+  IM_TITLE_NODIMENSIONSSET,
+  IM_TITLE_NOENTRIES,
+  IM_TITLE_NOFILTERRESULTS,
+  IM_TITLE_NOMAIL,
+  IM_TITLE_NONOTIFICATIONS,
+  IM_TITLE_NOSAVEDITEMS,
+  IM_TITLE_NOSEARCHRESULTS,
+  IM_TITLE_NOTASKS,
+  IM_TITLE_PAGENOTFOUND,
+  IM_TITLE_RESIZECOLUMN,
+  IM_TITLE_SORTCOLUMN,
+  IM_TITLE_SUCCESSSCREEN,
+  IM_TITLE_SURVEY,
+  IM_TITLE_UNABLETOLOAD,
+  IM_TITLE_UNABLETOLOADIMAGE,
+  IM_TITLE_UNABLETOUPLOAD,
+  IM_TITLE_UPLOADCOLLECTION,
+  IM_TITLE_UPLOADTOCLOUD,
+  NOTIFICATION_LIST_GROUP_ITEM_CLOSE_BTN_TITLE,
+  NOTIFICATION_LIST_GROUP_ITEM_COUNTER_TXT,
+  NOTIFICATION_LIST_GROUP_ITEM_TOGGLE_BTN_COLLAPSE_TITLE,
+  NOTIFICATION_LIST_GROUP_ITEM_TOGGLE_BTN_EXPAND_TITLE,
+  NOTIFICATION_LIST_GROUP_ITEM_TXT,
+  NOTIFICATION_LIST_ITEM_CLOSE_BTN_TITLE,
+  NOTIFICATION_LIST_ITEM_HIGH_PRIORITY_TXT,
+  NOTIFICATION_LIST_ITEM_LOW_PRIORITY_TXT,
+  NOTIFICATION_LIST_ITEM_MEDIUM_PRIORITY_TXT,
+  NOTIFICATION_LIST_ITEM_OVERLOW_BTN_TITLE,
+  NOTIFICATION_LIST_ITEM_READ,
+  NOTIFICATION_LIST_ITEM_SHOW_LESS,
+  NOTIFICATION_LIST_ITEM_SHOW_MORE,
+  NOTIFICATION_LIST_ITEM_TXT,
+  NOTIFICATION_LIST_ITEM_UNREAD,
+  PRODUCT_SWITCH_CONTAINER_LABEL,
+  SHELLBAR_CANCEL,
+  SHELLBAR_COPILOT,
+  SHELLBAR_LABEL,
+  SHELLBAR_LOGO,
+  SHELLBAR_NOTIFICATIONS,
+  SHELLBAR_OVERFLOW,
+  SHELLBAR_PRODUCTS,
+  SHELLBAR_PROFILE,
+  SHELLBAR_SEARCH,
+  SIDE_NAVIGATION_COLLAPSED_LIST_ARIA_ROLE_DESC,
+  SIDE_NAVIGATION_COLLAPSED_LIST_ITEMS_ARIA_ROLE_DESC,
+  SIDE_NAVIGATION_LIST_ARIA_ROLE_DESC,
+  SIDE_NAVIGATION_LIST_ITEMS_ARIA_ROLE_DESC,
+  SIDE_NAVIGATION_POPOVER_HIDDEN_TEXT,
+  TIMELINE_ARIA_LABEL,
+  UPLOADCOLLECTIONITEM_CANCELBUTTON_TEXT,
+  UPLOADCOLLECTIONITEM_EDIT_BUTTON_TEXT,
+  UPLOADCOLLECTIONITEM_ERROR_STATE,
+  UPLOADCOLLECTIONITEM_READY_STATE,
+  UPLOADCOLLECTIONITEM_RENAMEBUTTON_TEXT,
+  UPLOADCOLLECTIONITEM_RETRY_BUTTON_TEXT,
+  UPLOADCOLLECTIONITEM_TERMINATE_BUTTON_TEXT,
+  UPLOADCOLLECTIONITEM_UPLOADING_STATE,
+  UPLOADCOLLECTION_ARIA_ROLE_DESCRIPTION,
+  UPLOADCOLLECTION_DRAG_FILE_INDICATOR,
+  UPLOADCOLLECTION_DROP_FILE_INDICATOR,
+  UPLOADCOLLECTION_NO_DATA_DESCRIPTION,
+  UPLOADCOLLECTION_NO_DATA_TEXT,
+  VSD_CANCEL_BUTTON,
+  VSD_DIALOG_TITLE_SORT,
+  VSD_FILTER_BY,
+  VSD_ORDER_ASCENDING,
+  VSD_ORDER_DESCENDING,
+  VSD_RESET_BUTTON,
+  VSD_SORT_BY,
+  VSD_SORT_ORDER,
+  VSD_SUBMIT_BUTTON,
+  WIZARD_ACTIONSHEET_STEPS_ARIA_LABEL,
+  WIZARD_LIST_ARIA_DESCRIBEDBY,
+  WIZARD_LIST_ARIA_LABEL,
+  WIZARD_NAV_ARIA_LABEL,
+  WIZARD_NAV_ARIA_ROLE_DESCRIPTION,
+  WIZARD_NAV_STEP_DEFAULT_HEADING,
+  WIZARD_OPTIONAL_STEP_ARIA_LABEL,
+  WIZARD_STEP_ACTIVE,
+  WIZARD_STEP_ARIA_LABEL,
+  WIZARD_STEP_INACTIVE,
+  messagebundle_en_US_sappsd_default as default
+};
+//# sourceMappingURL=messagebundle_en_US_sappsd-B2RRECXZ.js.map

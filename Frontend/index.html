@@ -6,7 +6,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="Free HTML Templates" name="keywords" />
     <meta content="Free HTML Templates" name="description" />
-
+    <!-- tailwindcs  -->
+   <script src="https://cdn.tailwindcss.com"></script>
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon" />
 
@@ -305,6 +306,7 @@
               alt=""
             />
           </div>
+          
           <div class="col-lg-6">
             <h4 class="display-4 text-uppercase mb-4">
              Custom Digital Solutions That Build and Scale Your Business
@@ -344,6 +346,8 @@ Step into a future of untapped possibilities and substantial gains. With Scopic 
       class="container-fluid py-4 px-sm-3 px-md-5"
       style="background: #111111"
     >
+    <!-- Chatting services -->
+    <iframe src="chat.html" style="position: fixed; bottom: 0; right: 0; width: 920px; height: 650px; border: none; z-index: 9999;"></iframe>
     <div class="row">
         <div class="col-md-6">
       <p class="pt-3 text-white-50">
@@ -359,9 +363,16 @@ Step into a future of untapped possibilities and substantial gains. With Scopic 
 						</div>
 					</div>
     </div>
-
+<div> </div>
     </div>
     <!-- Footer End -->
+<!-- Chatting Servicve Start -->
+
+     <!-- <div
+      class="fixed bottom-20 right-7 bg-blue-600 text-white rounded-full w-14 h-14 text-2xl flex items-center justify-center cursor-pointer z-50 shadow-lg"
+      onclick="toggleChat()"
+    >💬</div> -->
+<!-- Chatting Servicve End -->
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-footer btn-lg-square back-to-top"
@@ -383,5 +394,110 @@ Step into a future of untapped possibilities and substantial gains. With Scopic 
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <!-- chating service  box Start-->
+    <!-- Chat Box -->
+    <!-- <div
+      id="chatBox"
+      class="fixed bottom-40 right-5 w-80 bg-white border border-gray-300 rounded-lg shadow-xl hidden flex-col overflow-hidden z-50"
+    >
+
+      <div
+        class="bg-blue-600 text-white px-4 py-2 flex justify-between items-center"
+      >
+        <span class="font-semibold">Need Help?</span>
+        <button
+          class="text-white text-lg focus:outline-none"
+          onclick="closeChat()"
+        >
+          ✖
+        </button>
+      </div>
+
+    
+      <div class="p-3 flex flex-col gap-2">
+        <button
+          class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm text-left"
+          onclick="showWithTyping('💼 ChoiceDev is an innovative software company...')"
+        >
+          About us
+        </button>
+        <button
+          class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm text-left"
+          onclick="showWithTyping('📞 Call our support team: +8801XXXXXXX')"
+        >
+          Support
+        </button>
+        <button
+          class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm text-left"
+          onclick="showWithTyping('💬 Visit our web chat to start chatting: your-chat-link.com')"
+        >
+          Live Chat
+        </button>
+        <button
+          class="bg-gray-900 hover:bg-black text-white px-4 py-2 rounded text-sm text-left"
+          onclick="showWithTyping('👨‍💻 Our team consists of skilled developers, designers, and project managers.')"
+        >
+          Our Team
+        </button>
+      </div>
+
+
+      <div
+        id="chatContent"
+        class="px-4 py-3 h-28 overflow-y-auto text-sm bg-gray-100 border-t border-b border-gray-200"
+      >
+        <div class="italic text-gray-500">Click a button for help......</div>
+      </div>
+
+
+      <div class="flex items-center p-3 border-t border-gray-200">
+        <input
+          type="text"
+          class="flex-1 px-3 py-2 border border-gray-300 rounded-l focus:outline-none text-sm"
+          placeholder="Typing Content..."
+        />
+        <button
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r text-sm"
+        >
+          Send
+        </button>
+      </div>
+    </div> -->
+    <!-- chating service  box Start-->
+     <!-- Chatting Service JavaScript Start -->
+
+    <!-- Script -->
+    <!-- <script>
+      function toggleChat() {
+        const chatBox = document.getElementById("chatBox");
+        const isVisible = chatBox.classList.contains("flex");
+        chatBox.classList.toggle("hidden", isVisible);
+        chatBox.classList.toggle("flex", !isVisible);
+      }
+
+      function closeChat() {
+        document.getElementById("chatBox").classList.remove("flex");
+        document.getElementById("chatBox").classList.add("hidden");
+      }
+
+      function showWithTyping(text) {
+        const content = document.getElementById("chatContent");
+        content.innerHTML = '<div class="italic text-gray-500">Typing...</div>';
+        setTimeout(() => {
+          typeWriter(content, text);
+        }, 500);
+      }
+
+      function typeWriter(element, text, i = 0) {
+        if (i === 0) element.innerHTML = "";
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          setTimeout(() => typeWriter(element, text, i + 1), 30);
+        }
+      }
+    </script> -->
+     <!-- Chatting Service JavaScript End -->
+
   </body>
 </html>

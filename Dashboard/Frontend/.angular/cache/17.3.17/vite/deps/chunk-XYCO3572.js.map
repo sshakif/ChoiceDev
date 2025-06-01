@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../node_modules/@ui5/webcomponents-base/dist/decorators/event.js"],
+  "sourcesContent": ["/**\n * Returns an event class decorator.\n *\n * @param { string } name the event name\n * @param { EventData } data the event data\n * @returns { ClassDecorator }\n */\nconst event = (name, data = {}) => {\n    return (target) => {\n        if (!Object.prototype.hasOwnProperty.call(target, \"metadata\")) {\n            target.metadata = {};\n        }\n        const metadata = target.metadata;\n        if (!metadata.events) {\n            metadata.events = {};\n        }\n        const eventsMetadata = metadata.events;\n        if (!eventsMetadata[name]) {\n            eventsMetadata[name] = data;\n        }\n    };\n};\nexport default event;\n"],
+  "mappings": ";AAOA,IAAM,QAAQ,CAAC,MAAM,OAAO,CAAC,MAAM;AAC/B,SAAO,CAAC,WAAW;AACf,QAAI,CAAC,OAAO,UAAU,eAAe,KAAK,QAAQ,UAAU,GAAG;AAC3D,aAAO,WAAW,CAAC;AAAA,IACvB;AACA,UAAM,WAAW,OAAO;AACxB,QAAI,CAAC,SAAS,QAAQ;AAClB,eAAS,SAAS,CAAC;AAAA,IACvB;AACA,UAAM,iBAAiB,SAAS;AAChC,QAAI,CAAC,eAAe,IAAI,GAAG;AACvB,qBAAe,IAAI,IAAI;AAAA,IAC3B;AAAA,EACJ;AACJ;AACA,IAAO,gBAAQ;",
+  "names": []
+}

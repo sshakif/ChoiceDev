@@ -1,0 +1,94 @@
+import {
+  init_Themes,
+  registerThemePropertiesLoader
+} from "./chunk-D5EWR56T.js";
+import {
+  __async,
+  __commonJS
+} from "./chunk-OQOTISLC.js";
+
+// node_modules/@ui5/webcomponents-fiori/dist/generated/json-imports/Themes.js
+var require_Themes = __commonJS({
+  "node_modules/@ui5/webcomponents-fiori/dist/generated/json-imports/Themes.js"(exports) {
+    init_Themes();
+    var loadThemeProperties = (themeName) => __async(exports, null, function* () {
+      switch (themeName) {
+        case "sap_fiori_3":
+          return (yield import(
+            /* webpackChunkName: "ui5-webcomponents-fiori-sap-fiori_3-parameters-bundle" */
+            "./parameters-bundle.css-7MKSBBRJ.js"
+          )).default;
+        case "sap_fiori_3_dark":
+          return (yield import(
+            /* webpackChunkName: "ui5-webcomponents-fiori-sap-fiori_3_dark-parameters-bundle" */
+            "./parameters-bundle.css-BTDVDMWY.js"
+          )).default;
+        case "sap_fiori_3_hcb":
+          return (yield import(
+            /* webpackChunkName: "ui5-webcomponents-fiori-sap-fiori_3_hcb-parameters-bundle" */
+            "./parameters-bundle.css-5HXJTSCL.js"
+          )).default;
+        case "sap_fiori_3_hcw":
+          return (yield import(
+            /* webpackChunkName: "ui5-webcomponents-fiori-sap-fiori_3_hcw-parameters-bundle" */
+            "./parameters-bundle.css-2KAFOEXB.js"
+          )).default;
+        case "sap_horizon":
+          return (yield import(
+            /* webpackChunkName: "ui5-webcomponents-fiori-sap-horizon-parameters-bundle" */
+            "./parameters-bundle.css-OIQR2BKX.js"
+          )).default;
+        case "sap_horizon_dark":
+          return (yield import(
+            /* webpackChunkName: "ui5-webcomponents-fiori-sap-horizon_dark-parameters-bundle" */
+            "./parameters-bundle.css-O7ITC25G.js"
+          )).default;
+        case "sap_horizon_dark_exp":
+          return (yield import(
+            /* webpackChunkName: "ui5-webcomponents-fiori-sap-horizon_dark_exp-parameters-bundle" */
+            "./parameters-bundle.css-H6RXPWMV.js"
+          )).default;
+        case "sap_horizon_exp":
+          return (yield import(
+            /* webpackChunkName: "ui5-webcomponents-fiori-sap-horizon_exp-parameters-bundle" */
+            "./parameters-bundle.css-ILREJV6O.js"
+          )).default;
+        case "sap_horizon_hcb":
+          return (yield import(
+            /* webpackChunkName: "ui5-webcomponents-fiori-sap-horizon_hcb-parameters-bundle" */
+            "./parameters-bundle.css-GKWGCLPN.js"
+          )).default;
+        case "sap_horizon_hcb_exp":
+          return (yield import(
+            /* webpackChunkName: "ui5-webcomponents-fiori-sap-horizon_hcb_exp-parameters-bundle" */
+            "./parameters-bundle.css-NFV2FDTQ.js"
+          )).default;
+        case "sap_horizon_hcw":
+          return (yield import(
+            /* webpackChunkName: "ui5-webcomponents-fiori-sap-horizon_hcw-parameters-bundle" */
+            "./parameters-bundle.css-SBBFIN2X.js"
+          )).default;
+        case "sap_horizon_hcw_exp":
+          return (yield import(
+            /* webpackChunkName: "ui5-webcomponents-fiori-sap-horizon_hcw_exp-parameters-bundle" */
+            "./parameters-bundle.css-4VQAS6RD.js"
+          )).default;
+        default:
+          throw "unknown theme";
+      }
+    });
+    var loadAndCheck = (themeName) => __async(exports, null, function* () {
+      const data = yield loadThemeProperties(themeName);
+      if (typeof data === "string" && data.endsWith(".json")) {
+        throw new Error(`[themes] Invalid bundling detected - dynamic JSON imports bundled as URLs. Switch to inlining JSON files from the build. Check the "Assets" documentation for more information.`);
+      }
+      return data;
+    });
+    ["sap_fiori_3", "sap_fiori_3_dark", "sap_fiori_3_hcb", "sap_fiori_3_hcw", "sap_horizon", "sap_horizon_dark", "sap_horizon_dark_exp", "sap_horizon_exp", "sap_horizon_hcb", "sap_horizon_hcb_exp", "sap_horizon_hcw", "sap_horizon_hcw_exp"].forEach((themeName) => registerThemePropertiesLoader("@ui5/webcomponents-fiori", themeName, loadAndCheck));
+  }
+});
+
+export {
+  require_Themes
+};
+//# sourceMappingURL=chunk-3O4D6ZD7.js.map

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../node_modules/@ui5/webcomponents-compat/dist/types/TableMode.js"],
+  "sourcesContent": ["/**\n * Different table modes.\n * @public\n */\nvar TableMode;\n(function (TableMode) {\n    /**\n     * Default mode (no selection).\n     * @public\n     */\n    TableMode[\"None\"] = \"None\";\n    /**\n     * Single selection mode (only one table row can be selected).\n     * @public\n     */\n    TableMode[\"SingleSelect\"] = \"SingleSelect\";\n    /**\n     * Multi selection mode (more than one table row can be selected).\n     * @public\n     */\n    TableMode[\"MultiSelect\"] = \"MultiSelect\";\n})(TableMode || (TableMode = {}));\nexport default TableMode;\n"],
+  "mappings": ";AAIA,IAAI;AAAA,CACH,SAAUA,YAAW;AAKlB,EAAAA,WAAU,MAAM,IAAI;AAKpB,EAAAA,WAAU,cAAc,IAAI;AAK5B,EAAAA,WAAU,aAAa,IAAI;AAC/B,GAAG,cAAc,YAAY,CAAC,EAAE;AAChC,IAAO,oBAAQ;",
+  "names": ["TableMode"]
+}

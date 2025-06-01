@@ -1,0 +1,94 @@
+{
+    "name": "flat3/lodata",
+    "description": "OData v4.01 Producer for Laravel",
+    "keywords": [
+        "odata",
+        "laravel",
+        "openapi"
+    ],
+    "homepage": "https://github.com/flat3/lodata",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Lloyd",
+            "email": "chrislloyd403@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Flat3\\Lodata\\": "src/",
+            "Flat3\\Lodata\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "doctrine/dbal": "^3|^4",
+        "php": "^7.3|^8.0",
+        "illuminate/bus": "^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/database": "^8.40.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/events": "^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/http": "^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/queue": "^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/routing": "^8.0|^9.0|^10.0|^11.0|^12.0",
+        "ext-simplexml": "*",
+        "ext-json": "*",
+        "ext-dom": "*",
+        "ext-pdo": "*",
+        "league/flysystem": "^1.0|^3.0",
+        "guzzlehttp/guzzle": "^6.5.5|^7.0.1",
+        "zbateson/stream-decorators": "^1.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Flat3\\Lodata\\ServiceProvider"
+            ],
+            "aliases": {
+                "Lodata": "Flat3\\Lodata\\Facades\\Lodata"
+            }
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4|^9.0|^10.0|^11.0",
+        "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0",
+        "spatie/phpunit-snapshot-assertions": "^4.2|main-dev",
+        "phpstan/phpstan": "^1.0.0",
+        "nunomaduro/collision": "^5.3|^6.0|^7.0|^8.0",
+        "brianium/paratest": "^6.2|^7.0",
+        "eclipxe/xmlschemavalidator": "^3.0",
+        "league/csv": "^9.7",
+        "sebastian/diff": "^4.0|^5.0|^6.0",
+        "m6web/redis-mock": "^5.5",
+        "predis/predis": "^2.1.2",
+        "mongodb/mongodb": "^1.11",
+        "ext-pdo_sqlsrv": "*",
+        "ext-odbc": "*",
+        "ext-pdo_odbc": "*",
+        "ext-pdo_pgsql": "*",
+        "ext-pdo_mysql": "*",
+        "ext-mongodb": "*",
+        "ext-redis": "*",
+        "ext-pdo_sqlite": "*",
+        "staudenmeir/eloquent-json-relations": "^1.0"
+    },
+    "suggest": {
+        "league/csv": "To use the CSV entity set",
+        "mongodb/mongodb": "To use the MongoDB entity set"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": [
+            "Composer\\Config::disableProcessTimeout",
+            "phpunit"
+        ],
+        "test-parallel": "testbench package:test --parallel",
+        "coverage": "XDEBUG_MODE=coverage phpunit --coverage-clover clover.xml",
+        "analyse": "phpstan analyse --memory-limit 1G",
+        "translate": "@php bin/translate.php"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
+    }
+}

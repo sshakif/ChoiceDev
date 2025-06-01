@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../node_modules/@ui5/webcomponents/dist/ToolbarRegistry.js"],
+  "sourcesContent": ["import getSharedResource from \"@ui5/webcomponents-base/dist/getSharedResource.js\";\nconst registry = getSharedResource(\"ToolbarItem.registry\", new Map());\nconst registerToolbarItem = (ElementClass) => {\n    registry.set(ElementClass.name, ElementClass);\n};\nconst getRegisteredToolbarItem = (name) => {\n    if (!registry.has(name)) {\n        throw new Error(`No template found for ${name}`);\n    }\n    return registry.get(name);\n};\nconst getRegisteredStyles = () => {\n    return [...registry.values()].map((ElementClass) => ElementClass.styles);\n};\nconst getRegisteredDependencies = () => {\n    return [...registry.values()].map((ElementClass) => ElementClass.dependencies).flat();\n};\nexport { registerToolbarItem, getRegisteredToolbarItem, getRegisteredStyles, getRegisteredDependencies, };\n"],
+  "mappings": ";;;;;;AAAA;AACA,IAAM,WAAW,0BAAkB,wBAAwB,oBAAI,IAAI,CAAC;AACpE,IAAM,sBAAsB,CAAC,iBAAiB;AAC1C,WAAS,IAAI,aAAa,MAAM,YAAY;AAChD;AACA,IAAM,2BAA2B,CAAC,SAAS;AACvC,MAAI,CAAC,SAAS,IAAI,IAAI,GAAG;AACrB,UAAM,IAAI,MAAM,yBAAyB,IAAI,EAAE;AAAA,EACnD;AACA,SAAO,SAAS,IAAI,IAAI;AAC5B;AACA,IAAM,sBAAsB,MAAM;AAC9B,SAAO,CAAC,GAAG,SAAS,OAAO,CAAC,EAAE,IAAI,CAAC,iBAAiB,aAAa,MAAM;AAC3E;AACA,IAAM,4BAA4B,MAAM;AACpC,SAAO,CAAC,GAAG,SAAS,OAAO,CAAC,EAAE,IAAI,CAAC,iBAAiB,aAAa,YAAY,EAAE,KAAK;AACxF;",
+  "names": []
+}
