@@ -1,0 +1,12 @@
+[2025-06-01 12:29:21] Score: , IP: ::1
+[2025-06-01 12:31:50] Score: , IP: ::1
+[2025-06-01 12:33:21] Score: 0.9, IP: ::1
+[2025-06-01 12:34:37] Score: 0.9, IP: ::1
+[2025-06-01 12:35:07] Score: 0.9, IP: ::1
+[2025-06-01 12:35:36] Score: 0.9, IP: ::1
+[2025-06-01 12:36:41] Score: 0.9, IP: ::1
+[2025-06-01 13:36:53] Score: 0.9, IP: ::1, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-01 13:36:53] ✅ HUMAN | Score: 0.9, IP: ::1
+[2025-06-01 13:38:01] Score: 0.9, IP: ::1, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-01 13:38:01] ✅ HUMAN | Score: 0.9, IP: ::1
+[2025-06-01 13:45:33] Score: 0.9, IP: ::1
