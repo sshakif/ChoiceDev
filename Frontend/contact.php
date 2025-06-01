@@ -12,17 +12,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = htmlspecialchars($_POST['message']);
     require_once './vendor/autoload.php'; 
     $mail = new PHPMailer(true); 
-
     try {
         $mail->isSMTP();  
         $mail->Host = 'smtp.gmail.com'; 
         $mail->SMTPAuth = true;  
         $mail->Port = 587;  
-        $mail->Username = 'hybritechinnovationsltd@gmail.com';  
+        $mail->Username = 'choicedevinfo@gmail.com';  
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Password = 'gizflulxmzwywrpd';  
+        $mail->Password = 'ehangsxysryxueid';  
         $mail->setFrom($email, $name);  
-        $mail->addAddress('arahman.hybritech65@gmail.com', 'Recipient Name');
+        $mail->addAddress('choicedevinfo@gmail.com', 'Recipient Name');
         $mail->addReplyTo($email, $name);
         $mail->Subject = $subject;
         $mail->isHTML(true);
