@@ -43,7 +43,7 @@
     <div class="container bg-white position-relative">
       <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
         <a href="index.html" class="navbar-brand text-secondary">
-       <img src="img/Logo-002.png" alt="Logo">
+          <img src="img/Logo-002.png" alt="Logo" />
         </a>
         <button
           type="button"
@@ -58,8 +58,11 @@
             <a href="index.html" class="nav-item nav-link">Home</a>
             <!-- <a href="about.html" class="nav-item nav-link">About</a> -->
             <a href="service.html" class="nav-item nav-link">Services</a>
-            <a href="price.html" class="nav-item nav-link active">Resources</a>
+            <a href="resources.html" class="nav-item nav-link">Resources</a>
             <a href="contact.html" class="nav-item nav-link">Contact</a>
+            <a href="contact.html" class="nav-item nav-link quote-button"
+              >GET A FREE QUOTE</a
+            >
           </div>
         </div>
       </nav>
@@ -70,7 +73,7 @@
       <div class="banner-overlay">
         <div class="container banner-items">
           <div class="row">
-            <div class="px-md-5 text-center text-lg-center">
+            <div class="px-md-5 text-center blog-title-banner text-lg-center">
               <h1 class="display-5 text-uppercase mb-3">
                 How AI is Changing the Way We Write Code
               </h1>
@@ -80,11 +83,24 @@
         </div>
       </div>
     </div>
-    <div class="blog-body">
+    <div class="blog-body pt-5">
       <div class="container">
         <div class="row pb-5">
           <div class="col-md-12">
             <div class="blog-content-details1">
+              <p>
+                In recent years, artificial intelligence has made a profound
+                impact across industries—but few have felt the shift as
+                dramatically as the world of software development. What used to
+                be a purely manual, logic-driven process is now being redefined
+                by AI tools that can write, optimize, and even review code. The
+                way we build software is fundamentally changing—and fast.
+              </p>
+              <p>
+                In this post, we’ll explore how AI is transforming coding, the
+                tools leading the charge, and what this means for the future of
+                developers.
+              </p>
               <h3 class="display-5 text-dark pt-5 pb-3">
                 The Rise of AI-Powered Coding Tools
               </h3>
@@ -177,6 +193,25 @@
                 </li>
               </ul>
               <h3 class="display-5 text-dark pt-5 pb-3">
+                Challenges and Concerns
+              </h3>
+              <p>While AI offers huge benefits, it’s not without concerns:</p>
+              <ul>
+                <li>
+                  Security Risks: AI might suggest insecure code or expose
+                  training data from public repositories.
+                </li>
+                <li>
+                  Over-reliance: Developers may become too dependent, risking a
+                  decline in fundamental skills.
+                </li>
+                <li>
+                  Bias & Errors: AI can replicate biased or flawed patterns
+                  found in its training data.
+                </li>
+              </ul>
+              <p>The best practice? Use AI as a co-pilot, not an autopilot.</p>
+              <h3 class="display-5 text-dark pt-5 pb-3">
                 What the Future Looks Like
               </h3>
               <p>Looking ahead, we can expect:</p>
@@ -208,42 +243,108 @@
                 code—they’ll collaborate with AI to create better, faster, and
                 smarter software.
               </p>
-              <p>Are you ready to code with AI?</p>
-              <h3 class="display-5 text-dark pt-5 pb-3">What’s Your Take?</h3>
-              <p>
-                Have you used any AI coding tools recently? Share your
-                experiences or favorite tools in the comments!
-              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- Footer Start -->
-    <div
-      class="container-fluid py-4 px-sm-3 px-md-5"
-      style="background: #111111"
-    >
-      <div class="row">
-        <div class="col-md-6">
-          <p class="pt-3 text-white-50">
-            &copy; <a href="#">ChoiceDev Ltd</a>. All Rights Reserved.
-          </p>
-        </div>
-        <div class="col-md-6 pt-2">
-          <div class="footer-botton-social-icon">
-            <ul>
-              <li>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-              </li>
-            </ul>
+    <footer>
+      <div
+        class="container-fluid py-4 px-sm-3 px-md-5"
+        style="background: #0f0f0f"
+      >
+        <div class="container">
+          <div class="row pt-5 footer-top-row">
+            <div class="col-md-3 footer-logo-col">
+              <div class="footer-logo">
+                <a href="index.html">
+                  <img src="img/Logo-002.png" alt="Logo" />
+                </a>
+              </div>
+            </div>
+            <div class="col-md-4 footer-desc-col">
+              <p
+                class="text-light justify-text"
+                style="margin-bottom: 40px; font-size: 15px"
+              >
+                ChoiceDev blends advanced AI development with intuitive UX
+                design to deliver digital products that elevate brand value and
+                customer experience.
+              </p>
+              <a
+                href="contact.html"
+                class="btn-footer-contact text-uppercase py-3 px-4"
+              >
+                Contact Us
+              </a>
+            </div>
+            <div class="col-md-5 contact-info footer-contact-col">
+              <div class="contact-item">
+                <i class="fa-solid fa-phone"></i>
+                <h6>+980 123 (4567) 890</h6>
+              </div>
+              <div class="contact-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <h6>123 Street, New York, USA</h6>
+              </div>
+              <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i>
+                <h6>example@gmail.com</h6>
+              </div>
+            </div>
+          </div>
+          <div class="row footer-social-row">
+            <div class="col-md-4 offset-md-3">
+              <div class="footer-botton-social-icon pt-3">
+                <ul>
+                  <li>
+                    <a
+                      href="https://www.facebook.com/profile.php?id=61576885797545"
+                      target="_blank"
+                    >
+                      <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.linkedin.com/company/choicedev1"
+                      target="_blank"
+                    >
+                      <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row footer-nav-row">
+            <div class="col-md-9 offset-md-3">
+              <div
+                class="footer-nav pt-2"
+                style="display: flex; flex-direction: row; gap: 50px"
+              >
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="service.html" class="nav-item nav-link">Services</a>
+                <a href="price.html" class="nav-item nav-link">Blogs</a>
+                <a href="contact.html" class="nav-item nav-link"
+                  >Get in Touch</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row footer-legal-row">
+            <div class="col-md-8 offset-md-3">
+              <div class="footer-nav-2 pt-1">
+                <a href="policy.html" class="text-muted">Privacy Policy</a>
+                <span class="text-muted">|</span>
+                <a href="terms.html" class="text-muted">Terms and conditions</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </footer>
     <!-- Footer End -->
 
     <!-- Back to Top -->
