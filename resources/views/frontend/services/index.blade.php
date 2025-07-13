@@ -1,25 +1,31 @@
 @extends('frontend.master')
 @section('content')
-<div class="banner2">
-  <div class="banner-overlay">
-    <div class="container banner-items">
-      <div class="row">
-        <div class=" px-md-5 text-center text-lg-left">
-          <h1 class="display-3 text-uppercase mb-3">
-            Digital Product Design & Development Services
-          </h1>
-          <p class="text-light mb-4">
-            From initial design to deployment and ongoing management, we handle every step of your web project.
-            Whether you need a stunning UX/UI refresh, a high-converting online store, or lightning-fast hosting,
-            we’ve got you covered.
-          </p>
-        </div>
 
+<!-- Page Header Start -->
+    <div class="banner2">
+      <div class="banner-overlay">
+        <div class="banner-items-service">
+          <div class="row">
+            <div class="col-lg-6 px-md-5 text-center text-lg-left">
+              <h1 class="display-4 text-uppercase mb-3">
+                Future-Ready Digital Products, Designed to Perform
+              </h1>
+              <p class="text-light justify-text mb-4">
+                We combine cutting-edge technology with strategic design to
+                build scalable solutions that evolve with your business. Every
+                product we craft is optimized for speed, security, and seamless
+                user experience—engineered to outperform today’s standards and
+                adapt to tomorrow’s demands. Beyond functionality, we create
+                intelligent digital experiences powered by the latest tech
+                stacks—solutions built to excel today and pivot for tomorrow's
+                opportunities.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<!-- Page Header Start -->
+<!-- Page Header End -->
 
 <!-- service-cards-design -->
 <div class="common-bg pb-5">

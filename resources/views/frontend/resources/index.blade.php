@@ -1,21 +1,23 @@
 @extends('frontend.master')
 @section('content')
- <div class="banner3">
-		<div class="banner-overlay">
-			<div class="container banner-items">
-				<div class="row">
-					<div class=" px-md-5 text-center text-lg-left">
-						<h1 class="display-3 text-uppercase mb-3">
-							Learn & Grow with Our Insights
-						</h1>
-						<p class="text-light mb-4">
-							Expert tips, trends, and success stories to empower your digital journey
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
+   <div class="banner3">
+      <div class="banner-overlay">
+        <div class="container banner-items-resources">
+          <div class="row">
+            <div class="px-md-5 text-lg-left">
+              <h1 class="display-3 text-uppercase mb-3">
+                Learn & Grow with Our <br />
+                Insights
+              </h1>
+              <p class="text-light mb-4">
+                Expert tips, trends, and success stories to empower your digital
+                journey
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 	<!-- blog-list-start -->
 	<div class="common-bg">
 		<div class="blog-grid-area">

@@ -2,32 +2,32 @@
 @section('content')
 <!-- Header Start -->
 <div class="banner">
-    <div class="banner-overlay">
-        <div class="container banner-items">
-            <div class="row">
-                <div class=" px-md-5 text-center text-lg-left">
-                    <h1 class="display-2 text-uppercase mb-3">
-                        Driving innovation, powering growth
-                    </h1>
-                    <p class="text-light">
-                        Sea ipsum kasd eirmod kasd magna,est sea et diam ipsum est amet sed
-                        sit. Ipsum dolor no justo dolor et, lorem ut dolor erat dolore sed
-                        ipsum at ipsum nonumy amet. Clita lorem dolore sed stet et est justo
-                        dolore.
-                    </p>
-                    <a href="" class="btn btn-home text-uppercase mt-1 py-3 px-5">Learn More</a>
-                </div>
-
-            </div>
+    <div class="banner-video">
+      <video autoplay muted loop class="w-100">
+        <source src="{{ asset('/') }}frontend-assets/img/AdobeStock_250452057_hero_banner.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="video-overlay"></div>
+    
+    <div class="container banner-items">
+      <div class="row">
+        <div class="px-md-5 text-center text-lg-left">
+          <h1 class="display-2 text-uppercase mb-3">
+            Driving innovation, powering growth
+          </h1>
+          <p class="text-light">
+            Driving innovation to unlock new possibilities and accelerate progress. Powering growth through
+            forward-thinking solutions that shape the future.
+          </p>
+          <a href="service.html" class="btn btn-home text-uppercase mt-1 py-3 px-5">
+            Learn More
+          </a>
         </div>
-        <div class="banner-video">
-            <video autoplay muted loop class="w-100">
-                <source src="{{ asset('/') }}frontend-assets/img/software-banner.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
-        </div>
+      </div>
     </div>
 </div>
+
 <!-- Header End -->
 
 <div class="common-bg style-two pb-5 pt-5">
