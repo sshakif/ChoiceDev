@@ -15,12 +15,15 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->enum('type', ['development', 'creative'])->default('development');
             $table->string('title')->nullable();
-            $table->string('short_desc')->nullable();
             $table->text('long_desc')->nullable(); 
             $table->string('file_path')->nullable();
             $table->boolean('status')->default(1);
 
+            $table->string('creative_title')->nullable();
+            $table->text('creative_desc')->nullable();
+            
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
 

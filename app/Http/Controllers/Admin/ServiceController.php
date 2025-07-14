@@ -9,30 +9,29 @@ use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
-    // Display all services
     public function index()
     {
-        $services = Service::orderBy('created_at', 'desc')->get();
-        return view('admin.backend.service.serviceList', compact('services'));
+        $developmentServices = Service::where('type', 'development')->latest()->get();
+        $creativeServices = Service::where('type', 'creative')->latest()->get();
+        return view('admin.backend.service.serviceList', compact('developmentServices', 'creativeServices'));
     }
 
-    // Store a new service
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'short_desc' => 'required|string|max:255',
+            'type' => 'required|in:development,creative',
+            'title' => 'nullable|string|max:255',
             'long_desc' => 'nullable|string',
             'file_path' => 'nullable|image|mimes:jpg,png,jpeg,svg|max:10240',
+            'creative_title' => 'nullable|string|max:255',
+            'creative_desc' => 'nullable|string',
             'status' => 'required|boolean'
         ]);
 
         $imagePath = null;
-        $mime_type = null;
 
         if ($request->hasFile('file_path')) {
             $image = $request->file('file_path');
-            $mime_type = $image->getClientMimeType();
             $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
 
             if (!file_exists(public_path('upload/service'))) {
@@ -44,10 +43,12 @@ class ServiceController extends Controller
         }
 
         Service::create([
+            'type' => $request->type, // 👈 MAKE SURE THIS IS INCLUDED
             'title' => $request->title,
-            'short_desc' => $request->short_desc,
             'long_desc' => $request->long_desc,
             'file_path' => $imagePath,
+            'creative_title' => $request->creative_title,
+            'creative_desc'  => $request->creative_desc,
             'status' => $request->status,
             'created_by' => Auth::id(),
         ]);
@@ -55,36 +56,34 @@ class ServiceController extends Controller
         return redirect()->route('service.list')->with('success', 'Service created successfully.');
     }
 
-    // Show edit form
+
     public function edit($id)
     {
         $service = Service::findOrFail($id);
         return view('admin.backend.service.editService', compact('service'));
     }
 
-    // Update the service
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'short_desc' => 'required|string|max:255',
+            'type' => 'required|in:development,creative',
+            'title' => 'nullable|string|max:255',
             'long_desc' => 'nullable|string',
             'file_path' => 'nullable|image|mimes:jpg,png,jpeg,svg|max:10240',
+            'creative_title' => 'nullable|string|max:255',
+            'creative_desc' => 'nullable|string',
         ]);
 
         $service = Service::findOrFail($id);
 
         $imagePath = $service->file_path;
-        $mime_type = $service->mime_type;
 
         if ($request->hasFile('file_path')) {
-            // Delete old image
             if ($service->file_path && file_exists(public_path($service->file_path))) {
                 unlink(public_path($service->file_path));
             }
 
             $image = $request->file('file_path');
-            $mime_type = $image->getClientMimeType();
             $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
 
             if (!file_exists(public_path('upload/service'))) {
@@ -96,18 +95,19 @@ class ServiceController extends Controller
         }
 
         $service->update([
-            'title' => $request->title,
-            'short_desc' => $request->short_desc,
-            'long_desc' => $request->long_desc,
-            'file_path' => $imagePath,
-            'status' => $request->status ?? 1,
-            'updated_by' => Auth::id(),
+            'type'           => $request->type,
+            'title'          => $request->type === 'development' ? $request->title : null,
+            'long_desc'      => $request->type === 'development' ? $request->long_desc : null,
+            'file_path'      => $request->type === 'development' ? $imagePath : null,
+            'creative_title' => $request->type === 'creative' ? $request->creative_title : null,
+            'creative_desc'  => $request->type === 'creative' ? $request->creative_desc : null,
+            'status'         => $request->status ?? 1,
+            'updated_by'     => Auth::id(),
         ]);
 
         return redirect()->route('service.list')->with('success', 'Service updated successfully.');
     }
 
-    // Delete service
     public function destroy($id)
     {
         $service = Service::findOrFail($id);

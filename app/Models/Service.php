@@ -11,12 +11,15 @@ class Service extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title',
-        'short_desc',
-        'long_desc',
-        'file_path',
-        'status',
-        'created_by',
-        'updated_by',
+    'type',
+    'title',
+    'long_desc',
+    'file_path',
+    'status',
+    'creative_title',
+    'creative_desc',
+    'created_by',
+    'updated_by',
     ];
+
 }
