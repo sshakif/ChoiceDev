@@ -19,177 +19,122 @@
       </div>
     </div>
 	<!-- blog-list-start -->
-	<div class="common-bg">
-		<div class="blog-grid-area">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8">
-						<div class="row">
-							<div class="col-lg-12 col-md-6">
-								<div class="single-blog-box">
-									<div class="blog-thumb">
-										<img src="{{ asset('/') }}frontend-assets/img/blog-6.png" alt="">
-									</div>
-									<div class="blog-content">
-										<div class="blog-meta">
-											<span>Admin: Mera</span>
-											<span>Comments (04)</span>
-										</div>
-										<div class="blog-title">
-											<a href="blog-details.html">Solution This Business For is Marketing Blog</a>
-											<p>Monotonectaly granular to front markets task data semper maecenas ferform
-											</p>
-										</div>
-									</div>
-									<div class="blog-category">
-										<a href="#">SEO</a>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-12 col-md-6">
-								<div class="single-blog-box">
-									<div class="blog-thumb">
-										<img src="{{ asset('/') }}frontend-assets/img/blog-2.png" alt="">
-									</div>
-									<div class="blog-content">
-										<div class="blog-meta">
-											<span>Admin: Mera</span>
-											<span>Comments (04)</span>
-										</div>
-										<div class="blog-title">
-											<a href="blog-details.html">Easy and Most Powerful Server and Platform.</a>
-											<p>Monotonectaly granular to front markets task data semper maecenas ferform
-											</p>
-										</div>
-									</div>
-									<div class="blog-category">
-										<a href="#">UI/UX</a>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-12 col-md-6">
-								<div class="single-blog-box">
-									<div class="blog-thumb">
-										<img src="{{ asset('/') }}frontend-assets/img/blog-3.png" alt="">
-									</div>
-									<div class="blog-content">
-										<div class="blog-meta">
-											<span>Admin: Mera</span>
-											<span>Comments (04)</span>
-										</div>
-										<div class="blog-title">
-											<a>In eu fringilla, accumsan purusvel sollicitudin.</a>
-											<p>Monotonectaly granular to front markets task data semper maecenas ferform
-											</p>
-										</div>
-									</div>
-									<div class="blog-category">
-										<a href="#">Software</a>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-12 col-md-6">
-								<div class="single-blog-box">
-									<div class="blog-thumb">
-										<img src="{{ asset('/') }}frontend-assets/img/blog-4.png" alt="">
-									</div>
-									<div class="blog-content">
-										<div class="blog-meta">
-											<span>Admin: Mera</span>
-											<span>Comments (04)</span>
-										</div>
-										<div class="blog-title">
-											<a href="blog-details.html">Vivamus vehicula nl purus at eros interdum.</a>
-											<p>Monotonectaly granular to front markets task data semper maecenas ferform
-											</p>
-										</div>
-									</div>
-									<div class="blog-category">
-										<a href="#">Android</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="widget-sidber">
-									<div class="widget_search">
-										<form action="#" method="get">
-											<input type="text" name="s" value="" placeholder="Search Here"
-												title="Search for:">
-											<button type="submit" class="icons">
-												<i class="fa fa-search"></i>
-											</button>
-										</form>
-									</div>
-								</div>
-								<div class="widget-sidber">
-									<div class="widget-sidber-content">
-										<h4>Categories</h4>
-									</div>
-									<div class="widget-category">
-										<ul>
-											<li><a href="#">Web Development<i class="bi bi-arrow-right"></i></a></li>
-											<li><a href="#">UX/UI<i class="bi bi-arrow-right"></i></a></li>
-											<li><a href="#">Ecommerce solutions<i class="bi bi-arrow-right"></i></a>
-											</li>
-											<li><a href="#">Web Design<i class="bi bi-arrow-right"></i></a></li>
-											<li><a href="#">SEO<i class="bi bi-arrow-right"></i></a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="widget-sidber">
-									<div class="widget-sidber-content">
-										<h4>Popular Post</h4>
-									</div>
-									<div class="sidber-widget-recent-post">
-										<div class="recent-widget-thumb">
-											<img src="{{ asset('/') }}frontend-assets/img/recent-post-1.png" alt="">
-										</div>
-										<div class="recent-widget-content">
-											<a href="#">Digital Marketing Strategy Action P…</a>
-											<p> Jan, 26 2024</p>
-										</div>
-									</div>
-									<div class="sidber-widget-recent-post">
-										<div class="recent-widget-thumb">
-											<img src="{{ asset('/') }}frontend-assets/img/recent-post-2.png" alt="">
-										</div>
-										<div class="recent-widget-content">
-											<a href="#">6 Things You Must Know Before Hirin…</a>
-											<p> Jan, 26 2024</p>
-										</div>
-									</div>
-									<div class="sidber-widget-recent-post">
-										<div class="recent-widget-thumb">
-											<img src="{{ asset('/') }}frontend-assets/img/recent-post-3.png" alt="">
-										</div>
-										<div class="recent-widget-content">
-											<a href="#">In eu fringilla, accumsan purus vel sollicitudin.</a>
-											<p> Jan, 26 2024</p>
-										</div>
-									</div>
-								</div>
-								<div class="widget-sidber">
-									<div class="widget-sidber-content">
-										<h4>Tags</h4>
-									</div>
-									<div class="widget-catefories-tags">
-										<a href="#">Design</a>
-										<a href="#">Software</a>
-										<a href="#">SEO</a>
-										<a href="#">Development</a>
-										<a href="#">Hosting</a>
-										<a href="#">Technology</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
+ <div class="container-fluid common-bg py-5">
+      <div class="container pt-5 pb-3">
+        <h1 class="display-4 text-uppercase text-center mb-5">
+          Visit Our Blogs
+        </h1>
+        <div class="row">
+          <div class="col-12 text-center mb-2">
+            <ul class="list-inline mb-4" id="portfolio-flters">
+              <li
+                class="btn btn-outline-dark text-uppercase py-2 px-4 mb-3 active"
+                data-filter="*" style="margin-right: 10px;"
+              >
+                <i class="fa fa-star mr-2"></i>All
+              </li>
+              <li
+                class="btn btn-outline-dark text-uppercase mb-3 py-2 px-4"
+                data-filter=".first" style="margin-right: 10px;"
+              >
+                <i class="fa fa-laptop-code mr-2"></i>Design
+              </li>
+              <li
+                class="btn btn-outline-dark text-uppercase py-2 mb-3 px-4"
+                data-filter=".second"
+              >
+                <i class="fa fa-mobile-alt mr-2"></i>Development
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row portfolio-container">
+          <div class="col-lg-4 col-md-6 mb-4 portfolio-item second">
+            <div class="blog-card">
+              <div class="blog-img">
+                <a href="blog1.html">
+                  <img src="{{ asset('/') }}frontend-assets/img/AI card.jpeg" alt="blog" />
+                </a>
+                <ul>
+                  <li>
+                    <a href="#">Development</a>
+                  </li>
+                  <!-- <li>
+                    <span>May 20, 2025</span>
+                  </li> -->
+                </ul>
+              </div>
+              <div class="blog-card-caption">
+                <h4>How AI is Changing the Way We Write Code</h4>
+                <p>
+                  <span
+                    >AI is transforming coding by automating repetitive tasks and generating code snippets, boosting developer productivity. It also enables smarter debugging and real-time collaboration, making software development faster and more efficient.
+                  </span>
+                </p>
+                <a href="blog1.html" class="read-more-btn-1">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4 portfolio-item second">
+            <div class="blog-card">
+              <div class="blog-img">
+                <a href="blog2.html">
+                  <img src="{{ asset('/') }}frontend-assets/img/Low card card.jpeg" alt="blog" />
+                </a>
+                <ul>
+                  <li>
+                    <a href="#">Development</a>
+                  </li>
+                  <!-- <li>
+                    <span>May 05, 2025</span>
+                  </li> -->
+                </ul>
+              </div>
+              <div class="blog-card-caption">
+                <h4>Exploring the Rise of Low-Code and No-Code Platforms</h4>
+                <p class="justify-text">
+                  <span
+                    >Low-code and no-code platforms empower rapid app
+                    development with minimal coding, accelerating digital
+                    transformation and reducing reliance on traditional
+                    developers.</span
+                  >
+                </p>
+                <a href="blog2.html" class="read-more-btn">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4 portfolio-item first">
+            <div class="blog-card">
+              <div class="blog-img">
+                <a href="blog3.html">
+                  <img src="{{ asset('/') }}frontend-assets/img/Graphic Design for card.jpeg" alt="blog" />
+                </a>
+                <ul>
+                  <li>
+                    <a href="#">Design</a>
+                  </li>
+                  <!-- <li>
+                    <span>March 24, 2025</span>
+                  </li> -->
+                </ul>
+              </div>
+              <div class="blog-card-caption">
+                <h4>The Role of Design in Building Trust Online</h4>
+                <p class="justify-text">
+                  <span
+                    >Good design builds trust by creating clear, user-friendly,
+                    and professional online experiences. It helps users feel
+                    confident and secure when interacting with digital
+                    platforms.
+                  </span>
+                </p>
+                <a href="blog3.html" class="read-more-btn">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 @endsection

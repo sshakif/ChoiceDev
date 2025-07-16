@@ -26,6 +26,11 @@
     <link href="{{ asset('/') }}frontend-assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
     <link href="{{ asset('/') }}frontend-assets/lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('/') }}frontend-assets/css/style.css" rel="stylesheet" />
 </head>

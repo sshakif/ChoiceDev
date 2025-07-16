@@ -210,8 +210,8 @@
 
                     <!-- Subtitle Field -->
                     <div class="mb-3">
-                        <label for="subtitle" class="form-label">Subtitle (<span id="subtitleCounter">0</span>/150)</label>
-                        <input type="text" name="subtitle" id="subtitle" class="form-control" value="{{ old('subtitle') }}" maxlength="150">
+                        <label for="subtitle" class="form-label">Subtitle (<span id="subtitleCounter">0</span>/350)</label>
+                        <input type="text" name="subtitle" id="subtitle" class="form-control" value="{{ old('subtitle') }}" maxlength="350">
                         @error('subtitle')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror

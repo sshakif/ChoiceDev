@@ -109,6 +109,9 @@
     <script src="{{ asset('/') }}frontend-assets/lib/isotope/isotope.pkgd.min.js"></script>
     <script src="{{ asset('/') }}frontend-assets/lib/lightbox/js/lightbox.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- Contact Javascript File -->
     <script src="{{ asset('/') }}frontend-assets/mail/jqBootstrapValidation.min.js"></script>
     <script src="{{ asset('/') }}frontend-assets/mail/contact.js"></script>
