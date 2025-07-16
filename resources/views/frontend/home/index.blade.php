@@ -201,7 +201,7 @@
                   <h5 class="text-black">Nourish Life Care – Disability Support Services Website</h5>
               
                   <p style="font-size: 14px;">We collaborated with Nourish Life Care, a dedicated disability care
-                    provider, to design and develop a fully responsive website that reflects their mission of empowering
+                    provider, to design and develop an fully responsive website that reflects their mission of empowering
                     individuals with tailored support. The project focused on creating an accessible, user-friendly, and
                     informative platform that highlights their services, values, and commitment to person-centred care.
                     Our team delivered an intuitive UI/UX design, integrated service overviews, structured content
