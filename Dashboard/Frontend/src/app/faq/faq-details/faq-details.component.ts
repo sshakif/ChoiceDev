@@ -1,12 +1,60 @@
-import { Component } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-faq-details',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './faq-details.component.html',
-  styleUrl: './faq-details.component.scss'
+  styleUrl: './faq-details.component.scss',
 })
-export class FaqDetailsComponent {
+export class FaqDetailsComponent implements OnInit, OnChanges {
+  @Input() faqId: number | null = null;
+  @Input() faqData: any = {};
+  @Input() isOpen: boolean = false;
+  @Output() close: EventEmitter<void> = new EventEmitter<void>();
 
+  formloading: boolean = false;
+  question: string = '';
+  answer: string = '';
+  isActive: boolean = true;
+  ngOnInit(): void {
+    console.log(this.faqId);
+    // if (this.faqData) {
+    //   this.question = this.faqData.question;
+    //   this.answer = this.faqData.answer;
+    // }
+  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (changes['faqData'] && this.faqData) {
+  //     this.question = this.faqData.question;
+  //     this.answer = this.faqData.answer;
+  //     this.isActive = this.faqData.is_active;
+  //   }
+  // }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['faqData'] && changes['faqData'].currentValue) {
+      this.setData();
+    }
+  }
+  setData() {
+    if (this.faqData) {
+      this.question = this.faqData.question;
+      this.answer = this.faqData.answer;
+    }
+  }
+  closeDialog() {
+    this.isOpen = false;
+    this.close.emit();
+  }
 }

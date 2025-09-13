@@ -56,9 +56,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         {
           id: 'services',
           method: 'GET',
-          url: '/odata/ServicePageDetails?$count=true',
+          url: '/odata/ServicePages?$count=true',
         },
-        
+        {
+          id: 'EmployeeList',
+          method: 'GET',
+          url: '/odata/Employees?$count=true',
+        },
         
         {
           id: 'faqList',
@@ -109,7 +113,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.createCountItem('Services', counts['services'], 'database', [
         '/service-list',
       ]),
-      
+
+       this.createCountItem('Employees', counts['EmployeeList'], 'employee', [
+        '/employee-list',
+      ]),
       this.createCountItem('FAQs', counts['faqList'], 'question-mark', [
         '/faq-list',
       ]),
@@ -140,6 +147,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private initializeWithEmptyData(): void {
     this.countArray = [
       this.createCountItem('Services', 0, 'database', ['services']),
+      this.createCountItem('Employees', 0, 'Employee', ['Employee']),
       this.createCountItem('FAQs', 0, 'question-mark', ['faqs']),
 
     ];

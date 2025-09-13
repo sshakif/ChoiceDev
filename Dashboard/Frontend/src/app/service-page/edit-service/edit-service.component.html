@@ -1,1 +1,73 @@
-<p>edit-service works!</p>
+<ui5-dialog [open]="isOpen" header-text="Edit Service Page" class="w-50" state="Information">
+  <ui5-tabcontainer [collapsed]="isTabCollapsed">
+    <ui5-tab text="Info">
+      <ui5-busy-indicator [active]="formloading" delay="100">
+        <div class="p-4">
+          <div class="d-flex align-items-center gap-2 mb-4">
+            <ui5-label show-colon>Active</ui5-label>
+            <ui5-switch design="Graphical" [checked]="isActive" (change)="toggleAction($event)"></ui5-switch>
+          </div>
+
+          <div class="mb-3">
+            <ui5-label show-colon required>Title</ui5-label>
+            <ui5-textarea class="w-100" placeholder="Enter title" [(ngModel)]="Service.title" required></ui5-textarea>
+          </div>
+
+          <div class="mb-3">
+            <ui5-label show-colon required>Short Description</ui5-label>
+            <ui5-textarea class="w-100" placeholder="Enter short description" [(ngModel)]="Service.short_description"
+              required></ui5-textarea>
+          </div>
+          <div class="mb-3">
+            <ui5-label show-colon required>Long Description</ui5-label>
+            <ui5-textarea class="h-[150px] w-full" placeholder="Enter long description"
+              [(ngModel)]="Service.long_description" required></ui5-textarea>
+          </div>
+
+          <div *ngIf="errorMessage" class="text-danger mt-2">
+            {{ errorMessage }}
+          </div>
+        </div>
+      </ui5-busy-indicator>
+    </ui5-tab>
+    <ui5-tab separator text="Attachments">
+      <div class="p-4">
+        <app-attachments [recordId]="ServiceId?.toString() ?? ''" [modelName]="'service-page'" [multiple]="true"
+          [allowedTypes]="[
+            'image/jpeg',
+            'image/png',
+            'image/webp',
+            'application/pdf',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+          ]" [maxFileSize]="2048" (uploadError)="errorMessage = $event"
+          (fileUploaded)="onAttachmentUploaded($event)"></app-attachments>
+      </div>
+    </ui5-tab>
+    <!-- <ui5-tab separator text="Attachments">
+      <div class="p-4">
+        <app-attachments
+          [recordId]="ServiceId?.toString() ?? ''" [modelName]="'service-page'"
+          [multiple]="true"
+          [allowedTypes]="[
+            'image/jpeg',
+            'image/png',
+            'image/webp',
+            'application/pdf',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+          ]"
+          [maxFileSize]="2048"
+          (uploadError)="errorMessage = $event"
+          (fileUploaded)="onAttachmentUploaded($event)" ></app-attachments>
+      </div>
+    </ui5-tab> -->
+  </ui5-tabcontainer>
+
+  <div slot="footer" class="d-flex justify-content-end w-100 gap-2 p-2">
+    <ui5-button design="Emphasized" (click)="updateData()" [disabled]="formloading">
+      Update
+    </ui5-button>
+    <ui5-button design="Default" (click)="closeDialog()">Close</ui5-button>
+  </div>
+</ui5-dialog>
+
+<app-toast-message [IsOpenToastAlert]="IsOpenToastAlert" [ToastType]="ToastType"></app-toast-message>

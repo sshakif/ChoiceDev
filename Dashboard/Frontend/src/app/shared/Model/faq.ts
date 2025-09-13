@@ -1,10 +1,11 @@
 import { Deserializable } from '../interfaces/deserializable';
 
-export class faq implements Deserializable {
+export class Faq implements Deserializable {
   id?: number;
   question: string = '';
   answer: string = '';
   is_active: boolean = false;
+  // is_active?: boolean;
   created_at?: string;
   updated_at?: string;
 

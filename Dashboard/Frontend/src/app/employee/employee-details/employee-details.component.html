@@ -1,0 +1,105 @@
+<ui5-dialog [open]="isOpen" header-text="Employee Details" state="Information">
+  <div *ngIf="employee" class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+    <!-- Active -->
+    <div class="flex items-center gap-3 col-span-2">
+      <ui5-label show-colon>Active</ui5-label>
+      <ui5-switch
+        accessible-name="Active"
+        design="Graphical"
+        disabled
+        [checked]="employee.is_active"
+      ></ui5-switch>
+    </div>
+
+    <!-- First Name -->
+    <div>
+      <ui5-label show-colon>First Name</ui5-label>
+      <ui5-input
+        value="{{ employee.first_name }}"
+        readonly
+        class="w-full"
+      ></ui5-input>
+    </div>
+
+    <!-- Last Name -->
+    <div>
+      <ui5-label show-colon>Last Name</ui5-label>
+      <ui5-input
+        value="{{ employee.last_name }}"
+        readonly
+        class="w-full"
+      ></ui5-input>
+    </div>
+
+    <!-- Email -->
+    <div>
+      <ui5-label show-colon>Email</ui5-label>
+      <ui5-input
+        value="{{ employee.email }}"
+        readonly
+        class="w-full"
+      ></ui5-input>
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <ui5-label show-colon>Phone</ui5-label>
+      <ui5-input
+        value="{{ employee.phone }}"
+        readonly
+        class="w-full"
+      ></ui5-input>
+    </div>
+
+    <!-- Department -->
+    <!-- <div>
+      <ui5-label show-colon>Department</ui5-label>
+      <ui5-input
+        value="{{ employee.department }}"
+        readonly
+        class="w-full"
+      ></ui5-input>
+    </div> -->
+
+    <!-- Designation -->
+    <!-- <div>
+      <ui5-label show-colon>Designation</ui5-label>
+      <ui5-input
+        value="{{ employee.designation }}"
+        readonly
+        class="w-full"
+      ></ui5-input>
+    </div> -->
+    <div>
+      <ui5-label show-colon>Salary</ui5-label>
+      <ui5-input
+        value="{{ employee.salary }}"
+        readonly
+        class="w-full"
+      ></ui5-input>
+    </div>
+    <div>
+      <ui5-label show-colon>date_of_birth</ui5-label>
+      <ui5-input
+        value="{{ employee.date_of_birth }}"
+        readonly
+        class="w-full"
+      ></ui5-input>
+    </div>
+
+    <!-- Address (full width) -->
+    <div class="md:col-span-2">
+      <ui5-label show-colon>Address</ui5-label>
+      <ui5-input
+        value="{{ employee.address }}"
+        readonly
+        class="w-full"
+      ></ui5-input>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div slot="footer" class="flex justify-end w-full gap-2 p-2">
+    <ui5-button design="Emphasized" (click)="closeDialog()">Close</ui5-button>
+  </div>
+</ui5-dialog>

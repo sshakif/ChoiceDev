@@ -1,0 +1,83 @@
+<div style="height: 100vh">
+  <react-analytical-table
+    [headerTitle]="'Employee List'"
+    [insertTitle]="'New'"
+    [button1Text]="'ALL'"
+    [button2Text]="'Active'"
+    [button3Text]="'Inactive'"
+    [apiUrl]="'Employees?'"
+    [alternateRowColors]="true"
+    [isInsertData]="true"
+    [isSearchFilter]="true"
+    [isFilterable]="true"
+    [isOdata]="true"
+    [model]="Employee"
+    [isGroupable]="false"
+    [isSortable]="true"
+    [isTableTree]="false"
+    [isInfiniteScroll]="true"
+    [infiniteScrollNumber]="10"
+    [minRowsNumber]="15"
+    [headerHeight]="30"
+    [rowHeight]="30"
+    [selectionMode]="'None'"
+    [emptyDataText]="'No Data Found'"
+    [tableColumn]="tableColum()"
+    [selectionMode]="'Single'"
+    [rowSelectionBehavior]="'RowOnly'"
+    [refreshTrigger]="refreshTable"
+    (isInsertDataChange)="handleInsertData($event)"
+  ></react-analytical-table>
+</div>
+<app-employee-add
+  [isOpen]="isInsert"
+  (close)="closeAddEmployeeModal()"
+></app-employee-add>
+<app-employee-edit
+  [isOpen]="isEdit"
+  [employeeId]="selectedEmployeeId"
+  [employeeData]="selectedEmployeeData"
+  (close)="closeEditEmployeeModal()"
+  (refreshTable)="refreshTable.emit()"
+></app-employee-edit>
+<app-employee-details
+  [employeeId]="selectedEmployeeId"
+  [employeeData]="selectedEmployeeData"
+  [isOpen]="isDetails"
+  (close)="closeEmployeeDetailsModal()"
+></app-employee-details>
+
+<ui5-dialog [open]="isDeleteOpen" header-text="Warning" state="Critical">
+  <p *ngIf="!isDeleteLoading">Are you sure you want to delete this data?</p>
+  <div *ngIf="isDeleteLoading">
+    <p>Deleting please wait ...</p>
+  </div>
+
+  <div
+    slot="footer"
+    style="
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      width: 100%;
+      box-sizing: border-box;
+    "
+  >
+    <ui5-button
+      (click)="deleteItemConfirm()"
+      design="Emphasized"
+      style="min-width: 4rem"
+      [disabled]="isDeleteLoading"
+    >
+      Delete
+    </ui5-button>
+    <ui5-button
+      (click)="isDeleteOpen = false"
+      style="margin: 0 0 0 0.5rem; min-width: 4rem"
+      [disabled]="isDeleteLoading"
+    >
+      Close
+    </ui5-button>
+  </div>
+</ui5-dialog>
+

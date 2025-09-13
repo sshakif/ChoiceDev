@@ -1,0 +1,314 @@
+<ui5-dialog [open]="isOpen" header-text="New" class="w-50" state="Information">
+  <ui5-tabcontainer [collapsed]="isTabCollapsed">
+    <ui5-tab text="Info" selected>
+      <ui5-bar slot="header" design="Header">
+        <ui5-title level="H5" slot="startContent">New</ui5-title>
+        <ui5-button
+          class="dialogCloser"
+          design="Transparent"
+          id="closeDialogButton"
+          slot="endContent"
+          (click)="closeDialog()"
+          icon="decline"
+        ></ui5-button>
+      </ui5-bar>
+      <app-employee-add *ngIf="loading"></app-employee-add>
+
+      <ui5-message-strip
+        class="w-100 mt-3"
+        design="Critical"
+        *ngIf="errorMessage"
+      >
+        <ui5-icon name="alert" slot="icon"></ui5-icon> {{ errorMessage }}
+      </ui5-message-strip>
+      <section>
+        <div>
+          <div class="d-flex align-items-center">
+            <ui5-label show-colon>Active</ui5-label>
+            <ui5-switch
+              accessible-name="graphical"
+              design="Graphical"
+              [checked]="employee.is_active"
+              (change)="toggleAction($event)"
+            ></ui5-switch>
+          </div>
+          <!-- Title Field -->
+          <!-- .......................................  -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- First Name -->
+            <div>
+              <ui5-label
+                show-colon
+                required
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                First Name
+              </ui5-label>
+              <ui5-input
+                class="w-full"
+                [(ngModel)]="employee.first_name"
+                placeholder="Enter your First Name"
+                required
+              ></ui5-input>
+            </div>
+
+            <!-- Last Name -->
+            <div>
+              <ui5-label
+                show-colon
+                required
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Last Name
+              </ui5-label>
+              <ui5-input
+                class="w-full"
+                [(ngModel)]="employee.last_name"
+                placeholder="Enter your Last Name"
+                required
+              ></ui5-input>
+            </div>
+
+            <!-- Email -->
+            <div>
+              <ui5-label
+                show-colon
+                required
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                E-mail
+              </ui5-label>
+              <ui5-input
+                class="w-full"
+                [(ngModel)]="employee.email"
+                placeholder="Enter your Email"
+                required
+              ></ui5-input>
+            </div>
+
+            <!-- Phone -->
+            <div>
+              <ui5-label
+                show-colon
+                required
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Phone
+              </ui5-label>
+              <ui5-input
+                class="w-full"
+                [(ngModel)]="employee.phone"
+                placeholder="Enter your Phone Number"
+                required
+              ></ui5-input>
+            </div>
+
+            <!-- Address (Full width under above fields) -->
+            <div class="md:col-span-2">
+              <ui5-label
+                show-colon
+                required
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Address
+              </ui5-label>
+              <ui5-textarea
+                [(ngModel)]="employee.address"
+                placeholder="Enter your Address"
+                required
+                class="w-full"
+              ></ui5-textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+    </ui5-tab>
+    <!-- <ui5-tab text="Others">
+        <div>
+              <ui5-label
+                show-colon
+                required
+                class="block text-sm font-medium text-gray-700"
+              >
+               department
+              </ui5-label>
+              <ui5-input
+   
+                [(ngModel)]="employee.department"
+                
+                required
+              ></ui5-input>
+          
+              <ui5-label
+                show-colon
+                required
+                class="block text-sm font-medium text-gray-700"
+              >
+               designation
+              </ui5-label>
+              <ui5-input
+     
+                [(ngModel)]="employee.designation"
+                
+                required
+              ></ui5-input>
+              <ui5-label
+                show-colon
+                required
+                class="block text-sm font-medium text-gray-700"
+              >
+               date_of_birth
+              </ui5-label>
+              <ui5-input
+  
+                [(ngModel)]="employee.date_of_birth"
+              
+                required
+              ></ui5-input>
+           
+              <ui5-label
+                show-colon
+                required
+                class="block text-sm font-medium text-gray-700"
+              >
+               joining_date
+              </ui5-label>
+              <ui5-input
+
+                [(ngModel)]="employee.joining_date"
+              
+                required
+              ></ui5-input>
+              </div>
+    </ui5-tab> -->
+
+    <ui5-tab text="Others">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+        <!-- Department Dropdown -->
+        <!-- <div>
+          <ui5-label
+            show-colon
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Service Title
+          </ui5-label> -->
+
+        <!-- Bind selected value to selectedServiceId -->
+        <!-- <ui5-select
+            class="w-full"
+            [(ngModel)]="selectedServiceId"
+            (change)="onServiceChange($event)"
+          >
+            <ui5-option *ngFor="let s of serviceslist" [value]="s.id">
+              {{ s.title }}
+            </ui5-option>
+          </ui5-select>
+        </div> -->
+
+        <!-- Designation Dropdown
+        <div>
+          <ui5-label
+            show-colon
+            required
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Designation
+          </ui5-label>
+          <ui5-select
+            [(ngModel)]="employees.designation"
+            required
+            class="w-full"
+          >
+            <ui5-option *ngFor="let desig of designationList" [value]="desig">{{
+              desig
+            }}</ui5-option>
+          </ui5-select>
+        </div> -->
+
+        <!-- Date of Birth -->
+        <div>
+          <ui5-label
+            show-colon
+            required
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Date of Birth
+          </ui5-label>
+          <ui5-date-picker
+            [(ngModel)]="employee.date_of_birth"
+            required
+            class="w-full"
+          ></ui5-date-picker>
+        </div>
+
+        <!-- Joining Date -->
+        <div>
+          <ui5-label
+            show-colon
+            required
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Joining Date
+          </ui5-label>
+          <ui5-date-picker
+            [(ngModel)]="employee.joining_date"
+            required
+            class="w-full"
+          ></ui5-date-picker>
+        </div>
+
+        <!-- salary -->
+        <div>
+          <ui5-label
+            show-colon
+            required
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
+            salary
+          </ui5-label>
+          <ui5-input
+            class="w-full"
+            [(ngModel)]="employee.salary"
+            placeholder="Enter your salary"
+            required
+          ></ui5-input>
+        </div>
+      </div>
+    </ui5-tab>
+
+    <!-- Attachments File Uploader Tab -->
+    <ui5-tab separator text="Attachments">
+      <app-attachments
+        #attachmentComponent
+        [modelName]="'employee'"
+        [recordId]="employeeId ? employeeId.toString() : ''"
+        [allowedTypes]="[
+          'image/jpeg',
+          'image/png',
+          'image/webp',
+          'application/pdf',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ]"
+        [maxFileSize]="2048"
+        [multiple]="true"
+      ></app-attachments>
+    </ui5-tab>
+  </ui5-tabcontainer>
+  <ui5-toolbar slot="footer">
+    <ui5-toolbar-button
+      design="Emphasized"
+      (click)="insertData()"
+      text="Submit"
+    ></ui5-toolbar-button>
+    <ui5-toolbar-button
+      design="Transparent"
+      text="Close"
+      (click)="closeDialog()"
+    ></ui5-toolbar-button>
+  </ui5-toolbar>
+</ui5-dialog>
+
+<app-toast-message
+  [IsOpenToastAlert]="IsOpenToastAlert"
+  [ToastType]="ToastType"
+></app-toast-message>
